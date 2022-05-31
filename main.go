@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	forum "forum/AAA"
+	forum "forum/Server"
 )
 
 func main() {
