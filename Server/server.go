@@ -8,7 +8,7 @@ import (
 
 func HandleFunc() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/HomePage.html", "Static/HomePage.css"))
+		template := template.Must(template.ParseFiles("Page/HomePage.html", "templates/footer.html", "templates/navbar.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
