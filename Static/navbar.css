@@ -1,11 +1,17 @@
 /* body {
     margin: 0px;
 } */
+.title {
+    top: 2vh;
+    left: 47%;
+    position: absolute;
+    color: #fff;
+}
 
 .nav {
     height: 50px;
     width: 100%;
-    background-color: #2b2d42;
+    background-color: black;
     position: relative;
 }
 
