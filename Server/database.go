@@ -9,7 +9,6 @@ import (
 )
 
 type User struct {
-	Id       int
 	Name     string
 	Email    string
 	Password string
@@ -40,8 +39,8 @@ func InitDatabase(database string) *sql.DB {
 	return db
 }
 
-func InsertIntoUsers(db *sql.DB, name string, email string, password string) (int64, error) {
-	result, _ := db.Exec(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`, name, email, password)
+func InsertIntoUsers(db *sql.DB, name string, email string, password string, picture string) (int64, error) {
+	result, _ := db.Exec(`INSERT INTO users (name, email, password, picture) VALUES (?, ?, ?, ?)`, name, email, password, picture)
 	return result.LastInsertId()
 }
 
@@ -53,7 +52,7 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 
 func SelectUserById(db *sql.DB, id int) User {
 	var u User
-	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
+	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Name, &u.Email, &u.Password, &u.Picture)
 	return u
 }
 
@@ -63,7 +62,7 @@ func SelectUserNameWithPattern(db *sql.DB, pattern string) []User {
 	rows, _ := db.Query(query)
 	final := make([]User, 0)
 	for rows.Next() {
-		rows.Scan(&u.Id, &u.Name, &u.Email, &u.Password)
+		rows.Scan(&u.Name, &u.Email, &u.Password, &u.Picture)
 		final = append(final, u)
 	}
 	return final
