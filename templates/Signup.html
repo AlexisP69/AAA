@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{{define "signup"}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suscribe</title>
-    <!-- Reset styles -->
-    <link rel="stylesheet" href="../Static/Signup.css" type="text/css">
-    <!-- Google Fonts Muli -->
-    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
+<dialog id="wrapper" class="wrapper">
+    <a href="/" class="close"></a>
 
-<body>
-    <section class="wrapper">
+    <!-- <section class="wrapper"> -->
+        <!-- <h2 class="title">Welcome to our family</h2> -->
         <div class="container">
+            <!-- <div class="img_logo">
+                <img src="../Static/logo.png" alt="salad" class="img">
+            </div> -->
             <div class="img__container">
                 <img src="../Static/members.png" alt="salad" class="img">
             </div>
+            
             <div class="content">
-                <h1 class="subtitle">Sign Up</h1>
-                <h2 class="title">Welcome to our family</h2>
+                <h1 class="subtitle"> Welcome To AAA</h1>
+                <h2>Sign Up</h2>
                 <input type="text" placeholder="Write a name" id="Name">
                 <input type="text" placeholder="Write an email" id="Email">
                 <input type="text" placeholder="Write a password" id="Password">
@@ -31,7 +26,6 @@
         </div>
     </section>
 
-</body>
 <script>
     function newUser() {
         let name = document.getElementById("Name").value;
@@ -65,5 +59,5 @@
         }
     }
 </script>
-
-</html>
+</dialog>
+{{ end}}

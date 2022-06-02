@@ -20,7 +20,7 @@ type MyUsers struct {
 
 func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/HomePage.html", "templates/footer.html", "templates/navbar.html", "templates/login.html"))
+		template := template.Must(template.ParseFiles("Page/HomePage.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "templates/Signup.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return

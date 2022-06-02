@@ -1,20 +1,25 @@
-.wrapper {
+/* #wrapper {
     min-height: 100vh;
     color: #000;
     font-family: 'Muli', sans-serif;
     font-size: 1rem;
-    background-color: #F1E8E6;
+    background-color: #000000;
     display: -ms-grid;
     display: grid;
     place-items: center;
   }
-  
+   */
+   
+  #wrapper.wrapper{
+    border-radius: 10px;
+    background-color: #58644c;
+  }
   .container {
-    background-color: #fff;
+    background-color: #58644c;
     padding: 1em;
     border-radius: 1em;
     max-width: 768px;
-    max-height: 100vh;
+    max-height: 88vh;
     display: -ms-grid;
     display: grid;
     place-items: center;
@@ -27,34 +32,37 @@
     font-weight: 700;
   }
   
-  .text {
+  /* .text {
     font-size: 1rem;
     margin-bottom: 0.8em;
-  }
+  } */
   
-  .container {
+  /* .container {
     max-width: 400px;
     overflow: hidden;
     padding: 0;
-  }
+  } */
   
   .img {
+  
     width: 50vh;
-    height:50vh;
+    height:30vh;
     -o-object-fit: cover;
        object-fit: cover;
  
   }
   
+
+
   .img__container {
-    height: 30vh;
+    height: 20vh;
     overflow: hidden;
     margin-bottom: 1.5em;
   }
   
-  .title {
+  /* .title {
     margin-bottom: 0.9em;
-  }
+  } */
   
   
   .content {
@@ -65,7 +73,7 @@
     margin-bottom: 1.8em;
   }
   
-  .mail {
+  #Email {
     padding: 0.5em 0 0.5em 1.5em;
     line-height: 3;
     width: 100%;
@@ -74,7 +82,7 @@
     margin-bottom: 1em;
   }
 
-  .username{
+  #Name{
     padding: 0.5em 0 0.5em 1.5em;
     line-height: 3;
     width: 100%;
@@ -83,7 +91,7 @@
     margin-bottom: 1em;
   }
 
-  .password{
+  #Password{
     padding: 0.5em 0 0.5em 1.5em;
     line-height: 3;
     width: 100%;
@@ -92,6 +100,15 @@
     margin-bottom: 1em;
   }
   
+  #ConfirmPassword{
+    padding: 0.5em 0 0.5em 1.5em;
+    line-height: 3;
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5em;
+    margin-bottom: 1em;
+  }
+
   ::-webkit-input-placeholder {
     color: #111127;
   }
@@ -108,7 +125,7 @@
     color: #111127;
   }
   
-  .Signup {
+  /* .Signup {
     color: #fff;
     font-size: 1.3rem;
     font-weight: 700;
@@ -119,12 +136,62 @@
     border-radius: 0.5em;
     width: 100%;
     margin-bottom: 1.3em;
-  }
+  } */
   
-  .text {
+  /* .text {
     font-size: 0.9rem;
     width: 90%;
     text-align: center;
+  } */
+  
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
   }
   
+  .popup {
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 140vh;
+    position: relative;
+    transition: all 5s ease-in-out;
+  }
   
+  label input[type="checkbox"] {
+    display: none;
+}
+
+h2{
+  color:white;
+  place-items: center;
+  text-align: center;
+background-color: #58644c;
+}
+
+.close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
