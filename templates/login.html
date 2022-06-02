@@ -1,0 +1,53 @@
+{{define "login"}}
+    <dialog id="popup" class="overlay1">
+        <!-- <div class="popup"> -->
+            <!-- <form method="dialog"> -->
+                <!-- <menu>
+                    <button value="cancel">Fermer</button>
+                </menu> -->
+            <!-- </form> -->
+            <div class="box-form">
+                <div class="left">
+                    <div class="overlay">
+                    <h1>Forum AAA!</h1>
+                    <h3>Against all authorities</h3>
+                    <span>
+                        <p>login with social media</p>
+                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a>
+                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
+                    </span>
+                    </div>
+                </div>
+                
+                
+                    <div class="right">
+                    <h5>Login</h5>
+                    <p>Don't have an account? <a href="/Signup">Create Your Account</a> it takes less than a minute</p>
+                    <div class="inputs">
+                        <input type="text" placeholder="Write a name" id="Name">
+                        <br>
+                        <input type="text" placeholder="Write an email" id="Email">
+                    </div>
+                        
+                        <br><br>
+                        
+                    <div class="remember-me--forget-password">
+                            
+                <label>
+                    <input type="checkbox" name="item" checked/>
+                    <span class="text-checkbox">Remember me</span>
+                </label>
+                        <p>forget password?</p>
+                    </div>
+                        
+                        <br>
+                        <button onclick="newUser()" id="newtask">New Task</button>
+                        
+                </div>
+                
+            </div>
+        </div>
+    
+    </dialog>
+    
+    {{end}}
