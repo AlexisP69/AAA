@@ -10,9 +10,11 @@ import (
 )
 
 type MyUsers struct {
-	name     string `json:name`
-	email    string `json:email`
-	password string `json:password`
+	Name            string
+	Email           string
+	Password        string
+	ConfirmPassword string
+	// test            string `json:test`
 	//Picture  string `json:picture`
 }
 
@@ -26,29 +28,43 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Register.html"))
+		template := template.Must(template.ParseFiles("Page/Signup.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, db)
 			return
 		}
 	})
 	http.HandleFunc("/registerApi", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("{\"test\":\"tata\"}"))
+		// w.Write([]byte("{\"test\":\"${Users.name}\""))
 		var Users MyUsers
+		// w.Write([]byte("{\"name\":\"" + Users.Name + "\"}"))
+		// w.Write([]byte("{\"email\":\"" + Users.Email + "\"}"))
+		// w.Write([]byte("{\"password\":\"" + Users.Password + "\"}"))
+		// w.Write([]byte("{\"userConfirmPassword\":\"" + Users.ConfirmPassword + "\"}"))
 
 		body, _ := ioutil.ReadAll(r.Body)
+		fmt.Println(body)
+		// fmt.Println(r.Body)
 		json.Unmarshal(body, &Users)
 		fmt.Println(Users)
+		// fmt.Println(Users)
 
-		if Users.name == "test" {
-			w.Write([]byte("{\"test\":\"tata\"}"))
+		w.Write([]byte("{\"name\":\"" + Users.Name + "\",\""))
+		w.Write([]byte("\"email\":\"" + Users.Email))
+		w.Write([]byte("\"password\":\"" + Users.Password))
+		w.Write([]byte("\"userConfirmPassword\":\"" + Users.ConfirmPassword + "\"}"))
+
+		if Users.Name == "test" {
+			// w.Write([]byte("{\"test\":\"\"}"))
+			fmt.Println(Users)
 			return
 		}
 
 		// Requete SQL
 		// Scan requête
 		// JSON.Marshal
-		w.Write([]byte("{\"test\":\"toto\"}"))
+		// fmt.Println(Users.name)
+		// w.Write([]byte("{\"test\":\"\"}"))
 	})
 
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
