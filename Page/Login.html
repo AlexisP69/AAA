@@ -1,47 +1,71 @@
 <!DOCTYPE html>
+
 <head>
     <title>Login Page</title>
-    <link href="../Static/Login.css" rel="stylesheet"/>
+    <link href="../Static/Login.css" rel="stylesheet" />
 </head>
+
 <body>
     <div class="box-form">
         <div class="left">
             <div class="overlay">
-            <h1>Forum AAA!</h1>
-            <h3>Against all authorities</h3>
-            <span>
-                <p>login with social media</p>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
-            </span>
+                <h1>Forum AAA!</h1>
+                <h3>Against all authorities</h3>
+                <span>
+                    <p>login with social media</p>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
+                </span>
             </div>
         </div>
-        
-        
-            <div class="right">
+
+
+        <div class="right">
             <h5>Login</h5>
             <p>Don't have an account? <a href="/Signup">Create Your Account</a> it takes less than a minute</p>
             <div class="inputs">
-                <input type="text" placeholder="Write a name" id="Name">
+                <input type="text" placeholder="Write a name" id="Email">
                 <br>
-                <input type="text" placeholder="Write an email" id="Email">
+                <input type="text" placeholder="Write an email" id="Password">
             </div>
-                
-                <br><br>
-                
+
+            <br><br>
+
             <div class="remember-me--forget-password">
-                    <!-- Angular -->
-        <label>
-            <input type="checkbox" name="item" checked/>
-            <span class="text-checkbox">Remember me</span>
-        </label>
+                <!-- Angular -->
+                <label>
+                    <input type="checkbox" name="item" checked />
+                    <span class="text-checkbox">Remember me</span>
+                </label>
                 <p>forget password?</p>
             </div>
-                
-                <br>
-                <button onclick="newUser()" id="newtask">New Task</button>
+
+            <br>
+            <button onclick="logUsers()" id="newtask">New Task</button>
         </div>
-        
+
     </div>
 </body>
+<script>
+    function logUsers() {
+        let email = document.getElementById("Email").value;
+        let password = document.getElementById("Password").value;
+
+        fetch("/loginApi",
+            {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }).then((res) => {
+                console.log(res);
+                return res.json()
+            })
+    }
+</script>
+
 </html>

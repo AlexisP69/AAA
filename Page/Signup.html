@@ -57,10 +57,11 @@
                     console.log(res);
                     return res.json()
                 })
-                .then((res) => {
-                    const abs = document.getElementById("absolute")
+                .then((data) => {
+                    console.log({data});
+                    // const abs = document.getElementById("absolute")
 
-                    abs.innerText = res.test
+                    // abs.innerText = res.test
                 })
         }
     }

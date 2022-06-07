@@ -9,56 +9,74 @@ import (
 	"net/http"
 )
 
-type MyUsers struct {
-	Name            string
-	Email           string
-	Password        string
-	ConfirmPassword string
-	// test            string `json:test`
-	//Picture  string `json:picture`
+type test struct {
+	Enregistrer []Register
+	Connecter   []Login
+}
+
+type Register struct {
+	Name                string
+	Email               string
+	Password            string
+	UserConfirmPassword string
+}
+
+type Login struct {
+	Email    string
+	Password string
 }
 
 func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/HomePage.html", "templates/footer.html", "templates/navbar.html"))
+		template := template.Must(template.ParseFiles("Page/HomePage.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "templates/Signup.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
 		}
 	})
 
-	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Signup.html"))
-		if r.Method != http.MethodPost {
-			template.Execute(w, db)
-			return
-		}
-	})
 	http.HandleFunc("/registerApi", func(w http.ResponseWriter, r *http.Request) {
 		// w.Write([]byte("{\"test\":\"${Users.name}\""))
-		var Users MyUsers
-		// w.Write([]byte("{\"name\":\"" + Users.Name + "\"}"))
-		// w.Write([]byte("{\"email\":\"" + Users.Email + "\"}"))
-		// w.Write([]byte("{\"password\":\"" + Users.Password + "\"}"))
-		// w.Write([]byte("{\"userConfirmPassword\":\"" + Users.ConfirmPassword + "\"}"))
+		var register Register
+		// w.Write([]byte("{\"name\":\"" + register.Name + "\"}"))
+		// w.Write([]byte("{\"email\":\"" + register.Email + "\"}"))
+		// w.Write([]byte("{\"password\":\"" + register.Password + "\"}"))
+		// w.Write([]byte("{\"userConfirmPassword\":\"" + register.ConfirmPassword + "\"}"))
 
 		body, _ := ioutil.ReadAll(r.Body)
-		fmt.Println(body)
 		// fmt.Println(r.Body)
-		json.Unmarshal(body, &Users)
-		fmt.Println(Users)
-		// fmt.Println(Users)
+		json.Unmarshal(body, &register)
+		// fmt.Println(register)
+		// InsertIntoUsers(db, "name", "email", "password")
+		// test := SelectUserById(db, 1)
+		// fmt.Println(test)
+		// fmt.Println(register)
+		_, err := InsertIntoUsers(db, register.Name, register.Email, register.Password)
 
-		w.Write([]byte("{\"name\":\"" + Users.Name + "\",\""))
-		w.Write([]byte("\"email\":\"" + Users.Email))
-		w.Write([]byte("\"password\":\"" + Users.Password))
-		w.Write([]byte("\"userConfirmPassword\":\"" + Users.ConfirmPassword + "\"}"))
-
-		if Users.Name == "test" {
-			// w.Write([]byte("{\"test\":\"\"}"))
-			fmt.Println(Users)
-			return
+		if err != nil {
+			fmt.Println(err)
+			w.Write([]byte("{\"error\": \"" + err.Error() + "\"}"))
+		} else {
+			// w.Write([]byte("{\"error\": \"" + err.Error() + "\"}"))
+			// w.Write([]byte("{\"name\": \"" + register.Name + "\","))
+			// w.Write([]byte("\"email\": \"" + register.Email + "\","))
+			// w.Write([]byte("\"password\": \"" + register.Password + "\","))
+			// w.Write([]byte("\"confirmPassword\": \"" + register.UserConfirmPassword + "\"}"))
 		}
+
+		// w.Write([]byte(Users.Email))
+		// w.Write([]byte(Users.Password))
+		// w.Write([]byte(Users.UserConfirmPassword))
+		// w.Write([]byte("{\"name\":\"" + Users.Name + "\",\""))
+		// w.Write([]byte("\"email\":\"" + Users.Email))
+		// w.Write([]byte("\"password\":\"" + Users.Password))
+		// w.Write([]byte("\"userConfirmPassword\":\"" + Users.ConfirmPassword + "\"}"))
+
+		// if Users.Name == "test" {
+		// 	// w.Write([]byte("{\"test\":\"\"}"))
+		// 	fmt.Println(Users)
+		// 	return
+		// }
 
 		// Requete SQL
 		// Scan requête
@@ -67,11 +85,22 @@ func HandleFunc(db *sql.DB) {
 		// w.Write([]byte("{\"test\":\"\"}"))
 	})
 
-	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Login.html"))
+	http.HandleFunc("/loginApi", func(w http.ResponseWriter, r *http.Request) {
+		var login Login
+		body, _ := ioutil.ReadAll(r.Body)
+		json.Unmarshal(body, &login)
+		// fmt.Println(login.Email)
+
+		fmt.Println("logi mail : ", login.Email)
+		SelectUserByEmail(db, login.Email)
+		// fmt.Println(test)
+	})
+
+	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "templates/Signup.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
-			return
+			//return
 		}
 	})
 
