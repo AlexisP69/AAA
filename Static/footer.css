@@ -1,4 +1,5 @@
 section {
+    
     width: 100%;
     display: inline-block;
     background: #333;
@@ -12,13 +13,14 @@ section {
 .footer-distributed {
     height: 30vh;
     position:relative;
-    background: black;
+    background: rgb(96, 85, 85);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
     text-align: left;
     font: bold 16px sans-serif;
-    padding: 15px;
+    /* padding: 15px; */
+    margin-bottom: 0;
 }
 
 .footer-distributed .footer-left,
@@ -31,6 +33,7 @@ section {
 /* Footer left */
 
 .footer-distributed .footer-left {
+    float: left;
     width: 40%;
 }
 
@@ -84,7 +87,7 @@ section {
     border-radius: 50%;
     text-align: center;
     line-height: 42px;
-    margin: 10px 15px;
+    margin: 7px 15px;
     vertical-align: middle;
 }
 
@@ -135,7 +138,7 @@ section {
 }
 
 .footer-distributed .footer-company-about {
-    line-height: 20px;
+    line-height: 12px;
     color: #92999f;
     font-size: 13px;
     font-weight: normal;
@@ -192,4 +195,16 @@ section {
         margin-left: 0;
     }
 
+}
+
+.monlogo{
+    width:9vh;
+}
+#monlogo{
+    margin-left:1vh;
+    margin-top: 1vh;
+    background-color: rgb(96, 85, 85);
+
+width:8vh;
+height:7vh;
 }

@@ -9,11 +9,9 @@ import (
 )
 
 type User struct {
-	Id       int
 	Name     string
 	Email    string
 	Password string
-	Picture  string
 }
 
 func InitDatabase(database string) *sql.DB {
@@ -25,7 +23,7 @@ func InitDatabase(database string) *sql.DB {
 	sqlStmt := `
 		CREATE TABLE IF NOT EXISTS users (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-			name TEXT NOT NULL,
+			name TEXT UNIQUE NOT NULL,
 			email TEXT UNIQUE NOT NULL,
 			password TEXT NOT NULL
 		);
@@ -41,19 +39,33 @@ func InitDatabase(database string) *sql.DB {
 }
 
 func InsertIntoUsers(db *sql.DB, name string, email string, password string) (int64, error) {
-	result, _ := db.Exec(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`, name, email, password)
+	result, err := db.Exec(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`, name, email, password)
+	if err != nil {
+		fmt.Println("Ce nom ou email existe déjà")
+		return 0, err
+	}
 	return result.LastInsertId()
 }
 
 func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	query := "SELECT * FROM " + table
 	result, _ := db.Query(query)
+	fmt.Println(result)
 	return result
 }
 
 func SelectUserById(db *sql.DB, id int) User {
 	var u User
-	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
+	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Name, &u.Email, &u.Password)
+	fmt.Println(u)
+	return u
+}
+
+func SelectUserByEmail(db *sql.DB, email string) User {
+	var u User
+	fmt.Println("select user :", email)
+	db.QueryRow(`SELECT * FROM users WHERE email = ?`, email).Scan(&u.Name, &u.Email, &u.Password)
+	fmt.Println(u)
 	return u
 }
 
@@ -63,7 +75,7 @@ func SelectUserNameWithPattern(db *sql.DB, pattern string) []User {
 	rows, _ := db.Query(query)
 	final := make([]User, 0)
 	for rows.Next() {
-		rows.Scan(&u.Id, &u.Name, &u.Email, &u.Password)
+		rows.Scan(&u.Name, &u.Email, &u.Password)
 		final = append(final, u)
 	}
 	return final

@@ -6,9 +6,9 @@ import (
 )
 
 func main() {
-	forum.HandleFunc()
 	db := forum.InitDatabase("AAAforum.db")
 	defer db.Close()
+	forum.HandleFunc(db)
 
 	// fmt.Println("-- Creation --")
 	// fmt.Println("-- Créer --")
