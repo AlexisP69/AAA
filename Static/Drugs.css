@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&family=Koulen&family=Libre+Franklin:ital,wght@1,100&display=swap');
+
+
+.containersize {
+  display: flex;
+  justify-content: space-around;
+  font-size: 5vh;
+  color:white;
+  background-color: rgb(187, 184, 184);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ 
+.btn1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(143, 101, 101);
+  color:white;
+  width: 20vh;
+  outline: 0;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  padding: 12px 20px;
+  text-align: center;
+  transition-duration: .15s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+
+}
