@@ -15,6 +15,14 @@ func HandleFunc() {
 		}
 	})
 
+	http.HandleFunc("/Therms-of-use", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles("Page/Therms-of-use.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, "")
+			return
+		}
+	})
+
 	fs := http.FileServer(http.Dir("Static/"))
 	http.Handle("/Static/", http.StripPrefix("/Static/", fs))
 	fmt.Println("http://localhost:8080")
