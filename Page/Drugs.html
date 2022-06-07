@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/Static/drugs.css" type="text/css">
+    <link rel="stylesheet" href="/Static/footer.css" type="text/css">
+    <link rel="stylesheet" href="/Static/navbar.css" type="text/css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Static/Capture d’écran 2022-05-31 à 16.29.49.png">
+    <title>Drugs</title>
+</head>
+<body>
+    {{template "navbar"}}
+    <div class="containersize">
+        <button class="btn1">Drugs</button>
+        <button class="erotica">Erotica</button>
+        <button class="gun">Gun</button>
+        <button class="quatre">Quatre</button>
+        <button class="cinq">Cinq</button>
+        <button class="six">Six</button>
+    </div>
+
+    <h1>The Categories</h1>
+        <h2> F I L T E R S </h2>
+        <div class="rectangle">
+            <textarea id="story" name="story"
+            rows="5" cols="50">
+            Ecrivez votre post...
+            </textarea>
+        </div>
+        <input type="text" id="name" required
+       minlength="0" maxlength="110" size="122">
+
+    {{template "footer"}}
+</body>

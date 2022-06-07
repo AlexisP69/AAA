@@ -48,18 +48,23 @@
     <div class="title">
         Forum Project
     </div>
-    <!-- <div class="nav-btn">
-        <label for="nav-check">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-    </div> -->
-    
+  
     <div class="nav-links">
-        <a href="login" target="_blank">Sign In</a>
         
-        <a href="register" target="_blank">Sign Up</a>
+        <a id="signin" href="#" >Sign In</a>
+        <a id="signup" href="#" >Sign Up</a>
+        <!-- <a href="register" target="_blank">Sign Up</a> -->
     </div>
+    {{template "login"}}
+    {{template "signup"}}
+    <script>
+        document.getElementById('signin').addEventListener('click', () => {
+            document.getElementById('popup').showModal()
+        })
+        document.getElementById('signup').addEventListener('click', () => {
+            document.getElementById('wrapper').showModal()
+        })
+        
+    </script>
 </div>
 {{end}}

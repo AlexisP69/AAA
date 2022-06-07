@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="/Static/HomePage.css" type="text/css">
     <link rel="stylesheet" href="/Static/footer.css" type="text/css">
     <link rel="stylesheet" href="/Static/navbar.css" type="text/css">
-    <link rel="icon" type="image/png" sizes="16x16" href="../Static/logo.png">
-    <script src="script.js" defer></script>
+    <!-- <link rel="stylesheet" href="/Static/Fondateur.css" type="text/css">
+    <link rel="stylesheet" href="/Static/Signup.css" type="text/css"> -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/Static/Capture d’écran 2022-05-31 à 16.29.49.png">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Vampiro+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -18,54 +20,65 @@
         </div>
     </div>
     <div class="containersize2">
-        <div class="text">
+        <div class="text3">
             Categories :
         </div>
         <div class="button1">
-            <div class="inner"><button class="Btn">Save</button></div>
-            <div class="inner"><button class="Btn">Publish</button></div>
-            <div class="inner"><button class="Btn">Back</button></div>
-            <div class="inner"><button class="Btn">Back</button></div>
+            <button onclick="window.location.href='/drugs'" class="btn1">Drugs</button>
+            <button class="btn2">Erotica</button>
+            <button class="btn1">Counterfeit</button>
+            <button class="btn2">Tutorials</button>
         </div>
         <div class="button2">
-            <div class="inner"><button class="Btn">Save</button></div>
-            <div class="inner"><button class="Btn">Save</button></div>
-            <div class="inner"><button class="Btn">Publish</button></div>
-            <div class="inner"><button class="Btn">Back</button></div>
+            <button class="btn2">Guns</button>
+            <button class="btn1">SoftWare</button>
+            <button class="btn2">Games</button>
+            <button class="btn1">JSP</button>
         </div>
     </div>
     <div class="containersize3">
-        <div class="text">
+        <div class="text3">
             Sujets Récents :
         </div>
-        <div class="row">
-            <div class="header">
-                <div class="progress-bar"></div>
-            </div>
-            <div class="container">
-                <button class="handle left-handle">
-                    <div class="text">&#8249;</div>
-                </button>
-                <div class="slider">
-                    <img src="https://via.placeholder.com/210/00FF00?text=1">
-                    <img src="https://via.placeholder.com/220/00FF00?text=2">
-                    <img src="https://via.placeholder.com/230/00FF00?text=3">
-                    <img src="https://via.placeholder.com/240/00FF00?text=4">
-                    <img src="https://via.placeholder.com/250/00FF00?text=5">
-                    <img src="https://via.placeholder.com/260/00FF00?text=6">
-                    <img src="https://via.placeholder.com/270/00FF00?text=7">
-                    <img src="https://via.placeholder.com/280/00FF00?text=8">
-                    <img src="https://via.placeholder.com/250/00FF00?text=9">
-                    <img src="https://via.placeholder.com/260/00FF00?text=10">
-                    <img src="https://via.placeholder.com/270/00FF00?text=11">
-                    <img src="https://via.placeholder.com/280/00FF00?text=12">
+
+        <div class="slider">
+            <input type="radio" name="slider" title="slide1" checked="checked" class="slider__nav" />
+            <input type="radio" name="slider" title="slide2" class="slider__nav" />
+            <input type="radio" name="slider" title="slide3" class="slider__nav" />
+            <input type="radio" name="slider" title="slide4" class="slider__nav" />
+            <div class="slider__inner">
+                <div class="slider__contents"><i class="slider__image fa fa-codepen"></i>
+                    <h2 class="slider__caption">codepen</h2>
+                    <p class="slider__txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate omnis
+                        possimus illo quos, corporis minima!</p>
                 </div>
-                <button class="handle right-handle">
-                    <div class="text">&#8250;</div>
-                </button>
+                <div class="slider__contents"><i class="slider__image fa fa-newspaper-o"></i>
+                    <h2 class="slider__caption">newspaper-o</h2>
+                    <p class="slider__txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate omnis
+                        possimus illo quos, corporis minima!</p>
+                </div>
+                <div class="slider__contents"><i class="slider__image fa fa-television"></i>
+                    <h2 class="slider__caption">television</h2>
+                    <p class="slider__txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate omnis
+                        possimus illo quos, corporis minima!</p>
+                </div>
+                <div class="slider__contents"><i class="slider__image fa fa-diamond"></i>
+                    <h2 class="slider__caption">diamond</h2>
+                    <p class="slider__txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate omnis
+                        possimus illo quos, corporis minima!</p>
+                </div>
             </div>
         </div>
     </div>
+    <div class="wrap">
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="What are you looking for?">
+            <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+
     {{template "footer"}}
 
 </body>

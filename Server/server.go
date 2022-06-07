@@ -85,15 +85,12 @@ func HandleFunc(db *sql.DB) {
 		// w.Write([]byte("{\"test\":\"\"}"))
 	})
 
-	http.HandleFunc("/loginApi", func(w http.ResponseWriter, r *http.Request) {
-		var login Login
-		body, _ := ioutil.ReadAll(r.Body)
-		json.Unmarshal(body, &login)
-		// fmt.Println(login.Email)
-
-		fmt.Println("logi mail : ", login.Email)
-		SelectUserByEmail(db, login.Email)
-		// fmt.Println(test)
+	http.HandleFunc("/fondateurs", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles("Page/Fondateur.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, "")
+			//return
+		}
 	})
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
@@ -101,6 +98,17 @@ func HandleFunc(db *sql.DB) {
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			//return
+		}
+	})
+
+	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles(
+			"Page/Homepage.html",
+		))
+		if r.Method != http.MethodPost {
+			err := template.Execute(w, "")
+			fmt.Println(err)
+			return
 		}
 	})
 

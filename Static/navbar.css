@@ -1,11 +1,9 @@
-/* body {
-    margin: 0px;
-} */
 .title {
     top: 2vh;
     left: 47%;
     position: absolute;
     color: #fff;
+    font-family: 'Pacifico', cursive;
 }
 
 .nav {
