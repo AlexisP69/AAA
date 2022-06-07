@@ -27,13 +27,13 @@ func HandleFunc(db *sql.DB) {
 		}
 	})
 
-	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Signup.html"))
-		if r.Method != http.MethodPost {
-			template.Execute(w, db)
-			return
-		}
-	})
+	// http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
+	// 	template := template.Must(template.ParseFiles("Page/Signup.html"))
+	// 	if r.Method != http.MethodPost {
+	// 		template.Execute(w, db)
+	// 		return
+	// 	}
+	// })
 	http.HandleFunc("/registerApi", func(w http.ResponseWriter, r *http.Request) {
 		// w.Write([]byte("{\"test\":\"${Users.name}\""))
 		var Users MyUsers
@@ -67,10 +67,29 @@ func HandleFunc(db *sql.DB) {
 		// w.Write([]byte("{\"test\":\"\"}"))
 	})
 
-	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Login.html"))
+	http.HandleFunc("/fondateurs", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles("Page/Fondateur.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
+			//return
+		}
+	})
+
+	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "templates/Signup.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, "")
+			//return
+		}
+	})
+
+	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles(
+			"Page/Homepage.html",
+		))
+		if r.Method != http.MethodPost {
+			err := template.Execute(w, "")
+			fmt.Println(err)
 			return
 		}
 	})
