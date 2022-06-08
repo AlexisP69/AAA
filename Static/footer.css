@@ -10,6 +10,7 @@ section {
     text-decoration: underline;
 }
 
+
 .footer-distributed {
     height: 30vh;
     position:relative;
@@ -23,7 +24,10 @@ section {
     margin-bottom: 0;
 }
 
-.footer-distributed .footer-left,
+.footer-distributed .footer-left{
+    padding-left: 2vh;
+}
+
 .footer-distributed .footer-center,
 .footer-distributed .footer-right {
     display: inline-block;
@@ -203,7 +207,7 @@ section {
 #monlogo{
     margin-left:1vh;
     margin-top: 1vh;
-    /* background-color: rgb(96, 85, 85); */
+    background-color:black;
 
 width:8vh;
 height:7vh;

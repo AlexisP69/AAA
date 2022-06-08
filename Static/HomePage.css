@@ -1,7 +1,6 @@
 *{
-    margin:0;
+    margin: 0;
 }
-
 .containersize1 {
     height: 30vh;
     background: #48CAE4;
@@ -20,7 +19,7 @@
 }
 
 .text3 {
-    padding: 4px;
+    margin: 2vh;
     font-family: 'Pacifico', cursive;
 
 }
@@ -74,7 +73,7 @@
 }
 
 .btn2:hover {
-    background: rgb(251, 193, 245);
+    background: #48CAE4;
 }
 
 
@@ -89,7 +88,8 @@
 }
 
 .containersize3 {
-    height: 35vh;
+
+    height: 40vh;
     background: white;
 }
 
@@ -156,7 +156,6 @@
 .slider__inner {
     position: absolute;
     top: 0;
-    left: 0;
     width: 400%;
     height: 100%;
     -webkit-transition: left 0.4s;
@@ -172,7 +171,6 @@
 
 .slider__contents {
     height: 100%;
-    padding: -3rem;
     text-align: center;
     display: -webkit-box;
     display: -webkit-flex;
@@ -209,7 +207,7 @@
 
 .slider__txt {
     color: #999;
-    margin-bottom: 3rem;
+    margin-bottom: 0rem;
     max-width: 300px;
 }
 
