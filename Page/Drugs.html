@@ -6,30 +6,46 @@
     <link rel="stylesheet" href="/Static/Drugs.css" type="text/css">
     <link rel="stylesheet" href="/Static/footer.css" type="text/css">
     <link rel="stylesheet" href="/Static/navbar.css" type="text/css">
+    <link rel="stylesheet" href="/Static/Post.css" type="text/css">
     <link rel="icon" type="image/png" sizes="16x16" href="/Static/Capture d’écran 2022-05-31 à 16.29.49.png">
     <title>Drugs</title>
 </head>
 <body>
     {{template "navbar"}}
-    <div class="containersize">
-        <button class="btn1">Drugs</button>
-        <button class="erotica">Erotica</button>
-        <button class="gun">Gun</button>
-        <button class="quatre">Quatre</button>
-        <button class="cinq">Cinq</button>
-        <button class="six">Six</button>
+    <div class="containersize2">
+        <div class="text3">
+            Categories :
+        </div>
+        <div class="button1">
+            
+            <button onclick="window.location.href='/drugs'" class="btn1">Drugs</button>
+            <button class="btn2">Erotica</button>
+            <button class="btn1">Counterfeit</button>
+            <button class="btn2">Tutorials</button>
+        </div>
+        <div class="button2">
+            <button class="btn2">Guns</button>
+            <button class="btn1">SoftWare</button>
+            <button class="btn2">Games</button>
+            <button class="btn1">JSP</button>
+        </div>
     </div>
 
-    <h1>The Categories</h1>
+    <h1>Drugs</h1>
         <h2> F I L T E R S </h2>
-        <div class="rectangle">
-            <textarea id="story" name="story"
-            rows="5" cols="50">
-            Ecrivez votre post...
-            </textarea>
-        </div>
-        <input type="text" id="name" required
-       minlength="0" maxlength="110" size="122">
+
+    <!-- POST -->
+        
+                <a id="poost" href="#" >Create New Post</a>
+            <!-- <button onclick="newPost()" id="newPost"> Create New Post</button> -->
+            <div id="tasklist"></div>
 
     {{template "footer"}}
+    {{template "post"}}
 </body>
+                <script>
+                document.getElementById('poost').addEventListener('click', () => {
+                    document.getElementById('popup-Form').showModal()
+                })
+                
+            </script>

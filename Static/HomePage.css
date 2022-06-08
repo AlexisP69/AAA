@@ -1,3 +1,7 @@
+*{
+    margin:0;
+}
+
 .containersize1 {
     height: 30vh;
     background: #48CAE4;

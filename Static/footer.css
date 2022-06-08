@@ -2,7 +2,7 @@ section {
     
     width: 100%;
     display: inline-block;
-    background: #333;
+    background: rgb(0, 0, 0);
     height: 0vh;
     text-align: center;
     font-size: 22px;
@@ -13,7 +13,7 @@ section {
 .footer-distributed {
     height: 30vh;
     position:relative;
-    background: rgb(96, 85, 85);
+    background: black;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
@@ -203,7 +203,7 @@ section {
 #monlogo{
     margin-left:1vh;
     margin-top: 1vh;
-    background-color: rgb(96, 85, 85);
+    /* background-color: rgb(96, 85, 85); */
 
 width:8vh;
 height:7vh;
