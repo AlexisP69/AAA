@@ -28,7 +28,7 @@ type Login struct {
 
 func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html", "templates/login.html"))
+		template := template.Must(template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
@@ -121,10 +121,10 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "Page/Signup.html"))
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
-			//return
+			return
 		}
 	})
 
