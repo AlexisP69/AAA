@@ -16,6 +16,10 @@ type test struct {
 	Connecter   []Login
 }
 
+type Post struct {
+	Titre string
+}
+
 type Register struct {
 	Name                string
 	Email               string
@@ -104,7 +108,8 @@ func HandleFunc(db *sql.DB) {
 		body, _ := ioutil.ReadAll(r.Body)
 		// fmt.Println(r.Body)
 		json.Unmarshal(body, &register)
-		fmt.Println(body)
+		// fmt.Println(body)
+		fmt.Println(db)
 		// fmt.Println(register)
 		// InsertIntoUsers(db, "name", "email", "password")
 		// test := SelectUserById(db, 1)
@@ -153,7 +158,16 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/loginApi", func(w http.ResponseWriter, r *http.Request) {
+		var login Login
+		fmt.Println(db)
 
+		body, _ := ioutil.ReadAll(r.Body)
+
+		json.Unmarshal(body, &login)
+		fmt.Println(body)
+
+		fmt.Println(login.Email)
+		// SelectAllFromTable(db, "users")
 	})
 
 	http.HandleFunc("/fondateurs", func(w http.ResponseWriter, r *http.Request) {
@@ -165,11 +179,22 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "Page/Signup.html"))
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Login.html", "Page/Signup.html", "templates/Post.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			//return
 		}
+	})
+
+	http.HandleFunc("/newPost", func(w http.ResponseWriter, r *http.Request) {
+		var post Post
+
+		body, _ := ioutil.ReadAll(r.Body)
+
+		json.Unmarshal(body, &post)
+		fmt.Println(body)
+
+		fmt.Println(post.Titre)
 	})
 
 	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {

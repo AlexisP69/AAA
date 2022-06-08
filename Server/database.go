@@ -9,6 +9,7 @@ import (
 )
 
 type User struct {
+	Id       int
 	Name     string
 	Email    string
 	Password string
@@ -55,10 +56,9 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	return result
 }
 
-func SelectUserById(db *sql.DB, id int) User {
+func selectUserById(db *sql.DB, id int) User {
 	var u User
-	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Name, &u.Email, &u.Password)
-	fmt.Println(u)
+	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 	return u
 }
 

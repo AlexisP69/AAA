@@ -1,12 +1,15 @@
 package main
 
 import (
+	"fmt"
 	forum "forum/Server"
 )
 
 func main() {
 	db := forum.InitDatabase("AAAforum.db")
 	defer db.Close()
+	test := forum.SelectUserByEmail(db, "poinsignon.alexis@hotmail.fr")
+	fmt.Println(test)
 	forum.HandleFunc(db)
 
 	// fmt.Println("-- Creation --")
