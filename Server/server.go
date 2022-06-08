@@ -11,6 +11,12 @@ import (
 	"github.com/gorilla/sessions"
 )
 
+type Post struct {
+	Categorie   string
+	Title       string
+	Description string
+}
+
 type test struct {
 	Enregistrer []Register
 	Connecter   []Login
@@ -86,7 +92,7 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Signup.html"))
+		template := template.Must(template.ParseFiles("Page/Signup.html", "templates/footer.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
@@ -170,6 +176,15 @@ func HandleFunc(db *sql.DB) {
 			template.Execute(w, "")
 			return
 		}
+	})
+
+	http.HandleFunc("/newPost", func(w http.ResponseWriter, r *http.Request) {
+		var post Post
+		body, _ := ioutil.ReadAll(r.Body)
+		json.Unmarshal(body, &post)
+		fmt.Println(body)
+		fmt.Println(post)
+		InsertIntoPost(db, post.Categorie, post.Title, post.Description)
 	})
 
 	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {
