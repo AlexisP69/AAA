@@ -11,13 +11,15 @@ import (
 	"github.com/gorilla/sessions"
 )
 
+type Post struct {
+	Categorie   string
+	Title       string
+	Description string
+}
+
 type test struct {
 	Enregistrer []Register
 	Connecter   []Login
-}
-
-type Post struct {
-	Titre string
 }
 
 type Register struct {
@@ -76,7 +78,7 @@ func logout(w http.ResponseWriter, r *http.Request) {
 
 func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html", "templates/login.html"))
+		template := template.Must(template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
@@ -90,7 +92,7 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Signup.html"))
+		template := template.Must(template.ParseFiles("Page/Signup.html", "templates/footer.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
@@ -179,22 +181,20 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Login.html", "Page/Signup.html", "templates/Post.html"))
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
-			//return
+			return
 		}
 	})
 
 	http.HandleFunc("/newPost", func(w http.ResponseWriter, r *http.Request) {
 		var post Post
-
 		body, _ := ioutil.ReadAll(r.Body)
-
 		json.Unmarshal(body, &post)
 		fmt.Println(body)
-
-		fmt.Println(post.Titre)
+		fmt.Println(post)
+		InsertIntoPost(db, post.Categorie, post.Title, post.Description)
 	})
 
 	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {

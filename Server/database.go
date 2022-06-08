@@ -28,6 +28,11 @@ func InitDatabase(database string) *sql.DB {
 			email TEXT UNIQUE NOT NULL,
 			password TEXT NOT NULL
 		);
+		CREATE TABLE IF NOT EXISTS post (
+			categorie TEXT UNIQUE NOT NULL,
+			title	TEXT UNIQUE NOT NULL,
+			description TEXT UNIQUE NOT NULL
+		)
 		`
 
 	_, err = db.Exec(sqlStmt)
@@ -43,6 +48,17 @@ func InsertIntoUsers(db *sql.DB, name string, email string, password string) (in
 	result, err := db.Exec(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`, name, email, password)
 	if err != nil {
 		fmt.Println("Ce nom ou email existe déjà")
+		// fmt.Println(err)
+		return 0, err
+	}
+	return result.LastInsertId()
+}
+
+func InsertIntoPost(db *sql.DB, categorie string, title string, description string) (int64, error) {
+	fmt.Println("TEST")
+	result, err := db.Exec(`INSERT INTO post (categorie, title, description) VALUES (?, ?, ?)`, categorie, title, description)
+	if err != nil {
+		fmt.Println(err)
 		// fmt.Println(err)
 		return 0, err
 	}

@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/Static/Capture d’écran 2022-05-31 à 16.29.49.png">
     <title>Drugs</title>
 </head>
+
 <body>
     {{template "navbar"}}
     <div class="containersize2">
@@ -33,15 +34,17 @@
 
     <h1>Drugs</h1>
         <h2> F I L T E R S </h2>
+        <div class="postss"></div>
 
     <!-- POST -->
         
                 <a id="poost" href="#" >Create New Post</a>
             <!-- <button onclick="newPost()" id="newPost"> Create New Post</button> -->
             <div id="tasklist"></div>
-
-    {{template "footer"}}
-    {{template "post"}}
+            {{template "footer"}}
+            {{template "post"}}
+    
+    
 </body>
                 <script>
                 document.getElementById('poost').addEventListener('click', () => {

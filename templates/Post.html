@@ -1,38 +1,42 @@
 {{define "post"}}
-<dialog id="popup-Form">
-  <a class="close" href="/drugs">&times;</a>
-  <div class="hehe">
-    <h3>Crée votre Post !!!</h3>
-  </div>
-  <div class="Catégories">
-    <p>Catégories:</p>
-    <div class="box">
-      <select>
-        <option>Drugs</option>
-        <option>Erotica</option>
-        <option>Counterfeit</option>
-        <option>Tutorials</option>
-        <option>Guns</option>
-        <option>SoftWare</option>
-        <option>Games</option>
-        <option>JSP</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="Titre">
-    <input type="text" placeholder="Le Titre " id="Title"></input>
-  </div>
-  <div class="Description">
-    <input type="text" placeholder="Description" class="description"></input>
-  </div>
-  <button onclick="newPost()" id="submit">Crée le post</button>
-
-</dialog>
-
-<script>
-  function newPost() {
-    let title = document.getElementById("Title").value;
+    <dialog id="popup-Form" >
+      <a class="close" href="/drugs">&times;</a>
+      <div class="hehe">
+        <h3>Crée votre Post !!!</h3>
+      </div>
+            <div class="Catégories" >
+              <p>Catégories:</p>
+              <div class="box">
+                <select id="categorie">
+                  <option>Drugs</option>
+                  <option>Erotica</option>
+                  <option>Counterfeit</option>
+                  <option>Tutorials</option>
+                  <option>Guns</option>
+                  <option>SoftWare</option>
+                  <option>Games</option>
+                  <option>JSP</option>
+                </select>
+              </div>
+            </div>
+              
+              </div>
+              <div class="Titre">
+                <input type="text" placeholder="Le Titre "  id="title"></input>
+              </div> 
+              <div class="Description">
+                <input type="text" placeholder="Description" id="description"></input>
+              </div> 
+              <button onclick="newPost()" id="submit">Crée le post</button>            
+              
+  
+          </div>
+    </dialog>
+    <script>
+    function newPost() {
+    let title = document.getElementById("title").value;
+    let categorie = document.getElementById("categorie").value;
+    let description = document.getElementById("description").value;
     console.log(title);
     fetch("/newPost",
       {
@@ -41,7 +45,9 @@
           "content-type": "application/json"
         },
         body: JSON.stringify({
-          titre: title
+          categorie:categorie,
+          titre: title,
+          description: description
         })
       }).then((res) => {
         console.log(res);
@@ -53,6 +59,5 @@
         abs.innerText = res.test
       })
   }
-</script>
-
-{{end}}
+  </script>
+    {{end}}
