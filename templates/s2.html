@@ -1,9 +1,7 @@
-{{define "signup"}}
-
 <dialog id="wrapper" class="wrapper">
     
     
-    <!-- <section class="wrapper"> -->
+    <section class="wrapper">
         <!-- <h2 class="title">Welcome to our family</h2> -->
         <div class="container">
             <a href="/" class="close"></a>
@@ -23,13 +21,13 @@
                 <input type="text" placeholder="Write a password" id="Password">
                 <input type="text" placeholder="Confirm your password" id="ConfirmPassword">
                 <button onclick="newUser()" id="newtask">New Task</button>
-
             </div>
         </div>
     </section>
 
 <script>
     function newUser() {
+        console.log(document.getElementById("Name").value)
         let name = document.getElementById("Name").value;
         let email = document.getElementById("Email").value;
         let password = document.getElementById("Password").value;
@@ -53,14 +51,18 @@
                     console.log(res);
                     return res.json()
                 })
-                .then((data) => {
-                    console.log({data});
+                // .then((data) => {
+                    // console.log({data});
+                    // if(data.error === "UNIQUE constraint failed: users.email") {
+                    //     console.log("test")
+                    // }else{
+                    //     console.log("réussi")
+                    // }
                     // const abs = document.getElementById("absolute")
 
                     // abs.innerText = res.test
-                })
+                // })
         }
     }
 </script>
 </dialog>
-{{ end}}

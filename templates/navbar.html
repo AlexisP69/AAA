@@ -51,12 +51,11 @@
   
     <div class="nav-links">
         
-        <a id="signin" href="#" >Sign In</a>
-        <a id="signup" href="#" >Sign Up</a>
+        <a id="signin" href="/login" >Sign In</a>
+        <a id="signup" href="/register" >Sign Up</a>
         <!-- <a href="register" target="_blank">Sign Up</a> -->
     </div>
     {{template "login"}}
-    {{template "signup"}}
     <script>
         document.getElementById('signin').addEventListener('click', () => {
             document.getElementById('popup').showModal()

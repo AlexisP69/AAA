@@ -1,3 +1,7 @@
+*{
+    margin:0;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&family=Koulen&family=Libre+Franklin:ital,wght@1,100&display=swap');
 
 
@@ -31,3 +35,212 @@
   transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 
 }
+
+.btn1:hover {
+  color: #000;
+  background: rgb(187, 184, 184);
+}
+
+
+
+.erotica{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(143, 101, 101);
+  color:white;
+  width: 20vh;
+  outline: 0;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  padding: 12px 20px;
+  text-align: center;
+  transition-duration: .15s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1)
+}
+
+h1{
+margin-top: 20px;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  background-color: #48CAE4;
+  font-size: 11vh;
+  margin-bottom: 5vh;
+}
+
+h2{
+  float:left;
+  writing-mode: vertical-lr;
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  text-orientation: sideways-left;
+  color:black;
+  background-color:rgb(77, 170, 212);
+  font-size: 17vh;
+  width: 15vw;
+}
+
+.rectangle {
+    margin-top:60px;
+  height: 70vh;
+  width: 60vh;
+  border-radius: 10px;
+  border: 3px black inset;
+  /* border: 5px solid #ccc; */
+  box-shadow: 5px 5px 5px #999;
+  display: flex;
+}
+textarea{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ h4{
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+} 
+
+input,
+label {
+    margin: .15rem 0;
+    justify-content: space-around;
+}
+
+.button1 {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.btn1 {
+    outline: 0;
+    width: 11vw;
+    cursor: pointer;
+    border: 2px solid #000;
+    border-radius: 3px;
+    color: #fff;
+    background: #000;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    padding: 12px 20px;
+    text-align: center;
+    transition-duration: .15s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+
+}
+
+.btn1:hover {
+    color: #000;
+    background: rgb(255, 218, 87);
+}
+
+.btn2 {
+    outline: 0;
+    width: 11vw;
+    cursor: pointer;
+    border: 2px solid #000;
+    border-radius: 3px;
+    color: #000;
+    background: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    padding: 12px 20px;
+    text-align: center;
+    transition-duration: .15s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+.btn2:hover {
+    background: rgb(251, 193, 245);
+}
+
+
+.button2 {
+    padding-top: 5vh;
+    display: flex;
+    justify-content: space-around;
+}
+.text3 {
+    padding: 4px;
+    font-size: 1.5em;
+    font-family: 'Pacifico', cursive;
+
+}
+
+.Post{
+    
+    margin-top:20px;
+    margin-left: 580px;
+    width: 50vh;
+    height: 5vh;
+    border:solid 1px black;
+}
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  /* The actual popup (appears on top) */
+  .popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+  }
+  
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
+
+  #poost{
+  font-family: 'Pacifico', cursive;
+  width: 90px;
+    margin-left: 150vh;
+    margin-top: 200px;
+    color :#000;
+    background-color :#48CAE4;
+    border-radius :40px;
+  }
