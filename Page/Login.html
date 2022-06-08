@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suscribe</title>
+    <!-- Reset styles -->
+    <link rel="stylesheet" href="../Static/Signup.css" type="text/css">
+    <!-- Google Fonts Muli -->
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <section class="wrapper">
+        <div class="container">
+            <div class="img__container">
+                <img src="../Static/members.png" alt="salad" class="img">
+            </div>
+            <div class="content">
+                <h1 class="subtitle">Sign Up</h1>
+                <h2 class="title">Welcome to our family</h2>
+                <input type="text" placeholder="Write an email" id="Email">
+                <input type="text" placeholder="Write a password" id="Password">
+                <button onclick="newUser()" id="newtask">New Task</button>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+<script>
+    function newUser() {
+        let email = document.getElementById("Email").value;
+        let password = document.getElementById("Password").value;
+        fetch("/loginApi",
+            {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }).then((res) => {
+                console.log(res);
+                return res.json()
+            })
+            .then((res) => {
+                const abs = document.getElementById("absolute")
+
+                abs.innerText = res.test
+            })
+    }
+</script>
+
+</html>

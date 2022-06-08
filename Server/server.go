@@ -28,7 +28,7 @@ type Login struct {
 
 func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/HomePage.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "templates/Signup.html"))
+		template := template.Must(template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html", "templates/login.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
@@ -38,6 +38,14 @@ func HandleFunc(db *sql.DB) {
 		template := template.Must(template.ParseFiles("Page/Therms-of-use.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
+		}
+	})
+
+	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles("Page/Signup.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, "")
+			return
 		}
 	})
 
@@ -52,23 +60,24 @@ func HandleFunc(db *sql.DB) {
 		body, _ := ioutil.ReadAll(r.Body)
 		// fmt.Println(r.Body)
 		json.Unmarshal(body, &register)
+		fmt.Println(body)
 		// fmt.Println(register)
 		// InsertIntoUsers(db, "name", "email", "password")
 		// test := SelectUserById(db, 1)
 		// fmt.Println(test)
-		// fmt.Println(register)
-		_, err := InsertIntoUsers(db, register.Name, register.Email, register.Password)
+		fmt.Println(register.Name)
+		InsertIntoUsers(db, register.Name, register.Email, register.Password)
 
-		if err != nil {
-			fmt.Println(err)
-			w.Write([]byte("{\"error\": \"" + err.Error() + "\"}"))
-		} else {
-			// w.Write([]byte("{\"error\": \"" + err.Error() + "\"}"))
-			// w.Write([]byte("{\"name\": \"" + register.Name + "\","))
-			// w.Write([]byte("\"email\": \"" + register.Email + "\","))
-			// w.Write([]byte("\"password\": \"" + register.Password + "\","))
-			// w.Write([]byte("\"confirmPassword\": \"" + register.UserConfirmPassword + "\"}"))
-		}
+		// if err != nil {
+		// 	// fmt.Println(err)
+		// 	// w.Write([]byte("{\"error\": \"" + err.Error() + "\"}"))
+		// } else {
+		// w.Write([]byte("{\"error\": \"" + err.Error() + "\"}"))
+		// w.Write([]byte("{\"name\": \"" + register.Name + "\","))
+		// w.Write([]byte("\"email\": \"" + register.Email + "\","))
+		// w.Write([]byte("\"password\": \"" + register.Password + "\","))
+		// w.Write([]byte("\"confirmPassword\": \"" + register.UserConfirmPassword + "\"}"))
+		// }
 
 		// w.Write([]byte(Users.Email))
 		// w.Write([]byte(Users.Password))
@@ -91,6 +100,18 @@ func HandleFunc(db *sql.DB) {
 		// w.Write([]byte("{\"test\":\"\"}"))
 	})
 
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles("Page/Login.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, "")
+			return
+		}
+	})
+
+	http.HandleFunc("/loginApi", func(w http.ResponseWriter, r *http.Request) {
+
+	})
+
 	http.HandleFunc("/fondateurs", func(w http.ResponseWriter, r *http.Request) {
 		template := template.Must(template.ParseFiles("Page/Fondateur.html"))
 		if r.Method != http.MethodPost {
@@ -100,7 +121,7 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "templates/Signup.html"))
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "Page/Signup.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			//return

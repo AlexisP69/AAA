@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	forum "forum/Server"
 )
 
@@ -19,10 +18,10 @@ func main() {
 
 	// fmt.Println("-- Sélection --")
 
-	forum.SelectAllFromTable(db, "users")
+	// forum.SelectAllFromTable(db, "users")
 	// user := selectUserById(db, 2)
 	// fmt.Println(user)
 
-	fmt.Println(forum.SelectUserNameWithPattern(db, "as"))
+	// fmt.Println(forum.SelectUserNameWithPattern(db, "as"))
 	// fmt.Println(test)
 }
