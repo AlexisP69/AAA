@@ -29,7 +29,7 @@ func InitDatabase(database string) *sql.DB {
 			password TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS post (
-			categorie TEXT UNIQUE NOT NULL,
+			categorie TEXT NOT NULL,
 			title	TEXT UNIQUE NOT NULL,
 			description TEXT UNIQUE NOT NULL
 		)
@@ -78,10 +78,10 @@ func selectUserById(db *sql.DB, id int) User {
 	return u
 }
 
-func SelectUserByEmail(db *sql.DB, email string) User {
+func SelectUserByEmail(db *sql.DB, email string, password string) User {
 	var u User
 	fmt.Println("select user :", email)
-	db.QueryRow(`SELECT * FROM users WHERE email = ?`, email).Scan(&u.Name, &u.Email, &u.Password)
+	db.QueryRow(`SELECT * FROM users WHERE (email, password) = (?,?)`, email, password).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 	fmt.Println(u)
 	return u
 }
