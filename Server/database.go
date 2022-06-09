@@ -9,6 +9,7 @@ import (
 )
 
 type User struct {
+	Id       int
 	Name     string
 	Email    string
 	Password string
@@ -28,7 +29,7 @@ func InitDatabase(database string) *sql.DB {
 			password TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS post (
-			categorie TEXT UNIQUE NOT NULL,
+			categorie TEXT NOT NULL,
 			title	TEXT UNIQUE NOT NULL,
 			description TEXT UNIQUE NOT NULL
 		)
@@ -71,17 +72,16 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	return result
 }
 
-func SelectUserById(db *sql.DB, id int) User {
+func selectUserById(db *sql.DB, id int) User {
 	var u User
-	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Name, &u.Email, &u.Password)
-	fmt.Println(u)
+	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 	return u
 }
 
-func SelectUserByEmail(db *sql.DB, email string) User {
+func SelectUserByEmail(db *sql.DB, email string, password string) User {
 	var u User
 	fmt.Println("select user :", email)
-	db.QueryRow(`SELECT * FROM users WHERE email = ?`, email).Scan(&u.Name, &u.Email, &u.Password)
+	db.QueryRow(`SELECT * FROM users WHERE (email, password) = (?,?)`, email, password).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 	fmt.Println(u)
 	return u
 }
