@@ -23,37 +23,27 @@
                 <h2 class="title">Welcome to our family</h2>
                 <input type="text" placeholder="Write an email" id="Email">
                 <input type="text" placeholder="Write a password" id="Password">
-                <button onclick="newUser()" id="newtask">New Task</button>
-
+                <button onclick="onClickRegister()" id="newtask">New Task</button>
+                <imput type="hidden" name="Submit" value="Se connecter" />
             </div>
         </div>
     </section>
 
 </body>
 <script>
-    function newUser() {
-        let email = document.getElementById("Email").value;
-        let password = document.getElementById("Password").value;
-        fetch("/loginApi",
-            {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password
-                })
-            }).then((res) => {
-                console.log(res);
-                return res.json()
+    const onClickRegister = () => {
+        fetch("/loginApi", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                email: document.getElementById("Email").value,
+                password: document.getElementById("Password").value
             })
-            .then((res) => {
-                const abs = document.getElementById("absolute")
-
-                abs.innerText = res.test
-            })
+        })
     }
+
 </script>
 
 </html>

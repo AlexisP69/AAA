@@ -34,40 +34,71 @@ var (
 	store = sessions.NewCookieStore(key)
 )
 
-func secret(w http.ResponseWriter, r *http.Request) {
-	session, _ := store.Get(r, "cookie-name")
+func HandleHome(w http.ResponseWriter, r *http.Request) {
+	var data User = User{}
 
-	// Check if user is authenticated
-	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-		http.Error(w, "Forbidden", http.StatusForbidden)
+	if r.URL.Path != "/loginApi" {
+		http.NotFound(w, r)
+		return
+	}
+	session, _ := store.Get(r, "cookie-name")
+	auth := session.Values["authenticated"]
+	fmt.Println(auth)
+	if auth == nil {
+		http.Redirect(w, r, "/login", http.StatusFound)
 		return
 	}
 
-	// Print secret message
-	fmt.Fprintln(w, "The cake is a lie!")
+	json.Unmarshal([]byte(auth.(string)), &data)
+
+	tmpl, _ := template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html", "templates/login.html")
+
+	tmpl.Execute(w, data)
 }
 
-func login(w http.ResponseWriter, r *http.Request) {
+func HandleLogin(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/loginApi" {
+		http.NotFound(w, r)
+		return
+	}
+
+	// tmpl, _ := template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html", "templates/login.html")
+
+	if err := r.ParseForm(); err != nil {
+		http.Error(w, "Error parsing form", 500)
+
+	}
+	fmt.Println("Welcome")
+
+	session, _ := store.Get(r, "cookie-name")
+
+	// if _, ok := r.PostForm["Submit"]; ok {
+	// fmt.Println(string("uv"))
+	res, _ := json.Marshal(r.PostForm)
+	session.Values["authenticated"] = string(res)
+	session.Save(r, w)
+	http.Redirect(w, r, "/", http.StatusFound)
+	// return
+	// } else if session.Values["authenticated"] != nil {
+	// 	http.Redirect(w, r, "/", http.StatusFound)
+	// 	return
+	// }
+
+	// tmpl.Execute(w, nil)
+}
+
+func HandleLogout(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
 		return
 	}
 	session, _ := store.Get(r, "cookie-name")
 
-	// Authentication goes here
-	// ...
-
-	// Set user as authenticated
-	session.Values["authenticated"] = true
-	session.Save(r, w)
-}
-
-func logout(w http.ResponseWriter, r *http.Request) {
-	session, _ := store.Get(r, "cookie-name")
-
 	// Revoke users authentication
-	session.Values["authenticated"] = false
+	session.Values["authenticated"] = nil
 	session.Save(r, w)
+
+	http.Redirect(w, r, "/", http.StatusFound)
 }
 
 func HandleFunc(db *sql.DB) {
@@ -152,9 +183,7 @@ func HandleFunc(db *sql.DB) {
 		}
 	})
 
-	http.HandleFunc("/loginApi", func(w http.ResponseWriter, r *http.Request) {
-
-	})
+	http.HandleFunc("/loginApi", HandleLogin)
 
 	http.HandleFunc("/fondateurs", func(w http.ResponseWriter, r *http.Request) {
 		template := template.Must(template.ParseFiles("Page/Fondateur.html"))
