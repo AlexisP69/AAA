@@ -169,7 +169,7 @@ func HandleFunc(db *sql.DB) {
 		fmt.Println(body)
 
 		fmt.Println(login.Email)
-		SelectUserByEmail(db, login.Email, login.Password)
+		SelectUserWhenLogin(db, login.Email, login.Password)
 		// SelectAllFromTable(db, "users")
 	})
 
