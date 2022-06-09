@@ -26,7 +26,7 @@ border-radius: 50px;
 .Catégories{
   font-family: 'Pacifico', cursive;
 }
-#Title{
+#title{
   font-family: 'Pacifico', cursive;
   margin-top: 10px;
   margin-left: 6vh;
@@ -35,7 +35,7 @@ border-radius: 50px;
   height: 20px;
   border-radius: 40px;
 }
-.description{
+#description{
   font-family: 'Pacifico', cursive;
   margin-top: 10px;
   margin-left: 6vh;

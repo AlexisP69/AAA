@@ -4,15 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suscribe</title>
-    <!-- Reset styles -->
-    <link rel="stylesheet" href="../Static/Signup.css" type="text/css">
-    <!-- Google Fonts Muli -->
+    <title>Login</title>
+   
+    <link rel="stylesheet" href="../Static/login.css" type="text/css">
+    <link rel="stylesheet" href="../Static/navbar.css" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    {{template "navbar"}}
+<div id="popup" class="overlay1">
+    <div class="box-form">
+        <div class="left">
+            <div class="overlay">
+                <h1>Forum AAA!</h1>
+                <h3>Against all authorities</h3>
+                <span>
+                    <p>login with social media</p>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
+                </span>
+            </div>
+        </div>
+
+
+        <div class="right">
+
+            <h5>Login</h5>
+            <p>Don't have an account? <a id="hehe" href="/register">Create Your Account</a> it takes less than a minute</p>
+            <form id="Subscribe" Method="POST" action="/">
+                <div class="inputs">
+                    <input type="text" placeholder="Write an email" id="Email">
+                    <br>
+                    <input type="text" placeholder="Write your password" id="Password">
+                </div>
+
+                <br><br>
+
+                <div class="remember-me--forget-password">
+                    
+                    <label>
+                        <input type="checkbox" name="item" checked />
+                        <span class="text-checkbox">Remember me</span>
+                    </label>
+                    <p>forget password?</p>
+                </div>
+
+                <br>
+                <button onclick="newUser()" id="newtask">New Task</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+    <script>
+    function newUser() {
+        let email = document.getElementById("Email").value;
+        let password = document.getElementById("Password").value;
+        fetch("/loginApi",
+            {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }).then((res) => {
+                console.log(res);
+                return res.json()
+            })
+            .then((res) => {
+                const abs = document.getElementById("absolute")
+
+                abs.innerText = res.test
+            })
+    }
+</script>
+
+    </script>
+    </div>
+</div>
+</html>
+
+<!-- <body>
     <section class="wrapper">
         <div class="container">
             <div class="img__container">
@@ -56,4 +133,4 @@
     }
 </script>
 
-</html>
+</html> -->

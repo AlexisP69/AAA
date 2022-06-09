@@ -92,7 +92,7 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Signup.html", "templates/footer.html"))
+		template := template.Must(template.ParseFiles("Page/Signup.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
@@ -151,7 +151,7 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Login.html"))
+		template := template.Must(template.ParseFiles("Page/Login.html", "templates/navbar.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
