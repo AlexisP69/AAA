@@ -26,7 +26,7 @@
                     but hey, it's pure CSS magic.
                 -->
                 <ul id="menu">
-                    <a href="#">
+                    <a href="/">
                         <li>Home</li>
                     </a>
                     <a href="#">
@@ -35,8 +35,8 @@
                     <a href="#">
                         <li>Info</li>
                     </a>
-                    <a href="#">
-                        <li>Contact</li>
+                    <a href="/fondateurs">
+                        <li>The Founders</li>
                     </a>
                     <a onclick="window.location.href='/Therms-of-use'" target="_blank">
                         <li>Therms of use</li>
@@ -45,7 +45,7 @@
             </div>
         </nav>
     </div>
-    <div class="title">
+    <div class="title" >
         Forum Project
     </div>
   
@@ -55,15 +55,6 @@
         <a id="signup" href="/register" >Sign Up</a>
         <!-- <a href="register" target="_blank">Sign Up</a> -->
     </div>
-    {{template "login"}}
-    <script>
-        document.getElementById('signin').addEventListener('click', () => {
-            document.getElementById('popup').showModal()
-        })
-        document.getElementById('signup').addEventListener('click', () => {
-            document.getElementById('wrapper').showModal()
-        })
-        
-    </script>
+   
 </div>
 {{end}}

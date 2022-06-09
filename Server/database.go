@@ -9,6 +9,7 @@ import (
 )
 
 type User struct {
+	Id       int
 	Name     string
 	Email    string
 	Password string
@@ -27,6 +28,11 @@ func InitDatabase(database string) *sql.DB {
 			email TEXT UNIQUE NOT NULL,
 			password TEXT NOT NULL
 		);
+		CREATE TABLE IF NOT EXISTS post (
+			categorie TEXT NOT NULL,
+			title	TEXT UNIQUE NOT NULL,
+			description TEXT UNIQUE NOT NULL
+		)
 		`
 
 	_, err = db.Exec(sqlStmt)
@@ -48,6 +54,17 @@ func InsertIntoUsers(db *sql.DB, name string, email string, password string) (in
 	return result.LastInsertId()
 }
 
+func InsertIntoPost(db *sql.DB, categorie string, title string, description string) (int64, error) {
+	fmt.Println("TEST")
+	result, err := db.Exec(`INSERT INTO post (categorie, title, description) VALUES (?, ?, ?)`, categorie, title, description)
+	if err != nil {
+		fmt.Println(err)
+		// fmt.Println(err)
+		return 0, err
+	}
+	return result.LastInsertId()
+}
+
 func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	query := "SELECT * FROM " + table
 	result, _ := db.Query(query)
@@ -55,17 +72,16 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	return result
 }
 
-func SelectUserById(db *sql.DB, id int) User {
+func selectUserById(db *sql.DB, id int) User {
 	var u User
-	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Name, &u.Email, &u.Password)
-	fmt.Println(u)
+	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 	return u
 }
 
-func SelectUserByEmail(db *sql.DB, email string) User {
+func SelectUserWhenLogin(db *sql.DB, email string, password string) User {
 	var u User
 	fmt.Println("select user :", email)
-	db.QueryRow(`SELECT * FROM users WHERE email = ?`, email).Scan(&u.Name, &u.Email, &u.Password)
+	db.QueryRow(`SELECT * FROM users WHERE (email, password) = (?,?)`, email, password).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 	fmt.Println(u)
 	return u
 }

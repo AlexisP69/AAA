@@ -4,32 +4,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suscribe</title>
-    <!-- Reset styles -->
-    <link rel="stylesheet" href="../Static/Signup.css" type="text/css">
-    <!-- Google Fonts Muli -->
+    <title>Login</title>
+   
+    <link rel="stylesheet" href="../Static/essai.css" type="text/css">
+    <link rel="stylesheet" href="../Static/navbar.css" type="text/css">
+
+    
     <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <section class="wrapper">
-        <div class="container">
-            <div class="img__container">
-                <img src="../Static/members.png" alt="salad" class="img">
-            </div>
-            <div class="content">
-                <h1 class="subtitle">Sign Up</h1>
-                <h2 class="title">Welcome to our family</h2>
-                    <input type="text" placeholder="Write a name" id="Name">
-                    <input type="text" placeholder="Write an email" id="Email">
-                    <input type="text" placeholder="Write a password" id="Password">
-                    <input type="text" placeholder="Confirm your password" id="ConfirmPassword">
-                    <button onclick="newUser()" id="newtask">New Task</button>
-            </div>
-        </div>
-    </section>
 
+    <div class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-title">
+            <nav role="navigation">
+                <div id="menuToggle">
+                    <!--
+                        A fake / hidden checkbox is used as click reciever,
+                        so you can use the :checked selector on it.
+                    -->
+                    <input type="checkbox" />
+                    
+                    <!--
+                        Some spans to act as a hamburger.
+                        
+                        They are acting like a real hamburger,
+                        not that McDonalds stuff.
+                    -->
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    
+                    <!--
+                        Too bad the menu has to be inside of the button
+                        but hey, it's pure CSS magic.
+                    -->
+                    <ul id="menu">
+                        <a href="/">
+                            <li>Home</li>
+                        </a>
+                        <a href="#">
+                            <li>About</li>
+                        </a>
+                        <a href="#">
+                            <li>Info</li>
+                        </a>
+                        <a href="/fondateurs">
+                            <li>The Founders</li>
+                        </a>
+                        <a onclick="window.location.href='/Therms-of-use'" target="_blank">
+                            <li>Therms of use</li>
+                        </a>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="title" >
+            Forum Project
+        </div>
+      
+        <div class="nav-links">
+            
+            <a id="signin" href="/login" >Sign In</a>
+            <a id="signup" href="/register" >Sign Up</a>
+            <!-- <a href="register" target="_blank">Sign Up</a> -->
+        </div>
+       
+    </div>    
+
+<div class='bold-line'></div>
+<div class='container'>
+    <div class="img__container">
+        <div class='window'>
+            <div class='overlay'>
+                <div class='content'>
+        <div class='welcome'>Hello People!</div>
+      <div class='subtitle'>Welcome to Forum AAA.</div>
+      <div class='input-fields'>
+        
+
+                <input type="text" placeholder="Write an Username" class='input-line full-width' id="Name">
+                <input type="text" placeholder="Write an Email" class='input-line full-width' id="Email">
+                <input type="text" placeholder="Write a password" class='input-line full-width' id="Password">
+                <input type="text" placeholder="Confirm your password" class='input-line full-width' id="ConfirmPassword">
+                <button onclick="newUser()" class='ghost-round full-width' id="newtask">Create Account</button>
+      </div>
+      
+    
+    </div>
+  </div>
+</div>
 </body>
 <script>
     function newUser() {
@@ -64,5 +129,4 @@
         }
     }
 </script>
-
 </html>

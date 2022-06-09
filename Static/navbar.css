@@ -1,3 +1,6 @@
+*{
+    margin: 0;
+}
 .title {
     top: 2vh;
     left: 47%;
@@ -161,7 +164,6 @@
     transform-origin: 4px 0px;
 
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-        background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
         opacity 0.55s ease;
 }
 
@@ -173,10 +175,7 @@
     transform-origin: 0% 100%;
 }
 
-/* 
- * Transform all the slices of hamburger
- * into a crossmark.
- */
+
 #menuToggle input:checked~span {
     opacity: 1;
     transform: rotate(45deg) translate(-2px, -1px);
@@ -198,19 +197,16 @@
     transform: rotate(-45deg) translate(0, -1px);
 }
 
-/*
- * Make this absolute positioned
- * at the top left of the screen
- */
-#menu {
-    position: absolute;
-    width: 300px;
-    height:820px;
-    margin: -100px 0 0 -50px;
-    /* padding: 50px; */
-    padding-top: 125px;
 
-    background: #ededed;
+#menu {
+    /* position: absolute; */
+    width: 300px;
+    height:500px;
+    margin: -100px -200px 0 -50px;
+    /* padding: 50px; */
+    padding-top: 120px;
+    
+    /* background: #ededed; */
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
     /* to stop flickering of text in safari */
@@ -222,8 +218,12 @@
 }
 
 #menu li {
-    padding: 10px 0;
+    
+    font-family: 'Pacifico', cursive;
     font-size: 22px;
+    color: #fff;
+    /* background-color: #48CAE4; */
+    height:100px;
 }
 
 /*

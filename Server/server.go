@@ -11,6 +11,12 @@ import (
 	"github.com/gorilla/sessions"
 )
 
+type Post struct {
+	Categorie   string
+	Title       string
+	Description string
+}
+
 type test struct {
 	Enregistrer []Register
 	Connecter   []Login
@@ -103,7 +109,7 @@ func HandleLogout(w http.ResponseWriter, r *http.Request) {
 
 func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html", "templates/login.html"))
+		template := template.Must(template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
@@ -135,7 +141,8 @@ func HandleFunc(db *sql.DB) {
 		body, _ := ioutil.ReadAll(r.Body)
 		// fmt.Println(r.Body)
 		json.Unmarshal(body, &register)
-		fmt.Println(body)
+		// fmt.Println(body)
+		fmt.Println(db)
 		// fmt.Println(register)
 		// InsertIntoUsers(db, "name", "email", "password")
 		// test := SelectUserById(db, 1)
@@ -176,14 +183,27 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Login.html"))
+		template := template.Must(template.ParseFiles("Page/Login.html", "templates/navbar.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
 		}
 	})
 
-	http.HandleFunc("/loginApi", HandleLogin)
+	http.HandleFunc("/loginApi", func(w http.ResponseWriter, r *http.Request) {
+		var login Login
+		fmt.Println(db)
+
+		body, _ := ioutil.ReadAll(r.Body)
+
+		json.Unmarshal(body, &login)
+		fmt.Println(body)
+
+		fmt.Println(login.Email)
+		SelectUserWhenLogin(db, login.Email, login.Password)
+		HandleLogin(w, r)
+		// SelectAllFromTable(db, "users")
+	})
 
 	http.HandleFunc("/fondateurs", func(w http.ResponseWriter, r *http.Request) {
 		template := template.Must(template.ParseFiles("Page/Fondateur.html"))
@@ -194,11 +214,20 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "templates/login.html", "Page/Signup.html"))
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
-			//return
+			return
 		}
+	})
+
+	http.HandleFunc("/newPost", func(w http.ResponseWriter, r *http.Request) {
+		var post Post
+		body, _ := ioutil.ReadAll(r.Body)
+		json.Unmarshal(body, &post)
+		fmt.Println(body)
+		fmt.Println(post)
+		InsertIntoPost(db, post.Categorie, post.Title, post.Description)
 	})
 
 	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {
