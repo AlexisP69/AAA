@@ -148,7 +148,13 @@ func HandleFunc(db *sql.DB) {
 		// test := SelectUserById(db, 1)
 		// fmt.Println(test)
 		fmt.Println(register.Name)
-		InsertIntoUsers(db, register.Name, register.Email, register.Password)
+		_, err := InsertIntoUsers(db, register.Name, register.Email, register.Password)
+		if err != nil {
+			// if( err == "UNIQUE constraint failed: users.email") {
+
+			// }
+			// fmt.Println(err)
+		}
 
 		// if err != nil {
 		// 	// fmt.Println(err)

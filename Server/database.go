@@ -56,7 +56,7 @@ func InsertIntoUsers(db *sql.DB, name string, email string, password string) (in
 	result, err := db.Exec(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`, name, email, password)
 	if err != nil {
 		fmt.Println("Ce nom ou email existe déjà")
-		// fmt.Println(err)
+		fmt.Println(err)
 		return 0, err
 	}
 	return result.LastInsertId()
