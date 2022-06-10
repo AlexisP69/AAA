@@ -18,7 +18,7 @@
             Categories :
         </div>
         <div class="button1">
-            
+
             <button onclick="window.location.href='/drugs'" class="btn1">Drugs</button>
             <button class="btn2">Erotica</button>
             <button class="btn1">Counterfeit</button>
@@ -33,22 +33,31 @@
     </div>
 
     <h1>Drugs</h1>
-        <h2> F I L T E R S </h2>
-        <div class="postss"></div>
+    <h2> F I L T E R S </h2>
+    <div class="postss">
+    </div>
 
     <!-- POST -->
-        
-                <a id="poost" href="#" >Create New Post</a>
-            <!-- <button onclick="newPost()" id="newPost"> Create New Post</button> -->
-            <div id="tasklist"></div>
-            {{template "footer"}}
-            {{template "post"}}
-    
-    
-</body>
-                <script>
-                document.getElementById('poost').addEventListener('click', () => {
-                    document.getElementById('popup-Form').showModal()
-                })
-                
-            </script>
+
+    <a id="poost">Create New Post</a>
+    <!-- <button onclick="newPost()" id="newPost"> Create New Post</button> -->
+    <div id="postList">
+        {{range .EveryPost}}
+            {{template "postBlock" .}}
+        {{end}}
+    </div>
+    {{template "footer"}}
+    {{template "post"}}
+
+
+</body >
+<script>
+    document.getElementById('poost').addEventListener('click', () => {
+        document.getElementById('popup-Form').showModal()
+    })
+</script>
+
+<script>
+</script>
+
+</html>
