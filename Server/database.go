@@ -15,6 +15,13 @@ type User struct {
 	Password string
 }
 
+type Posts struct {
+	Id          int
+	Categorie   string
+	Title       string
+	Description string
+}
+
 func InitDatabase(database string) *sql.DB {
 	fmt.Println("-- Creation --")
 	db, err := sql.Open("sqlite3", database)
@@ -29,6 +36,7 @@ func InitDatabase(database string) *sql.DB {
 			password TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS post (
+			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			categorie TEXT NOT NULL,
 			title	TEXT UNIQUE NOT NULL,
 			description TEXT UNIQUE NOT NULL
@@ -68,15 +76,14 @@ func InsertIntoPost(db *sql.DB, categorie string, title string, description stri
 func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	query := "SELECT * FROM " + table
 	result, _ := db.Query(query)
-	fmt.Println(result)
 	return result
 }
 
-func selectUserById(db *sql.DB, id int) User {
-	var u User
-	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
-	return u
-}
+// func selectUserById(db *sql.DB, id int) User {
+// 	var u User
+// 	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
+// 	return u
+// }
 
 func SelectUserWhenLogin(db *sql.DB, email string, password string) User {
 	var u User
@@ -84,6 +91,25 @@ func SelectUserWhenLogin(db *sql.DB, email string, password string) User {
 	db.QueryRow(`SELECT * FROM users WHERE (email, password) = (?,?)`, email, password).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 	fmt.Println(u)
 	return u
+}
+
+// func SelectPostWithId(db *sql.DB, id int) Posts {
+// 	var u Posts
+// 	fmt.Println("select post :", id)
+// 	db.QueryRow(`SELECT * FROM post WHERE id  = ?`, id).Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+// 	fmt.Println(u)
+// 	return u
+// }
+
+func SelectAllPost(db *sql.DB) []Posts {
+	var u Posts
+	rows := SelectAllFromTable(db, "post")
+	final := make([]Posts, 0)
+	for rows.Next() {
+		rows.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+		final = append(final, u)
+	}
+	return final
 }
 
 func SelectUserNameWithPattern(db *sql.DB, pattern string) []User {

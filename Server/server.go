@@ -12,14 +12,14 @@ import (
 )
 
 type Post struct {
+	Id          int
 	Categorie   string
 	Title       string
 	Description string
 }
 
-type test struct {
-	Enregistrer []Register
-	Connecter   []Login
+type Test struct {
+	EveryPost []Posts
 }
 
 type Register struct {
@@ -243,9 +243,11 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html"))
+		var postSlice Test
+		postSlice.EveryPost = SelectAllPost(db)
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html"))
 		if r.Method != http.MethodPost {
-			template.Execute(w, "")
+			template.Execute(w, postSlice)
 			return
 		}
 	})
