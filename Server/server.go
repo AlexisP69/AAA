@@ -30,8 +30,8 @@ type Register struct {
 }
 
 type Login struct {
-	Email    string
-	Password string
+	Email    string `json:email`
+	Password string `json:password`
 }
 
 var (
@@ -41,28 +41,30 @@ var (
 )
 
 func HandleHome(w http.ResponseWriter, r *http.Request) {
-	var data User = User{}
+	var data Login = Login{}
 
 	if r.URL.Path != "/loginApi" {
 		http.NotFound(w, r)
+		fmt.Println("wowo")
 		return
 	}
 	session, _ := store.Get(r, "cookie-name")
 	auth := session.Values["authenticated"]
 	fmt.Println(auth)
-	if auth == nil {
-		http.Redirect(w, r, "/login", http.StatusFound)
-		return
-	}
+	// if auth == nil {
+	// 	http.Redirect(w, r, "/login", http.StatusFound)
+	// 	return
+	// }
 
 	json.Unmarshal([]byte(auth.(string)), &data)
 
 	tmpl, _ := template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html", "templates/login.html")
 
+	fmt.Println("DATA IN HOME", data)
 	tmpl.Execute(w, data)
 }
 
-func HandleLogin(w http.ResponseWriter, r *http.Request) {
+func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	if r.URL.Path != "/loginApi" {
 		http.NotFound(w, r)
 		return
@@ -72,20 +74,46 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, "Error parsing form", 500)
-
+		return
 	}
 	fmt.Println("Welcome")
 
-	session, _ := store.Get(r, "cookie-name")
-
 	// if _, ok := r.PostForm["Submit"]; ok {
 	// fmt.Println(string("uv"))
-	res, _ := json.Marshal(r.PostForm)
-	session.Values["authenticated"] = string(res)
-	session.Save(r, w)
-	http.Redirect(w, r, "/", http.StatusFound)
+
+	var login Login
+
+	body, _ := ioutil.ReadAll(r.Body)
+
+	json.Unmarshal(body, &login)
+
+	fmt.Println(login.Email)
+	result := SelectUserWhenLogin(db, login.Email, login.Password)
+	if result.Id == 0 {
+		w.Write([]byte(`{"test": "wrong mail or password"}`))
+
+	} else {
+		w.Write([]byte(`{"test": "success"}`))
+		res, _ := json.Marshal(login)
+		session, _ := store.Get(r, "cookie-name")
+		fmt.Println(session)
+		fmt.Printf("POSTFOR IN LOGIN %v", login)
+		session.Values["authenticated"] = string(res)
+		session.Save(r, w)
+	}
+	// http.Redirect(w, r, "/", http.StatusFound)
 	// return
-	// } else if session.Values["authenticated"] != nil {
+	// } else
+
+	// result := SelectUserWhenLogin(db, login.Email, login.Password)
+	// if result.Id == 0 {
+	// 	w.Write([]byte(`{"test": "wrong mail or password"}`))
+
+	// } else {
+	// 	w.Write([]byte(`{"test": "success"}`))
+	// }
+
+	// if session.Values["authenticated"] != nil {
 	// 	http.Redirect(w, r, "/", http.StatusFound)
 	// 	return
 	// }
@@ -191,17 +219,18 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/loginApi", func(w http.ResponseWriter, r *http.Request) {
-		var login Login
-		fmt.Println(db)
 
-		body, _ := ioutil.ReadAll(r.Body)
+		// var login Login
+		// fmt.Println(db)
 
-		json.Unmarshal(body, &login)
-		fmt.Println(body)
+		// body, _ := ioutil.ReadAll(r.Body)
 
-		fmt.Println(login.Email)
-		SelectUserWhenLogin(db, login.Email, login.Password)
-		HandleLogin(w, r)
+		// json.Unmarshal(body, &login)
+		// fmt.Println(body)
+
+		// fmt.Println(login.Email)
+		// SelectUserWhenLogin(db, login.Email, login.Password)
+		HandleLogin(w, r, db)
 		// SelectAllFromTable(db, "users")
 	})
 
