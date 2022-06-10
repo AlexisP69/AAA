@@ -30,8 +30,8 @@ type Register struct {
 }
 
 type Login struct {
-	Email    string `json:email`
-	Password string `json:password`
+	Email    string
+	Password string
 }
 
 var (
@@ -93,13 +93,13 @@ func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		w.Write([]byte(`{"test": "wrong mail or password"}`))
 
 	} else {
-		w.Write([]byte(`{"test": "success"}`))
 		res, _ := json.Marshal(login)
 		session, _ := store.Get(r, "cookie-name")
 		fmt.Println(session)
 		fmt.Printf("POSTFOR IN LOGIN %v", login)
 		session.Values["authenticated"] = string(res)
 		session.Save(r, w)
+		w.Write([]byte(`{"test": "success"}`))
 	}
 	// http.Redirect(w, r, "/", http.StatusFound)
 	// return
