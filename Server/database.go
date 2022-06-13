@@ -22,6 +22,12 @@ type Posts struct {
 	Description string
 }
 
+type Commentaire struct {
+	Id          int
+	Name        string
+	Commentaire string
+}
+
 func InitDatabase(database string) *sql.DB {
 	fmt.Println("-- Creation --")
 	db, err := sql.Open("sqlite3", database)
@@ -29,6 +35,7 @@ func InitDatabase(database string) *sql.DB {
 		log.Fatal(err)
 	}
 	sqlStmt := `
+		PRAGMA foreign_keys = ON;
 		CREATE TABLE IF NOT EXISTS users (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			name TEXT UNIQUE NOT NULL,
@@ -40,7 +47,14 @@ func InitDatabase(database string) *sql.DB {
 			categorie TEXT NOT NULL,
 			title	TEXT UNIQUE NOT NULL,
 			description TEXT UNIQUE NOT NULL
-		)
+		);
+		CREATE TABLE IF NOT EXISTS commentaire (
+			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			type_id INTEGER NOT NULL,
+			name TEXT NOT NULL,
+			commentaire TEXT NOT NULL,
+			FOREIGN KEY (type_id) REFERENCES post(id)
+		);
 		`
 
 	_, err = db.Exec(sqlStmt)
@@ -110,6 +124,17 @@ func SelectAllPost(db *sql.DB) []Posts {
 
 	}
 	return final
+}
+
+func CreateComment(db *sql.DB, commentaire string) (int64, error) {
+	var u User
+	result, err := db.Exec(`INSERT INTO commentaire (commentaire, name) VALUES (?, ?)`, commentaire, u.Name)
+	if err != nil {
+		fmt.Println(err)
+		// fmt.Println(err)
+		return 0, err
+	}
+	return result.LastInsertId()
 }
 
 func SelectUserNameWithPattern(db *sql.DB, pattern string) []User {

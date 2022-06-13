@@ -27,7 +27,7 @@
             <button onclick="window.location.href='/erotica'" class="btn2">Erotica</button>
             <button onclick="window.location.href='/counterfeit'" class="btn1">Counterfeit</button>
             <button onclick="window.location.href='/tutorials'" class="btn2">Tutorials</button>
-            
+
         </div>
         <div class="button2">
             <button onclick="window.location.href='/guns'" class="btn2">Guns</button>
@@ -48,22 +48,30 @@
     <!-- <button onclick="newPost()" id="newPost"> Create New Post</button> -->
     <div id="postList">
         {{range .EveryPost}}
-            {{template "postBlock" .}}
-            
-            {{template "completePost"}}
+        {{template "postBlock" .}}
+
+        {{template "completePost"}}
         {{end}}
     </div>
     {{template "footer"}}
     {{template "post"}}
 
-    
 
 
-</body >
+
+</body>
 <script>
     document.getElementById('poost').addEventListener('click', () => {
         document.getElementById('popup-Form').showModal()
     })
+    var inputs = document.getElementById("postList");
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].onclick = function () {
+            console.log(inputs[i].id);
+        }
+    }
+    // let e = document.getElementById('postList')[0].id
+    // console.log(e)
 
 </script>
 
