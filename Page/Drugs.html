@@ -50,7 +50,7 @@
         {{range .EveryPost}}
             {{template "postBlock" .}}
             
-            {{template "completePost"}}
+            {{template "completePost" .}}
         {{end}}
     </div>
     {{template "footer"}}

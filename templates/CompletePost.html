@@ -1,15 +1,17 @@
 {{define "completePost"}}
-<dialog id="Form" >
+<dialog id="Form{{.Id}}" class="detail">
       
          <a class="close" href="">&times;</a>
-        <div class="hehe">
-          <h3>This post</h3>
+        <div class="tt">
+          <h4>{{.Title}}</h4>
         </div>
         
         <div class="grandRectangle">
-          <h1>{{.Title}}</h1>
+          <p>Nom de l'utilisateur </p>
         </div>
-        <div class="petitRectangle"></div>
+        <div class ="petitRectangle">
+          <h4>{{.Description}}</h4>
+        </div>
         <div class="basRectangle">
           <img id="like" onclick="myFunction()" src="../Static/like.png"></img>
           <img id="dislike" src="../Static/dislike.png"></img>
@@ -55,23 +57,4 @@
   <input class="" type="text" placeholder="Comment Please" />
   <p>heeeeeee</p>
 </dialog>
-<script>
-  function myFunction() {
-    var $counter=0;
-      $(".like").click(function() {
-          $('#counter').val($counter++);
-      });
-      $(".dislike").click(function() {
-          $('#counter').val($counter--);
-      });
-  }
-
-
-  document.getElementById('commentaire').addEventListener('click', () => {
-  let div = document.createElement('div');
-  div.innerHTML = '<p>CreateElement example</p>';
-  document.body.appendChild(div);
-  });
-
-</script>
 {{end}}

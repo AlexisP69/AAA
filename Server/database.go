@@ -78,6 +78,12 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	return result
 }
 
+func SelectAllByCategorie(db *sql.DB, categorie string) Posts {
+	var u Posts
+	db.QueryRow(`SELECT * FROM post WHERE categorie = ?`, categorie).Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+	return u
+}
+
 // func selectUserById(db *sql.DB, id int) User {
 // 	var u User
 // 	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
