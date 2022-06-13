@@ -7,58 +7,60 @@
     <title>Login</title>
    
     <link rel="stylesheet" href="../Static/Login.css" type="text/css">
-    <link rel="stylesheet" href="../Static/navbar.css" type="text/css">
+    <link rel="stylesheet" href="../Static/navbar2.css" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     {{template "navbar"}}
-<div id="popup" class="overlay1">
-    <div class="box-form">
-        <div class="left">
-            <div class="overlay">
-                <h1>Forum AAA!</h1>
-                <h3>Against all authorities</h3>
-                <span>
-                    <p>login with social media</p>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
-                </span>
+    <div id="popup" class="overlay1">
+        <div class="box-form">
+            <div class="left">
+                <div class="overlay">
+                    <h1>Forum AAA!</h1>
+                    <h3>Against all authorities</h3>
+                    <span>
+                        <p>login with social media</p>
+                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a>
+                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="right">
+
+                <h5>Login</h5>
+                <p>Don't have an account? <a id="hehe" href="/register">Create Your Account</a> it takes less than a
+                    minute</p>
+                    <div id="absolute"></div>
+                <div id="Subscribe">
+                    <div class="inputs">
+                        <input type="email" placeholder="Write an email" name="Email" id="Email">
+                        <br>
+                        <input type="password" placeholder="Write your password" name="Password" id="Password">
+                    </div>
+
+                    <br><br>
+
+                    <div class="remember-me--forget-password">
+
+                        <label>
+                            <input type="checkbox" name="item" checked />
+                            <span class="text-checkbox">Remember me</span>
+                        </label>
+                        <p>forget password?</p>
+                    </div>
+
+                    <br>
+                    <button onclick="newUser()" id="newtask" name="Submit" value="Se Connecter">Submit</button>
+                </div>
             </div>
         </div>
-
-
-        <div class="right">
-
-            <h5>Login</h5>
-            <p>Don't have an account? <a id="hehe" href="/register">Create Your Account</a> it takes less than a minute</p>
-            <form id="Subscribe" Method="POST" action="/">
-                <div class="inputs">
-                    <input type="text" placeholder="Write an email" id="Email">
-                    <br>
-                    <input type="text" placeholder="Write your password" id="Password">
-                </div>
-
-                <br><br>
-
-                <div class="remember-me--forget-password">
-                    
-                    <label>
-                        <input type="checkbox" name="item" checked />
-                        <span class="text-checkbox">Remember me</span>
-                    </label>
-                    <p>forget password?</p>
-                </div>
-
-                <br>
-                <button onclick="newUser()" id="newtask">New Task</button>
-            </form>
-        </div>
     </div>
-</div>
 </body>
-    <script>
+<script>
     function newUser() {
         let email = document.getElementById("Email").value;
         let password = document.getElementById("Password").value;
@@ -73,20 +75,25 @@
                     password: password
                 })
             }).then((res) => {
-                console.log(res);
+                // console.log(res);
                 return res.json()
             })
             .then((res) => {
+                console.log(res)
                 const abs = document.getElementById("absolute")
 
                 abs.innerText = res.test
+                if(res.test == "success"){
+                    window.location.href = '/'
+                }
             })
     }
 </script>
 
-    </script>
-    </div>
+</script>
 </div>
+</div>
+
 </html>
 
 <!-- <body>

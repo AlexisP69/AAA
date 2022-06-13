@@ -41,28 +41,30 @@ var (
 )
 
 func HandleHome(w http.ResponseWriter, r *http.Request) {
-	var data User = User{}
+	var data Login = Login{}
 
 	if r.URL.Path != "/loginApi" {
 		http.NotFound(w, r)
+		fmt.Println("wowo")
 		return
 	}
 	session, _ := store.Get(r, "cookie-name")
 	auth := session.Values["authenticated"]
 	fmt.Println(auth)
-	if auth == nil {
-		http.Redirect(w, r, "/login", http.StatusFound)
-		return
-	}
+	// if auth == nil {
+	// 	http.Redirect(w, r, "/login", http.StatusFound)
+	// 	return
+	// }
 
 	json.Unmarshal([]byte(auth.(string)), &data)
 
 	tmpl, _ := template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html", "templates/login.html")
 
+	fmt.Println("DATA IN HOME", data)
 	tmpl.Execute(w, data)
 }
 
-func HandleLogin(w http.ResponseWriter, r *http.Request) {
+func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	if r.URL.Path != "/loginApi" {
 		http.NotFound(w, r)
 		return
@@ -72,20 +74,46 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, "Error parsing form", 500)
-
+		return
 	}
 	fmt.Println("Welcome")
 
-	session, _ := store.Get(r, "cookie-name")
-
 	// if _, ok := r.PostForm["Submit"]; ok {
 	// fmt.Println(string("uv"))
-	res, _ := json.Marshal(r.PostForm)
-	session.Values["authenticated"] = string(res)
-	session.Save(r, w)
-	http.Redirect(w, r, "/", http.StatusFound)
+
+	var login Login
+
+	body, _ := ioutil.ReadAll(r.Body)
+
+	json.Unmarshal(body, &login)
+
+	fmt.Println(login.Email)
+	result := SelectUserWhenLogin(db, login.Email, login.Password)
+	if result.Id == 0 {
+		w.Write([]byte(`{"test": "wrong mail or password"}`))
+
+	} else {
+		res, _ := json.Marshal(login)
+		session, _ := store.Get(r, "cookie-name")
+		fmt.Println(session)
+		fmt.Printf("POSTFOR IN LOGIN %v", login)
+		session.Values["authenticated"] = string(res)
+		session.Save(r, w)
+		w.Write([]byte(`{"test": "success"}`))
+	}
+	// http.Redirect(w, r, "/", http.StatusFound)
 	// return
-	// } else if session.Values["authenticated"] != nil {
+	// } else
+
+	// result := SelectUserWhenLogin(db, login.Email, login.Password)
+	// if result.Id == 0 {
+	// 	w.Write([]byte(`{"test": "wrong mail or password"}`))
+
+	// } else {
+	// 	w.Write([]byte(`{"test": "success"}`))
+	// }
+
+	// if session.Values["authenticated"] != nil {
 	// 	http.Redirect(w, r, "/", http.StatusFound)
 	// 	return
 	// }
@@ -148,7 +176,13 @@ func HandleFunc(db *sql.DB) {
 		// test := SelectUserById(db, 1)
 		// fmt.Println(test)
 		fmt.Println(register.Name)
-		InsertIntoUsers(db, register.Name, register.Email, register.Password)
+		_, err := InsertIntoUsers(db, register.Name, register.Email, register.Password)
+		if err != nil {
+			// if( err == "UNIQUE constraint failed: users.email") {
+
+			// }
+			// fmt.Println(err)
+		}
 
 		// if err != nil {
 		// 	// fmt.Println(err)
@@ -191,17 +225,18 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/loginApi", func(w http.ResponseWriter, r *http.Request) {
-		var login Login
-		fmt.Println(db)
 
-		body, _ := ioutil.ReadAll(r.Body)
+		// var login Login
+		// fmt.Println(db)
 
-		json.Unmarshal(body, &login)
-		fmt.Println(body)
+		// body, _ := ioutil.ReadAll(r.Body)
 
-		fmt.Println(login.Email)
-		SelectUserWhenLogin(db, login.Email, login.Password)
-		HandleLogin(w, r)
+		// json.Unmarshal(body, &login)
+		// fmt.Println(body)
+
+		// fmt.Println(login.Email)
+		// SelectUserWhenLogin(db, login.Email, login.Password)
+		HandleLogin(w, r, db)
 		// SelectAllFromTable(db, "users")
 	})
 
@@ -216,7 +251,77 @@ func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
 		var postSlice Test
 		postSlice.EveryPost = SelectAllPost(db)
-		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html"))
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, postSlice)
+			return
+		}
+	})
+
+	http.HandleFunc("/erotica", func(w http.ResponseWriter, r *http.Request) {
+		var postSlice Test
+		postSlice.EveryPost = SelectAllPost(db)
+		template := template.Must(template.ParseFiles("Page/Erotica.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, postSlice)
+			return
+		}
+	})
+
+	http.HandleFunc("/counterfeit", func(w http.ResponseWriter, r *http.Request) {
+		var postSlice Test
+		postSlice.EveryPost = SelectAllPost(db)
+		template := template.Must(template.ParseFiles("Page/Counterfeit.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, postSlice)
+			return
+		}
+	})
+
+	http.HandleFunc("/tutorials", func(w http.ResponseWriter, r *http.Request) {
+		var postSlice Test
+		postSlice.EveryPost = SelectAllPost(db)
+		template := template.Must(template.ParseFiles("Page/Tutorials.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, postSlice)
+			return
+		}
+	})
+
+	http.HandleFunc("/guns", func(w http.ResponseWriter, r *http.Request) {
+		var postSlice Test
+		postSlice.EveryPost = SelectAllPost(db)
+		template := template.Must(template.ParseFiles("Page/Guns.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, postSlice)
+			return
+		}
+	})
+
+	http.HandleFunc("/software", func(w http.ResponseWriter, r *http.Request) {
+		var postSlice Test
+		postSlice.EveryPost = SelectAllPost(db)
+		template := template.Must(template.ParseFiles("Page/SoftWare.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, postSlice)
+			return
+		}
+	})
+
+	http.HandleFunc("/games", func(w http.ResponseWriter, r *http.Request) {
+		var postSlice Test
+		postSlice.EveryPost = SelectAllPost(db)
+		template := template.Must(template.ParseFiles("Page/Games.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		if r.Method != http.MethodPost {
+			template.Execute(w, postSlice)
+			return
+		}
+	})
+
+	http.HandleFunc("/jsp", func(w http.ResponseWriter, r *http.Request) {
+		var postSlice Test
+		postSlice.EveryPost = SelectAllPost(db)
+		template := template.Must(template.ParseFiles("Page/Jsp.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
 			return
