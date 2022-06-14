@@ -50,10 +50,10 @@ func InitDatabase(database string) *sql.DB {
 		);
 		CREATE TABLE IF NOT EXISTS commentaire (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-			type_id INTEGER NOT NULL,
+			post_id INTEGER NOT NULL,
 			name TEXT NOT NULL,
 			commentaire TEXT NOT NULL,
-			FOREIGN KEY (type_id) REFERENCES post(id)
+			FOREIGN KEY (post_id) REFERENCES post(id)
 		);
 		`
 
@@ -67,20 +67,28 @@ func InitDatabase(database string) *sql.DB {
 }
 
 func InsertIntoUsers(db *sql.DB, name string, email string, password string) (int64, error) {
-	var u Comments
 	result, err := db.Exec(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`, name, email, password)
 	if err != nil {
 		fmt.Println("Ce nom ou email existe déjà")
 		fmt.Println(err)
 		return 0, err
 	}
-	u.Name = name
-	fmt.Println(u.Name)
 	return result.LastInsertId()
 }
 
 func InsertIntoPost(db *sql.DB, categorie string, title string, description string) (int64, error) {
 	result, err := db.Exec(`INSERT INTO post (categorie, title, description) VALUES (?, ?, ?)`, categorie, title, description)
+	if err != nil {
+		fmt.Println(err)
+		// fmt.Println(err)
+		return 0, err
+	}
+	return result.LastInsertId()
+}
+
+func InsertIntoComments(db *sql.DB, commentaire string) (int64, error) {
+	var u User
+	result, err := db.Exec(`INSERT INTO commentaire (commentaire, name, post_id) VALUES (?, ?, ?)`, commentaire, u.Name)
 	if err != nil {
 		fmt.Println(err)
 		// fmt.Println(err)
@@ -135,15 +143,16 @@ func SelectAllPost(db *sql.DB) []Posts {
 	return final
 }
 
-func CreateComment(db *sql.DB, commentaire string) (int64, error) {
-	var u User
-	result, err := db.Exec(`INSERT INTO commentaire (commentaire, name) VALUES (?, ?)`, commentaire, u.Name)
-	if err != nil {
-		fmt.Println(err)
-		// fmt.Println(err)
-		return 0, err
+func SelectAllComments(db *sql.DB) []Commentaire {
+	var u Commentaire
+	rows := SelectAllFromTable(db, "commentaire")
+	final := make([]Commentaire, 0)
+	for rows.Next() {
+		rows.Scan(&u.Id, &u.Name, &u.Commentaire)
+		final = append(final, u)
+
 	}
-	return result.LastInsertId()
+	return final
 }
 
 func SelectUserNameWithPattern(db *sql.DB, pattern string) []User {

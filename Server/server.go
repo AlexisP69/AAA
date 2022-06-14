@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/sessions"
 )
 
-type Post struct {
+type NewPost struct {
 	Id          int
 	Categorie   string
 	Title       string
@@ -29,9 +29,10 @@ type Register struct {
 	UserConfirmPassword string
 }
 
-type Comments struct {
-	Input string
-	Name  string
+type NewComments struct {
+	Input  string
+	Name   string
+	PostId int
 }
 
 type Login struct {
@@ -255,15 +256,7 @@ func HandleFunc(db *sql.DB) {
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
 		var postSlice Test
-		var Commentaire Comments
 		postSlice.EveryPost = SelectAllPost(db)
-
-		body, _ := ioutil.ReadAll(r.Body)
-
-		json.Unmarshal(body, &Commentaire)
-
-		fmt.Println(db)
-		fmt.Println(Commentaire)
 		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
@@ -342,12 +335,21 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/newPost", func(w http.ResponseWriter, r *http.Request) {
-		var post Post
+		var post NewPost
 		body, _ := ioutil.ReadAll(r.Body)
 		json.Unmarshal(body, &post)
 		fmt.Println(body)
 		fmt.Println(post)
 		InsertIntoPost(db, post.Categorie, post.Title, post.Description)
+	})
+
+	http.HandleFunc("/newComments", func(w http.ResponseWriter, r *http.Request) {
+		var Commentaire NewComments
+		body, _ := ioutil.ReadAll(r.Body)
+		json.Unmarshal(body, &Commentaire)
+		fmt.Println(db)
+		fmt.Println(Commentaire)
+		// InsertIntoComments(db, Commentaire.Input)
 	})
 
 	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {

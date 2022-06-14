@@ -1,7 +1,9 @@
 {{define "completePost"}}
 <dialog id="Form{{.Id}}" class="detail">
 
-  <a class="close" href="">&times;</a>
+  <form class="close" method="dialog">
+    <button value="cancel">&times;</button>
+  </form>
   <div class="tt">
     <h4>{{.Title}}</h4>
   </div>
@@ -17,62 +19,37 @@
     <img id="dislike" src="../Static/dislike.png"></img>
     <img id="commentaire" src="../Static/commentaire.png"></img>
     <div class="comments">
-      <input type="text" id="infos" placeholder="Write an Comment">
-      <button id="com" onclick="myFunction()">Comment</button>
-      <div id="yo"></div>
+      <textarea id="infos{{.Id}}" placeholder="Write an Comment"></textarea>
+      <button onclick="newComment()" class="com" id="com{{.Id}}">Comment</button>
+      <div id="yo{{.Id}}"></div>
     </div>
-
   </div>
-
-
-
-  <!-- <div class="Catégories" >
-          <p>Catégories:</p>
-          <div class="box">
-            <select id="categorie">
-              <option>Drugs</option>
-              <option>Erotica</option>
-              <option>Counterfeit</option>
-              <option>Tutorials</option>
-              <option>Guns</option>
-              <option>SoftWare</option>
-              <option>Games</option>
-              <option>JSP</option>
-            </select>
-          </div>
-        </div> -->
-
-  <!-- </div>
-          <div class="Titre">
-            <input type="text" placeholder="Le Titre "  id="title"></input>
-          </div> 
-          <div class="Description">
-            <input type="text" placeholder="Description" id="description"></input>
-          </div> 
-          <button onclick="newPost()" id="submit">Crée le post</button>            
-          
-
-      </div> -->
 </dialog>
 
 <script>
-  function myFunction() {
-    let input = document.getElementById("infos").value;
-    let test = document.getElementById("yo").innerHTML +=
-      `<div class="comment">
-                <span>
-                    ${input}
-                </span>
-            </div>`;
+  let test = document.getElementById("com{{.Id}}").addEventListener("click", () => {
+    let input = document.getElementById("infos{{.Id}}").value;
+    const d = document.getElementById("yo{{.Id}}")
+    console.log(d)
+    d.innerHTML +=
+      `
+      <div class="comment">
+        <span>
+          ${input}
+        </span>
+      </div>
+      `
+    console.log(input) //A EFFACER
 
-    fetch("/drugs",
+    fetch("/newComments",
       {
         method: "POST",
         headers: {
           "content-type": "application/json"
         },
         body: JSON.stringify({
-          input: input
+          input: input,
+          postid: test
         })
       }).then((res) => {
         console.log(res);
@@ -83,7 +60,8 @@
 
         abs.innerText = res.test
       })
-  }
+  })
+// newElement.innerHTML += "Nom de l'utilisateur"+" "+":"+" "+ info
 
 </script>
 {{end}}
