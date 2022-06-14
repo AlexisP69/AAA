@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/Static/footer.css" type="text/css">
     <link rel="stylesheet" href="/Static/navbargen.css" type="text/css">
     <link rel="stylesheet" href="/Static/Post.css" type="text/css">
-    <link rel="stylesheet" href="/Static/Postblock.css" type="text/css">
+    <link rel="stylesheet" href="/Static/PostBlock.css" type="text/css">
     <link rel="stylesheet" href="/Static/CompletePosts.css" type="text/css">
 
 
@@ -48,9 +48,9 @@
     <!-- <button onclick="newPost()" id="newPost"> Create New Post</button> -->
     <div id="postList">
         {{range .EveryPost}}
-        {{template "postBlock" .}}
-
-        {{template "completePost"}}
+            {{template "postBlock" .}}
+            
+            {{template "completePost" .}}
         {{end}}
     </div>
     {{template "footer"}}
@@ -64,14 +64,6 @@
     document.getElementById('poost').addEventListener('click', () => {
         document.getElementById('popup-Form').showModal()
     })
-    var inputs = document.getElementById("postList");
-    for (var i = 0; i < inputs.length; i++) {
-        inputs[i].onclick = function () {
-            console.log(inputs[i].id);
-        }
-    }
-    // let e = document.getElementById('postList')[0].id
-    // console.log(e)
 
 </script>
 

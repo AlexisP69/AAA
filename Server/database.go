@@ -67,12 +67,15 @@ func InitDatabase(database string) *sql.DB {
 }
 
 func InsertIntoUsers(db *sql.DB, name string, email string, password string) (int64, error) {
+	var u Comments
 	result, err := db.Exec(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`, name, email, password)
 	if err != nil {
 		fmt.Println("Ce nom ou email existe déjà")
 		fmt.Println(err)
 		return 0, err
 	}
+	u.Name = name
+	fmt.Println(u.Name)
 	return result.LastInsertId()
 }
 
@@ -90,6 +93,12 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	query := "SELECT * FROM " + table
 	result, _ := db.Query(query)
 	return result
+}
+
+func SelectAllByCategorie(db *sql.DB, categorie string) Posts {
+	var u Posts
+	db.QueryRow(`SELECT * FROM post WHERE categorie = ?`, categorie).Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+	return u
 }
 
 // func selectUserById(db *sql.DB, id int) User {
