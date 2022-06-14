@@ -39,6 +39,46 @@
     border:solid 0.2px;
 }
 
+.comments{
+    border-radius: 5px;
+    height:3vh;
+    background-color: #292a2b;
+    
+}
+
+textarea{
+    border-radius: 5px;
+    height:4vh;
+    width:85%;
+    background-color: white;
+    
+}
+
+.com{
+    margin-top: 0;
+    border-radius: 10px;
+ font-family: 'Pacifico',cursive;
+ background-color:rgb(198, 198, 198);
+
+}
+
+div[id="yo*"]{
+    /* text-align: center; */
+    font-family: 'Pacifico',cursive;
+    border-radius: 10px;
+    background-color: #b2aaa2;
+}
+
+.comment{
+    font-family: 'Pacifico',cursive;
+    border-radius: 10px;
+    background-color: #b2aaa2;
+    border:solid 2px ;
+    overflow-wrap: break-word;
+    width:100%;
+
+}
+
 .h4{
     font-family: 'Pacifico', cursive;
     font-size: 20vh;
@@ -81,4 +121,17 @@ color: #48CAE4;
 .petitRectangle h4{
     margin-top:10px;
     place-items: center;
+}
+
+.close{
+    size:15px;
+    margin: 0;
+    padding: 0;
+    color: white;
+    
+}
+
+button{
+    background-color:#48CAE4;
+    border-radius:50px;
 }

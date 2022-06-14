@@ -1,7 +1,9 @@
 {{define "completePost"}}
 <dialog id="Form{{.Id}}" class="detail">
       
-         <a class="close" href="">&times;</a>
+         <form class="close" method="dialog">
+            <button value="cancel">&times;</button>
+        </form>
         <div class="tt">
           <h4>{{.Title}}</h4>
         </div>
@@ -13,48 +15,32 @@
           <h4>{{.Description}}</h4>
         </div>
         <div class="basRectangle">
-          <img id="like" onclick="myFunction()" src="../Static/like.png"></img>
+          <img id="like"  src="../Static/like.png"></img>
           <img id="dislike" src="../Static/dislike.png"></img>
-          <img id="commentaire" src="../Static/commentaire.png"></img>
-          
+          <img id="commentaire"  src="../Static/commentaire.png"></img>
+        <div class="comments">
+          <textarea id="infos{{.Id}}"  placeholder="Write an Comment"></textarea>
+          <button class="com" id="com{{.Id}}" >Comment</button>
+          <div id="yo{{.Id}}"></div>
+        </div> 
         </div>
-        <dialog id="comment-form">
-          <input class="" type="text" placeholder="Comment Please" />
-          <p>heeeeeee</p>
-        </dialog>
-       
-  
-     
-        <!-- <div class="Catégories" >
-          <p>Catégories:</p>
-          <div class="box">
-            <select id="categorie">
-              <option>Drugs</option>
-              <option>Erotica</option>
-              <option>Counterfeit</option>
-              <option>Tutorials</option>
-              <option>Guns</option>
-              <option>SoftWare</option>
-              <option>Games</option>
-              <option>JSP</option>
-            </select>
-          </div>
-        </div> -->
-          
-          <!-- </div>
-          <div class="Titre">
-            <input type="text" placeholder="Le Titre "  id="title"></input>
-          </div> 
-          <div class="Description">
-            <input type="text" placeholder="Description" id="description"></input>
-          </div> 
-          <button onclick="newPost()" id="submit">Crée le post</button>            
-          
+</dialog>
 
-      </div> -->
-</dialog>
-<dialog id="comment-form">
-  <input class="" type="text" placeholder="Comment Please" />
-  <p>heeeeeee</p>
-</dialog>
+<script>
+  document.getElementById("com{{.Id}}").addEventListener("click", () =>{
+    let info = document.getElementById("infos{{.Id}}").value;
+    const d =  document.getElementById("yo{{.Id}}")
+    console.log(d)
+  d.innerHTML +=
+  `
+  <div class="comment">
+  <span>
+                  ${info}
+                </span>
+                </div>`
+console.log(info) //A EFFACER
+// newElement.innerHTML += "Nom de l'utilisateur"+" "+":"+" "+ info
+  })
+
+  </script>
 {{end}}
