@@ -78,10 +78,10 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	return result
 }
 
-func SelectAllByCategorie(db *sql.DB, categorie string) Posts {
-	var u Posts
-	db.QueryRow(`SELECT * FROM post WHERE categorie = ?`, categorie).Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
-	return u
+func SelectAllByCategorie(db *sql.DB, categorie string) *sql.Rows {
+	// var u Posts
+	res, _ := db.Query(`SELECT * FROM post WHERE lower(categorie) = '` + categorie + "'") //.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+	return res
 }
 
 // func selectUserById(db *sql.DB, id int) User {
@@ -106,9 +106,9 @@ func SelectUserWhenLogin(db *sql.DB, email string, password string) User {
 // 	return u
 // }
 
-func SelectAllPost(db *sql.DB) []Posts {
+func SelectAllPost(db *sql.DB, categorie string) []Posts {
 	var u Posts
-	rows := SelectAllFromTable(db, "post")
+	rows := SelectAllByCategorie(db, categorie) //SelectAllFromTable(db, "post")
 	final := make([]Posts, 0)
 	for rows.Next() {
 		rows.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)

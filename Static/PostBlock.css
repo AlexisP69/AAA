@@ -6,15 +6,18 @@ body {
   /* center the blockquote in the page */
   .blockquote-wrapper {
      /* display: flex; */
-     height: 30vh;
+     height: 20vh;
+     margin-bottom: 40px;
      /* padding: 0 0px; */
   }
   
   /* Blockquote main style */
   .blockquote {
+    margin-top:1vh;
+    margin-left: 65vh;
       position: relative;
       max-width: 620px;
-      margin: 40px auto;
+      /* margin: 30px auto; */
       align-self: center;
   }
   
