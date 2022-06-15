@@ -21,6 +21,7 @@ type Posts struct {
 	Name        string
 	Title       string
 	Description string
+	Date        string
 }
 
 type Commentaire struct {
@@ -49,7 +50,8 @@ func InitDatabase(database string) *sql.DB {
 			categorie TEXT NOT NULL,
 			name TEXT NOT NULL,
 			title	TEXT UNIQUE NOT NULL,
-			description TEXT UNIQUE NOT NULL
+			description TEXT UNIQUE NOT NULL,
+			date TEXT NOT NULL
 		);
 		CREATE TABLE IF NOT EXISTS commentaire (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -79,8 +81,8 @@ func InsertIntoUsers(db *sql.DB, name string, email string, password string) (in
 	return result.LastInsertId()
 }
 
-func InsertIntoPost(db *sql.DB, categorie string, name string, title string, description string) (int64, error) {
-	result, err := db.Exec(`INSERT INTO post (categorie, name, title, description) VALUES (?, ?, ?, ?)`, categorie, name, title, description)
+func InsertIntoPost(db *sql.DB, categorie string, name string, title string, description string, date string) (int64, error) {
+	result, err := db.Exec(`INSERT INTO post (categorie, name, title, description, date) VALUES (?, ?, ?, ?, ?)`, categorie, name, title, description, date)
 	if err != nil {
 		fmt.Println(err)
 		// fmt.Println(err)
@@ -145,14 +147,13 @@ func SelectUserWhenLogin(db *sql.DB, email string, password string) User {
 // 	return final
 // }
 
-func SelectAllPost(db *sql.DB, categorie string) Test {
+func SelectAllPost(db *sql.DB, categorie string) []Posts {
 	var u Posts
-	var z Test
 	rows := SelectAllByCategorie(db, categorie) //SelectAllFromTable(db, "post")
-	final := make([]Test, 0)
+	final := make([]Posts, 0)
 	for rows.Next() {
-		rows.Scan(&u.Id, &u.Categorie, &u.Name, &u.Title, &u.Description)
-		final = append(final, z)
+		rows.Scan(&u.Id, &u.Categorie, &u.Name, &u.Title, &u.Description, &u.Date)
+		final = append(final, u)
 
 	}
 	return final
