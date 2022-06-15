@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&family=Koulen&family=Libre+Franklin:ital,wght@1,100&display=swap');
+
+
+
+.footer{
+    margin-top: 81px;
+    background-color: black;
+    box-sizing: border-box;
+    width: 100%;
+    /* padding: 5px; */
+}
+
+a{  
+    text-align: center;
+    color:white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 10vh;
+}
+
+/* a::before{
+    content:"|"
+} */
+
+#monlogo{
+    margin-left:1vh;
+    /* margin-top: 1vh; */
+    background-color:black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+     width:9vh;
+    height:8vh; 
+}
+/* 
+li a{
+    margin-left: 47%;
+    font-size: medium;
+    margin-top: 1vh;
+    display: block;
+} */
+
+li{
+    display:inline-block;
+    padding: 0 15px;
+    margin-left: 43%;
+    margin-top: 1vh;
+    font-size: medium;
+    /* justify-content: space-around; */
+    
+    /* padding-bottom: 20px; */
+
+}
+
+/* p{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    display: block; 
+    color:white;
+} */
