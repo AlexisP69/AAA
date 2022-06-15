@@ -16,6 +16,7 @@ type Post struct {
 	Categorie   string
 	Title       string
 	Description string
+	Date        string
 }
 
 type Test struct {
@@ -334,7 +335,7 @@ func HandleFunc(db *sql.DB) {
 		json.Unmarshal(body, &post)
 		fmt.Println(body)
 		fmt.Println(post)
-		InsertIntoPost(db, post.Categorie, post.Title, post.Description)
+		InsertIntoPost(db, post.Categorie, post.Title, post.Description, post.Date)
 	})
 
 	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {

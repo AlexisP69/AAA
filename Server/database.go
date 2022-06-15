@@ -20,6 +20,7 @@ type Posts struct {
 	Categorie   string
 	Title       string
 	Description string
+	Date        string
 }
 
 func InitDatabase(database string) *sql.DB {
@@ -39,7 +40,9 @@ func InitDatabase(database string) *sql.DB {
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			categorie TEXT NOT NULL,
 			title	TEXT UNIQUE NOT NULL,
-			description TEXT UNIQUE NOT NULL
+			description TEXT UNIQUE NOT NULL,
+			date TEXT  NOT NULL
+			
 		)
 		`
 
@@ -62,8 +65,8 @@ func InsertIntoUsers(db *sql.DB, name string, email string, password string) (in
 	return result.LastInsertId()
 }
 
-func InsertIntoPost(db *sql.DB, categorie string, title string, description string) (int64, error) {
-	result, err := db.Exec(`INSERT INTO post (categorie, title, description) VALUES (?, ?, ?)`, categorie, title, description)
+func InsertIntoPost(db *sql.DB, categorie string, title string, description string, date string) (int64, error) {
+	result, err := db.Exec(`INSERT INTO post (categorie, title, description, date) VALUES (?, ?, ?, ?)`, categorie, title, description, date)
 	if err != nil {
 		fmt.Println(err)
 		// fmt.Println(err)
@@ -111,7 +114,7 @@ func SelectAllPost(db *sql.DB, categorie string) []Posts {
 	rows := SelectAllByCategorie(db, categorie) //SelectAllFromTable(db, "post")
 	final := make([]Posts, 0)
 	for rows.Next() {
-		rows.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+		rows.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description, &u.Date)
 		final = append(final, u)
 
 	}
