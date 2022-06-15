@@ -1,32 +1,89 @@
-#Form{
+#Form {
     margin-top: 40vh;
     margin-left: 53vh;
     width:90vh;
     height:40vh;
+    background-color: #292a2b;
+
+}
+
+.detail {
+    margin-top: 40vh;
+    margin-left: 53vh;
+    width:90vh;
+    height:40vh;
+    background-color: #292a2b;
 }
 
 
-
 .grandRectangle{
+    text-align: center;
     border:solid 2px;
     margin-top: 3vh;
     border-radius: 3px;
-    background-color: red;
+    background-color: rgb(213, 199, 199);
     height:3vh;
     
 }
 .petitRectangle{
     border-radius: 5px;
-    background-color: yellow;
-    height:150px;
+    background-color: rgb(213, 199, 199);
+    height:20vh;
     border:solid 2px;
 }
 .basRectangle{
+
     border-radius: 5px;
     height:3vh;
-    background-color: green;
+    background-color: #48CAE4;
     border:solid 0.2px;
 }
+
+.comments{
+    border-radius: 5px;
+    height:3vh;
+    background-color: #292a2b;
+    
+}
+
+textarea{
+    border-radius: 5px;
+    height:4vh;
+    width:85%;
+    background-color: white;
+    
+}
+
+.com{
+    margin-top: 0;
+    border-radius: 10px;
+ font-family: 'Pacifico',cursive;
+ background-color:rgb(198, 198, 198);
+
+}
+
+div[id="yo*"]{
+    /* text-align: center; */
+    font-family: 'Pacifico',cursive;
+    border-radius: 10px;
+    background-color: #b2aaa2;
+}
+
+.comment{
+    font-family: 'Pacifico',cursive;
+    border-radius: 10px;
+    background-color: #b2aaa2;
+    border:solid 2px ;
+    overflow-wrap: break-word;
+    width:100%;
+
+}
+
+.h4{
+    font-family: 'Pacifico', cursive;
+    font-size: 20vh;
+}
+
 
 #like{
     height: 2.5vh;
@@ -51,4 +108,30 @@
     height: 2.5vh;
     margin-left: 3vh;
     margin-top: 0.2vh;
+}
+
+.tt h4{
+ font-family: 'Pacifico',cursive;
+font-size:4vh;
+color: #48CAE4;
+
+
+}
+
+.petitRectangle h4{
+    margin-top:10px;
+    place-items: center;
+}
+
+.close{
+    size:15px;
+    margin: 0;
+    padding: 0;
+    color: white;
+    
+}
+
+button{
+    background-color:#48CAE4;
+    border-radius:50px;
 }

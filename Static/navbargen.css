@@ -123,10 +123,6 @@
     transition: color 0.3s ease;
 }
 
-#menuToggle a:hover {
-    color: tomato;
-}
-
 
 #menuToggle input {
     display: block;
@@ -199,11 +195,11 @@
 
 
 #menu {
-    
+    font-family: 'Pacifico', cursive;
     /* position: absolute; */
     width: 200px;
     height:100%;
-    margin: 10px -200px 0 -50px;
+    margin: 10px -1000px 0 -50px;
     /* padding: 50px; */
     /* padding-top: 120px; */
     
@@ -225,7 +221,7 @@
     font-size: 22px;
     color: #fff;
     /* background-color: #48CAE4; */
-    height: 100px;
+    height:15vh;
 }
 
 /*

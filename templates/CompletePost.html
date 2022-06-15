@@ -1,77 +1,45 @@
 {{define "completePost"}}
-<dialog id="Form" >
+<dialog id="Form{{.Id}}" class="detail">
       
-         <a class="close" href="">&times;</a>
-        <div class="hehe">
-          <h3>This post</h3>
+         <form class="close" method="dialog">
+            <button value="cancel"></button>
+        </form>
+        <div class="tt">
+          <h4>{{.Title}}</h4>
         </div>
         
         <div class="grandRectangle">
-          <h1>{{.Title}}</h1>
+          <p>Nom de l'utilisateur </p>
         </div>
-        <div class="petitRectangle"></div>
+        <div class ="petitRectangle">
+          <h4>{{.Description}}</h4>
+        </div>
         <div class="basRectangle">
-          <img id="like" onclick="myFunction()" src="../Static/like.png"></img>
+          <img id="like"  src="../Static/like.png"></img>
           <img id="dislike" src="../Static/dislike.png"></img>
-          <img id="commentaire" src="../Static/commentaire.png"></img>
-          
+          <img id="commentaire"  src="../Static/commentaire.png"></img>
+        <div class="comments">
+          <textarea id="infos{{.Id}}"  placeholder="Write an Comment"></textarea>
+          <button class="com" id="com{{.Id}}" >Comment</button>
+          <div id="yo{{.Id}}"></div>
+        </div> 
         </div>
-        <dialog id="comment-form">
-          <input class="" type="text" placeholder="Comment Please" />
-          <p>heeeeeee</p>
-        </dialog>
-       
-  
-     
-        <!-- <div class="Catégories" >
-          <p>Catégories:</p>
-          <div class="box">
-            <select id="categorie">
-              <option>Drugs</option>
-              <option>Erotica</option>
-              <option>Counterfeit</option>
-              <option>Tutorials</option>
-              <option>Guns</option>
-              <option>SoftWare</option>
-              <option>Games</option>
-              <option>JSP</option>
-            </select>
-          </div>
-        </div> -->
-          
-          <!-- </div>
-          <div class="Titre">
-            <input type="text" placeholder="Le Titre "  id="title"></input>
-          </div> 
-          <div class="Description">
-            <input type="text" placeholder="Description" id="description"></input>
-          </div> 
-          <button onclick="newPost()" id="submit">Crée le post</button>            
-          
+</dialog>
 
-      </div> -->
-</dialog>
-<dialog id="comment-form">
-  <input class="" type="text" placeholder="Comment Please" />
-  <p>heeeeeee</p>
-</dialog>
 <script>
-  function myFunction() {
-    var $counter=0;
-      $(".like").click(function() {
-          $('#counter').val($counter++);
-      });
-      $(".dislike").click(function() {
-          $('#counter').val($counter--);
-      });
-  }
+  document.getElementById("com{{.Id}}").addEventListener("click", () =>{
+    let info = document.getElementById("infos{{.Id}}").value;
+    const d =  document.getElementById("yo{{.Id}}")
+    console.log(d)
+  d.innerHTML +=
+  `
+  <div class="comment">
+  <span>
+                  ${info}
+                </span>
+                </div>`
+console.log(info) //A EFFACER
+  })
 
-
-  document.getElementById('commentaire').addEventListener('click', () => {
-  let div = document.createElement('div');
-  div.innerHTML = '<p>CreateElement example</p>';
-  document.body.appendChild(div);
-  });
-
-</script>
+  </script>
 {{end}}

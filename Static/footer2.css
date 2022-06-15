@@ -3,7 +3,8 @@
 
 
 .footer{
-    margin-top: 81px;
+   
+    margin-top: 14vh;
     background-color: black;
     box-sizing: border-box;
     width: 100%;
@@ -13,13 +14,12 @@
 a{  
     text-align: center;
     color:white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    width: 10vh;
+    margin-left: 15px;
+    
+    
 }
 
-/* a::before{
-    content:"|"
-} */
+
 
 #monlogo{
     margin-left:1vh;
@@ -40,11 +40,13 @@ li a{
 } */
 
 li{
+    font-family: 'Pacifico', cursive;
     display:inline-block;
-    padding: 0 15px;
-    margin-left: 43%;
+    /* padding: 0 15px; */
+    margin-left: 71vh;
+    text-align: center;
     margin-top: 1vh;
-    font-size: medium;
+    font-size: 3vh;
     /* justify-content: space-around; */
     
     /* padding-bottom: 20px; */
