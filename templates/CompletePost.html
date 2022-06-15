@@ -9,7 +9,7 @@
   </div>
 
   <div class="grandRectangle">
-    <p>Nom de l'utilisateur </p>
+    <p>{{.Name}} </p>
   </div>
   <div class="petitRectangle">
     <h4>{{.Description}}</h4>
@@ -27,15 +27,17 @@
 </dialog>
 
 <script>
-  let test = document.getElementById("com{{.Id}}").addEventListener("click", () => {
+  document.getElementById("com{{.Id}}").addEventListener("click", () => {
     let input = document.getElementById("infos{{.Id}}").value;
     const d = document.getElementById("yo{{.Id}}")
+    let postId = "{{.Id}}"
+    let name = "{{.Name}}"
     console.log(d)
     d.innerHTML +=
       `
       <div class="comment">
         <span>
-          ${input}
+        ${name} :  ${input}
         </span>
       </div>
       `
@@ -49,7 +51,7 @@
         },
         body: JSON.stringify({
           input: input,
-          postid: test
+          postid : postId
         })
       }).then((res) => {
         console.log(res);

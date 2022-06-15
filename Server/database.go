@@ -18,12 +18,14 @@ type User struct {
 type Posts struct {
 	Id          int
 	Categorie   string
+	Name        string
 	Title       string
 	Description string
 }
 
 type Commentaire struct {
 	Id          int
+	PostId      int
 	Name        string
 	Commentaire string
 }
@@ -45,6 +47,7 @@ func InitDatabase(database string) *sql.DB {
 		CREATE TABLE IF NOT EXISTS post (
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			categorie TEXT NOT NULL,
+			name TEXT NOT NULL,
 			title	TEXT UNIQUE NOT NULL,
 			description TEXT UNIQUE NOT NULL
 		);
@@ -76,8 +79,8 @@ func InsertIntoUsers(db *sql.DB, name string, email string, password string) (in
 	return result.LastInsertId()
 }
 
-func InsertIntoPost(db *sql.DB, categorie string, title string, description string) (int64, error) {
-	result, err := db.Exec(`INSERT INTO post (categorie, title, description) VALUES (?, ?, ?)`, categorie, title, description)
+func InsertIntoPost(db *sql.DB, categorie string, name string, title string, description string) (int64, error) {
+	result, err := db.Exec(`INSERT INTO post (categorie, name, title, description) VALUES (?, ?, ?, ?)`, categorie, name, title, description)
 	if err != nil {
 		fmt.Println(err)
 		// fmt.Println(err)
@@ -86,9 +89,8 @@ func InsertIntoPost(db *sql.DB, categorie string, title string, description stri
 	return result.LastInsertId()
 }
 
-func InsertIntoComments(db *sql.DB, commentaire string) (int64, error) {
-	var u User
-	result, err := db.Exec(`INSERT INTO commentaire (commentaire, name, post_id) VALUES (?, ?, ?)`, commentaire, u.Name)
+func InsertIntoComments(db *sql.DB, commentaire string, name string, postId int) (int64, error) {
+	result, err := db.Exec(`INSERT INTO commentaire (commentaire, name, post_id) VALUES (?, ?, ?)`, commentaire, name, postId)
 	if err != nil {
 		fmt.Println(err)
 		// fmt.Println(err)
@@ -103,10 +105,10 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	return result
 }
 
-func SelectAllByCategorie(db *sql.DB, categorie string) Posts {
-	var u Posts
-	db.QueryRow(`SELECT * FROM post WHERE categorie = ?`, categorie).Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
-	return u
+func SelectAllByCategorie(db *sql.DB, categorie string) *sql.Rows {
+	// var u Posts
+	res, _ := db.Query(`SELECT * FROM post WHERE lower(categorie) = '` + categorie + "'") //.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+	return res
 }
 
 // func selectUserById(db *sql.DB, id int) User {
@@ -131,13 +133,26 @@ func SelectUserWhenLogin(db *sql.DB, email string, password string) User {
 // 	return u
 // }
 
-func SelectAllPost(db *sql.DB) []Posts {
+// func SelectAllPost(db *sql.DB, categorie string) []Posts {
+// 	var u Posts
+// 	rows := SelectAllByCategorie(db, categorie) //SelectAllFromTable(db, "post")
+// 	final := make([]Posts, 0)
+// 	for rows.Next() {
+// 		rows.Scan(&u.Id, &u.Categorie, &u.Name, &u.Title, &u.Description)
+// 		final = append(final, u)
+
+// 	}
+// 	return final
+// }
+
+func SelectAllPost(db *sql.DB, categorie string) Test {
 	var u Posts
-	rows := SelectAllFromTable(db, "post")
-	final := make([]Posts, 0)
+	var z Test
+	rows := SelectAllByCategorie(db, categorie) //SelectAllFromTable(db, "post")
+	final := make([]Test, 0)
 	for rows.Next() {
-		rows.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
-		final = append(final, u)
+		rows.Scan(&u.Id, &u.Categorie, &u.Name, &u.Title, &u.Description)
+		final = append(final, z)
 
 	}
 	return final
@@ -148,10 +163,11 @@ func SelectAllComments(db *sql.DB) []Commentaire {
 	rows := SelectAllFromTable(db, "commentaire")
 	final := make([]Commentaire, 0)
 	for rows.Next() {
-		rows.Scan(&u.Id, &u.Name, &u.Commentaire)
+		rows.Scan(&u.Id, &u.PostId, &u.Name, &u.Commentaire)
 		final = append(final, u)
 
 	}
+	fmt.Println(final)
 	return final
 }
 

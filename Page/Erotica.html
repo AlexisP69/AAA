@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/Static/footer.css" type="text/css">
     <link rel="stylesheet" href="/Static/navbargen.css" type="text/css">
     <link rel="stylesheet" href="/Static/Post.css" type="text/css">
-    <link rel="stylesheet" href="/Static/Postblock.css" type="text/css">
+    <link rel="stylesheet" href="/Static/PostBlock.css" type="text/css">
     <link rel="stylesheet" href="/Static/CompletePosts.css" type="text/css">
 
 
@@ -50,7 +50,7 @@
         {{range .EveryPost}}
             {{template "postBlock" .}}
             
-            {{template "completePost"}}
+            {{template "completePost" .}}
         {{end}}
     </div>
     {{template "footer"}}

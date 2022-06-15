@@ -48,9 +48,9 @@
     <!-- <button onclick="newPost()" id="newPost"> Create New Post</button> -->
     <div id="postList">
         {{range .EveryPost}}
-            {{template "postBlock" .}}
-            
-            {{template "completePost" .}}
+        {{template "postBlock" .}}
+
+        {{template "completePost" .}}
         {{end}}
     </div>
     {{template "footer"}}
