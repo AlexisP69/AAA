@@ -72,28 +72,34 @@ margin-top: 20px;
   margin-bottom: 5vh;
 }
 
-h2{
+/* .rectangle{
   float:left;
-  writing-mode: vertical-lr;
   text-align: center;
   font-family: 'Josefin Sans', sans-serif;
   text-orientation: sideways-left;
-  color:black;
   background-color:rgb(77, 170, 212);
-  font-size: 17vh;
-  width: 15vw;
-}
+  font-size: 3vh;
+  width: 30vw;
+  height: 100%;
+} */
+
+/* p{
+  float: left;
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  text-orientation: sideways-left;
+} */
 
 .rectangle {
-    margin-top:60px;
-  height: 70vh;
-  width: 60vh;
+  float: left;
+  margin-top:60px;
+  height: 200vh;
+  width: 40vh;
   border-radius: 10px;
-  border: 3px black inset;
-  /* border: 5px solid #ccc; */
+  border: 5px solid #ccc; 
   box-shadow: 5px 5px 5px #999;
-  display: flex;
-}
+  background-color:rgb(78, 177, 223);
+} 
 textarea{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -244,3 +250,95 @@ label {
     background-color :#48CAE4;
     border-radius :40px;
   }
+
+  .checkbox-containeur{
+    box-sizing: border-box;
+    display:flex;
+    padding: 2vh;
+    font-size: 3vh;
+    font-family: 'Pacifico', cursive;
+  }
+  .checkbox-containeur label{
+    cursor: pointer;
+    display: flex;
+  }
+  .checkbox-containeur input[type="checkbox"]{
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+  }
+  .checkbox-containeur label::before{
+    content: '';
+    width: 4vh;
+    height: 3vh;
+    border-radius: 0.5rem;
+    margin-right: .5rem;
+    border: 1px solid #000;
+  }
+
+  .checkbox-containeur label:hover::before,
+  .checkbox-containeur input[type="checkbox"]:hover{
+    background-color:white;
+  }
+
+  .checkbox-containeur input[type="checkbox"]:checked + label::before{
+    background-color: blue;
+    content: "\002714";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+
+/* p1{
+  padding: 10vh;
+  font-size: 4vh;
+  font-family: 'Pacifico', cursive;
+  font-weight: bold;
+} */
+
+ p{
+  margin-top: 6vh;
+  font-size: 4vh;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bolder;
+  /* padding: 4vh; */
+} 
+
+h3{
+  padding: 5vh;
+  font-size: 6vh;
+  font-family: 'Pacifico', cursive;
+  font-weight: bold;
+}
+
+.boutons{
+  text-align: center;
+}
+
+.btn{
+  border: 1px solid black;
+  background: none;
+  font-size: 20px;
+  font-family:Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  margin: 10px;
+}
+/* .main{
+  padding: 1vh;
+  background: white;
+  padding: 15px 15px 15px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px;
+  display:flex;
+  align-items: center;
+}
+
+.main .slider{
+  height: 40px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+} */
+
