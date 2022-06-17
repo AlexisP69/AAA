@@ -1,0 +1,45 @@
+{{define "completePost"}}
+<dialog id="Form{{.Id}}" class="detail">
+      
+         <form class="close" method="dialog">
+            <button value="cancel"></button>
+        </form>
+        <div class="tt">
+          <h4>{{.Title}}</h4>
+        </div>
+        
+        <div class="grandRectangle">
+          <p>Nom de l'utilisateur </p>
+        </div>
+        <div class ="petitRectangle">
+          <h4>{{.Description}}</h4>
+        </div>
+        <div class="basRectangle">
+          <img id="like"  src="../Static/like.png"></img>
+          <img id="dislike" src="../Static/dislike.png"></img>
+          <img id="commentaire"  src="../Static/commentaire.png"></img>
+        <div class="comments">
+          <textarea id="infos{{.Id}}"  placeholder="Write an Comment"></textarea>
+          <button class="com" id="com{{.Id}}" >Comment</button>
+          <div id="yo{{.Id}}"></div>
+        </div> 
+        </div>
+</dialog>
+
+<script>
+  document.getElementById("com{{.Id}}").addEventListener("click", () =>{
+    let info = document.getElementById("infos{{.Id}}").value;
+    const d =  document.getElementById("yo{{.Id}}")
+    console.log(d)
+  d.innerHTML +=
+  `
+  <div class="comment">
+  <span>
+                  ${info}
+                </span>
+                </div>`
+console.log(info) //A EFFACER
+  })
+
+  </script>
+{{end}}

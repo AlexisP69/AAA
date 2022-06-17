@@ -20,6 +20,7 @@ type Posts struct {
 	Categorie   string
 	Title       string
 	Description string
+	Date        string
 }
 
 func InitDatabase(database string) *sql.DB {
@@ -39,7 +40,9 @@ func InitDatabase(database string) *sql.DB {
 			id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			categorie TEXT NOT NULL,
 			title	TEXT UNIQUE NOT NULL,
-			description TEXT UNIQUE NOT NULL
+			description TEXT UNIQUE NOT NULL,
+			date TEXT  NOT NULL
+			
 		)
 		`
 
@@ -56,15 +59,14 @@ func InsertIntoUsers(db *sql.DB, name string, email string, password string) (in
 	result, err := db.Exec(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`, name, email, password)
 	if err != nil {
 		fmt.Println("Ce nom ou email existe déjà")
-		// fmt.Println(err)
+		fmt.Println(err)
 		return 0, err
 	}
 	return result.LastInsertId()
 }
 
-func InsertIntoPost(db *sql.DB, categorie string, title string, description string) (int64, error) {
-	fmt.Println("TEST")
-	result, err := db.Exec(`INSERT INTO post (categorie, title, description) VALUES (?, ?, ?)`, categorie, title, description)
+func InsertIntoPost(db *sql.DB, categorie string, title string, description string, date string) (int64, error) {
+	result, err := db.Exec(`INSERT INTO post (categorie, title, description, date) VALUES (?, ?, ?, ?)`, categorie, title, description, date)
 	if err != nil {
 		fmt.Println(err)
 		// fmt.Println(err)
@@ -77,6 +79,12 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 	query := "SELECT * FROM " + table
 	result, _ := db.Query(query)
 	return result
+}
+
+func SelectAllByCategorie(db *sql.DB, categorie string) *sql.Rows {
+	// var u Posts
+	res, _ := db.Query(`SELECT * FROM post WHERE lower(categorie) = '` + categorie + "'") //.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+	return res
 }
 
 // func selectUserById(db *sql.DB, id int) User {
@@ -101,13 +109,14 @@ func SelectUserWhenLogin(db *sql.DB, email string, password string) User {
 // 	return u
 // }
 
-func SelectAllPost(db *sql.DB) []Posts {
+func SelectAllPost(db *sql.DB, categorie string) []Posts {
 	var u Posts
-	rows := SelectAllFromTable(db, "post")
+	rows := SelectAllByCategorie(db, categorie) //SelectAllFromTable(db, "post")
 	final := make([]Posts, 0)
 	for rows.Next() {
-		rows.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+		rows.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description, &u.Date)
 		final = append(final, u)
+
 	}
 	return final
 }

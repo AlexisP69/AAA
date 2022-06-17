@@ -1,0 +1,91 @@
+
+body { 
+    background-color: #292a2b;
+   }
+  
+  /* center the blockquote in the page */
+  .blockquote-wrapper {
+     /* display: flex; */
+     height: 20vh;
+     margin-bottom: 40px;
+     /* padding: 0 0px; */
+  }
+  
+  /* Blockquote main style */
+  .blockquote {
+    margin-top:1vh;
+    margin-left: 65vh;
+      position: relative;
+      max-width: 620px;
+      /* margin: 30px auto; */
+      align-self: center;
+  }
+  
+  /* Blockquote header */
+  .blockquote h1 {
+    
+      position: relative; 
+      color: #000000;
+      font-size: 2.8rem;
+      font-weight: normal;
+      line-height: 1;
+      margin: 0;
+      border: 2px solid #fff;
+      border: solid 2px;
+      border-radius:20px;
+      padding: 25px;
+  }
+  
+  /* Blockquote right double quotes */
+  .blockquote h1:after {
+      
+      content:"";
+      position: absolute;
+      border: 2px solid #000000;;
+      border-radius: 0 50px 0 0;
+      width: 60px;
+      height: 60px;
+      bottom: -62px;
+      left: 50px;
+      border-bottom: none;
+      border-left: none;
+      z-index: 3; 
+  }
+  
+  .blockquote h1:before {
+      content:"";
+      position: absolute;
+      width: 80px;
+      /* border: 6px solid #292a2b; */
+      bottom: -3px;
+      left: 50px;
+      z-index: 2;
+  }
+  
+  /* increase header size after 600px */
+  @media all and (min-width: 600px) {
+      .blockquote h1 {
+          font-size: 3rem;
+          line-height: 1.2;
+     }
+  
+  }
+  
+  /* Blockquote subheader */
+  .blockquote h4 {
+      position: relative;
+      font-family: 'Pacifico', cursive;
+      color: #e6e9eb; /* Couler de l'username*/
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin: 0;
+      padding-top: 15px;
+      z-index: 1;
+      padding-right:200px;
+  }
+  
+   
+  .blockquote h4:first-letter {
+    margin-left:-12px;
+  }

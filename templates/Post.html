@@ -29,15 +29,22 @@
               </div> 
               <button onclick="newPost()" id="submit">Crée le post</button>            
               
-  
-          </div>
-    </dialog>
+              
+            </div>
+          </dialog>
+          <div id="current_date"></p>
     <script>
     function newPost() {
     let title = document.getElementById("title").value;
     let categorie = document.getElementById("categorie").value;
     let description = document.getElementById("description").value;
+    let date = new Date();
+    year = date.getFullYear();
+    month = date.getMonth() + 1;
+    day = date.getDate();
+    document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
     console.log(title);
+
     fetch("/newPost",
       {
         method: "POST",
@@ -45,6 +52,7 @@
           "content-type": "application/json"
         },
         body: JSON.stringify({
+          date: date,
           categorie:categorie,
           title: title,
           description: description

@@ -1,6 +1,14 @@
 {{define "postBlock"}}
-    <div>
-        <h3>{{.Title}}</h3>
-        <h4>{{.Id}}</h4>
-    </div>
+    <div class="blockquote-wrapper" >
+        <div class="blockquote">
+          <h1 id="imp{{.Id}}" >{{.Title}}</h1>
+          <h4>- {{.Id}}<br><em>User from Forum AAA </em></h4>
+          
+        </div>
+      </div>
+      <script>
+        document.getElementById('imp{{.Id}}').addEventListener('click', () => {
+        document.getElementById('Form{{.Id}}').showModal()
+    })
+      </script>
 {{end}}
