@@ -1,14 +1,14 @@
 {{define "postBlock"}}
-    <div class="blockquote-wrapper" >
-        <div class="blockquote">
-          <h1 id="imp{{.Id}}" >{{.Title}}</h1>
-          <h4>- {{.Id}}<br><em>User from Forum AAA </em></h4>
-          
-        </div>
-      </div>
-      <script>
-        document.getElementById('imp{{.Id}}').addEventListener('click', () => {
-        document.getElementById('Form{{.Id}}').showModal()
-    })
-      </script>
+<div class="blockquote-wrapper">
+  <div class="blockquote">
+    <h1 id="imp{{.Post.Id}}">{{.Post.Title}}</h1>
+    <h4>- {{.Post.Name}}<br><em>User from Forum AAA </em></h4>
+
+  </div>
+</div>
+<script>
+  document.getElementById('imp{{.Post.Id}}').addEventListener('click', () => {
+    document.getElementById('Form{{.Post.Id}}').showModal()
+  })
+</script>
 {{end}}

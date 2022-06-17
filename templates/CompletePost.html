@@ -1,45 +1,77 @@
 {{define "completePost"}}
-<dialog id="Form{{.Id}}" class="detail">
-      
-         <form class="close" method="dialog">
-            <button value="cancel"></button>
-        </form>
-        <div class="tt">
-          <h4>{{.Title}}</h4>
-        </div>
-        
-        <div class="grandRectangle">
-          <p>Nom de l'utilisateur </p>
-        </div>
-        <div class ="petitRectangle">
-          <h4>{{.Description}}</h4>
-        </div>
-        <div class="basRectangle">
-          <img id="like"  src="../Static/like.png"></img>
-          <img id="dislike" src="../Static/dislike.png"></img>
-          <img id="commentaire"  src="../Static/commentaire.png"></img>
-        <div class="comments">
-          <textarea id="infos{{.Id}}"  placeholder="Write an Comment"></textarea>
-          <button class="com" id="com{{.Id}}" >Comment</button>
-          <div id="yo{{.Id}}"></div>
-        </div> 
-        </div>
+<dialog id="Form{{.Post.Id}}" class="detail">
+
+  <form class="close" method="dialog">
+    <button value="cancel">&times;</button>
+  </form>
+  <div class="tt">
+    <h4>{{.Post.Title}}</h4>
+  </div>
+
+  <div class="grandRectangle">
+    <p>{{.Post.Name}} </p>
+  </div>
+  <div class="petitRectangle">
+    <h4>{{.Post.Description}}</h4>
+  </div>
+  <div class="basRectangle">
+    <img id="like" src="../Static/like.png"></img>
+    <img id="dislike" src="../Static/dislike.png"></img>
+    <img id="commentaire" src="../Static/commentaire.png"></img>
+    <div class="comments">
+      <textarea id="infos{{.Post.Id}}" placeholder="Write an Comment"></textarea>
+      <button onclick="newComment()" class="com" id="com{{.Post.Id}}">Comment</button>
+      <div id="yo{{.Post.Id}}">
+        {{range .EveryComments}}
+          <div class="comment">
+            <span>
+              {{.Name}}:  {{.Commentaire}} 
+            </span>
+          </div>
+        {{end}}
+      </div>
+    </div>
+  </div>
 </dialog>
 
 <script>
-  document.getElementById("com{{.Id}}").addEventListener("click", () =>{
-    let info = document.getElementById("infos{{.Id}}").value;
-    const d =  document.getElementById("yo{{.Id}}")
+  document.getElementById("com{{.Post.Id}}").addEventListener("click", () => {
+    let input = document.getElementById("infos{{.Post.Id}}").value;
+    const d = document.getElementById("yo{{.Post.Id}}")
+    let postId = "{{.Post.Id}}"
+    let name = "You"
     console.log(d)
-  d.innerHTML +=
-  `
-  <div class="comment">
-  <span>
-                  ${info}
-                </span>
-                </div>`
-console.log(info) //A EFFACER
-  })
+    d.innerHTML +=
+      `
+      <div class="comment">
+        <span>
+        ${name} : ${input}
+        </span>
+      </div>
+      `
+    console.log(input) //A EFFACER
 
-  </script>
+    fetch("/newComments",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          input: input,
+          postid : postId
+        })
+      }).then((res) => {
+        console.log(res);
+        return res.json()
+      })
+      .then((res) => {
+        const abs = document.getElementById("absolute")
+
+        abs.innerText = res.test
+      })
+  })
+// newElement.innerHTML += "Nom de l'utilisateur"+" "+":"+" "+ info
+
+</script>
 {{end}}

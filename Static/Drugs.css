@@ -298,14 +298,14 @@ label {
   font-weight: bold;
 } */
 
- p{
+ /* p{
   margin-top: 6vh;
   font-size: 4vh;
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bolder;
   /* padding: 4vh; */
-} 
+
 
 h3{
   padding: 5vh;
