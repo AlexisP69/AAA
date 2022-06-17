@@ -144,8 +144,8 @@ func HandleFunc(db *sql.DB) {
 			return
 		}
 	})
-	http.HandleFunc("/Therms-of-use", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/Therms-of-use.html"))
+	http.HandleFunc("/UserPage", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles("Page/UserPage.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 		}
@@ -341,6 +341,17 @@ func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {
 		template := template.Must(template.ParseFiles(
 			"Page/Homepage.html",
+		))
+		if r.Method != http.MethodPost {
+			err := template.Execute(w, "")
+			fmt.Println(err)
+			return
+		}
+	})
+
+	http.HandleFunc("/Userpage", func(w http.ResponseWriter, r *http.Request) {
+		template := template.Must(template.ParseFiles(
+			"Page/UserPage.html",
 		))
 		if r.Method != http.MethodPost {
 			err := template.Execute(w, "")
