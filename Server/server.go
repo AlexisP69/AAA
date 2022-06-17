@@ -21,7 +21,7 @@ type NewPost struct {
 }
 
 type Test struct {
-	EveryPost     []Posts
+	Post          Posts
 	EveryComments []Commentaire
 }
 
@@ -174,22 +174,8 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/registerApi", func(w http.ResponseWriter, r *http.Request) {
-		// w.Write([]byte("{\"test\":\"${Users.name}\""))
-		// w.Write([]byte("{\"name\":\"" + register.Name + "\"}"))
-		// w.Write([]byte("{\"email\":\"" + register.Email + "\"}"))
-		// w.Write([]byte("{\"password\":\"" + register.Password + "\"}"))
-		// w.Write([]byte("{\"userConfirmPassword\":\"" + register.ConfirmPassword + "\"}"))
-
 		body, _ := ioutil.ReadAll(r.Body)
-		// fmt.Println(r.Body)
 		json.Unmarshal(body, &register)
-		// fmt.Println(body)
-		fmt.Println(db)
-		// fmt.Println(register)
-		// InsertIntoUsers(db, "name", "email", "password")
-		// test := SelectUserById(db, 1)
-		// fmt.Println(test)
-		fmt.Println(register.Name)
 		// register.Password, _ = HashPassword(register.Password)
 		fmt.Println(register.Password)
 		_, err := InsertIntoUsers(db, register.Name, register.Email, register.Password)
@@ -199,37 +185,6 @@ func HandleFunc(db *sql.DB) {
 			// }
 			// fmt.Println(err)
 		}
-
-		// if err != nil {
-		// 	// fmt.Println(err)
-		// 	// w.Write([]byte("{\"error\": \"" + err.Error() + "\"}"))
-		// } else {
-		// w.Write([]byte("{\"error\": \"" + err.Error() + "\"}"))
-		// w.Write([]byte("{\"name\": \"" + register.Name + "\","))
-		// w.Write([]byte("\"email\": \"" + register.Email + "\","))
-		// w.Write([]byte("\"password\": \"" + register.Password + "\","))
-		// w.Write([]byte("\"confirmPassword\": \"" + register.UserConfirmPassword + "\"}"))
-		// }
-
-		// w.Write([]byte(Users.Email))
-		// w.Write([]byte(Users.Password))
-		// w.Write([]byte(Users.UserConfirmPassword))
-		// w.Write([]byte("{\"name\":\"" + Users.Name + "\",\""))
-		// w.Write([]byte("\"email\":\"" + Users.Email))
-		// w.Write([]byte("\"password\":\"" + Users.Password))
-		// w.Write([]byte("\"userConfirmPassword\":\"" + Users.ConfirmPassword + "\"}"))
-
-		// if Users.Name == "test" {
-		// 	// w.Write([]byte("{\"test\":\"\"}"))
-		// 	fmt.Println(Users)
-		// 	return
-		// }
-
-		// Requete SQL
-		// Scan requête
-		// JSON.Marshal
-		// fmt.Println(Users.name)
-		// w.Write([]byte("{\"test\":\"\"}"))
 	})
 
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
@@ -241,17 +196,9 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/loginApi", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println(db)
-
 		body, _ := ioutil.ReadAll(r.Body)
-
 		json.Unmarshal(body, &login)
-		fmt.Println(body)
-
-		fmt.Println(login.Email)
-		// SelectUserWhenLogin(db, login.Email, login.Password)
 		HandleLogin(w, r, db, &login)
-		// SelectAllFromTable(db, "users")
 	})
 
 	http.HandleFunc("/fondateurs", func(w http.ResponseWriter, r *http.Request) {
@@ -263,10 +210,16 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice Test
+		var postSlice []Test
 		fmt.Println(register.Name)
-		postSlice.EveryPost = SelectAllPost(db, "drugs")
-		// postSlice.EveryComments = SelectAllComments(db)
+		posts := SelectAllPost(db, "drugs")
+		for _, post := range posts {
+			var t Test
+			t.Post = post
+			t.EveryComments = SelectAllComments(db, post.Id)
+			postSlice = append(postSlice, t)
+		}
+		fmt.Printf("%v", postSlice)
 		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
@@ -275,8 +228,15 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/erotica", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice Test
-		postSlice.EveryPost = SelectAllPost(db, "erotica")
+		var postSlice []Test
+		fmt.Println(register.Name)
+		posts := SelectAllPost(db, "erotica")
+		for _, post := range posts {
+			var t Test
+			t.Post = post
+			t.EveryComments = SelectAllComments(db, post.Id)
+			postSlice = append(postSlice, t)
+		}
 		template := template.Must(template.ParseFiles("Page/Erotica.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
@@ -285,8 +245,14 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/counterfeit", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice Test
-		postSlice.EveryPost = SelectAllPost(db, "counterfeit")
+		var postSlice []Test
+		posts := SelectAllPost(db, "counterfeit")
+		for _, post := range posts {
+			var t Test
+			t.Post = post
+			t.EveryComments = SelectAllComments(db, post.Id)
+			postSlice = append(postSlice, t)
+		}
 		template := template.Must(template.ParseFiles("Page/Counterfeit.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
@@ -295,8 +261,14 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/tutorials", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice Test
-		postSlice.EveryPost = SelectAllPost(db, "tutorials")
+		var postSlice []Test
+		posts := SelectAllPost(db, "tutorials")
+		for _, post := range posts {
+			var t Test
+			t.Post = post
+			t.EveryComments = SelectAllComments(db, post.Id)
+			postSlice = append(postSlice, t)
+		}
 		template := template.Must(template.ParseFiles("Page/Tutorials.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
@@ -305,8 +277,14 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/guns", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice Test
-		postSlice.EveryPost = SelectAllPost(db, "guns")
+		var postSlice []Test
+		posts := SelectAllPost(db, "guns")
+		for _, post := range posts {
+			var t Test
+			t.Post = post
+			t.EveryComments = SelectAllComments(db, post.Id)
+			postSlice = append(postSlice, t)
+		}
 		template := template.Must(template.ParseFiles("Page/Guns.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
@@ -315,8 +293,14 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/software", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice Test
-		postSlice.EveryPost = SelectAllPost(db, "software")
+		var postSlice []Test
+		posts := SelectAllPost(db, "software")
+		for _, post := range posts {
+			var t Test
+			t.Post = post
+			t.EveryComments = SelectAllComments(db, post.Id)
+			postSlice = append(postSlice, t)
+		}
 		template := template.Must(template.ParseFiles("Page/SoftWare.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
@@ -325,8 +309,14 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/games", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice Test
-		postSlice.EveryPost = SelectAllPost(db, "games")
+		var postSlice []Test
+		posts := SelectAllPost(db, "games")
+		for _, post := range posts {
+			var t Test
+			t.Post = post
+			t.EveryComments = SelectAllComments(db, post.Id)
+			postSlice = append(postSlice, t)
+		}
 		template := template.Must(template.ParseFiles("Page/Games.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
@@ -335,8 +325,14 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/jsp", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice Test
-		postSlice.EveryPost = SelectAllPost(db, "jsp")
+		var postSlice []Test
+		posts := SelectAllPost(db, "jsp")
+		for _, post := range posts {
+			var t Test
+			t.Post = post
+			t.EveryComments = SelectAllComments(db, post.Id)
+			postSlice = append(postSlice, t)
+		}
 		template := template.Must(template.ParseFiles("Page/Jsp.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)

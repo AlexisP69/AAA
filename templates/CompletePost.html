@@ -1,43 +1,51 @@
 {{define "completePost"}}
-<dialog id="Form{{.Id}}" class="detail">
+<dialog id="Form{{.Post.Id}}" class="detail">
 
   <form class="close" method="dialog">
     <button value="cancel">&times;</button>
   </form>
   <div class="tt">
-    <h4>{{.Title}}</h4>
+    <h4>{{.Post.Title}}</h4>
   </div>
 
   <div class="grandRectangle">
-    <p>{{.Name}} </p>
+    <p>{{.Post.Name}} </p>
   </div>
   <div class="petitRectangle">
-    <h4>{{.Description}}</h4>
+    <h4>{{.Post.Description}}</h4>
   </div>
   <div class="basRectangle">
     <img id="like" src="../Static/like.png"></img>
     <img id="dislike" src="../Static/dislike.png"></img>
     <img id="commentaire" src="../Static/commentaire.png"></img>
     <div class="comments">
-      <textarea id="infos{{.Id}}" placeholder="Write an Comment"></textarea>
-      <button onclick="newComment()" class="com" id="com{{.Id}}">Comment</button>
-      <div id="yo{{.Id}}"></div>
+      <textarea id="infos{{.Post.Id}}" placeholder="Write an Comment"></textarea>
+      <button onclick="newComment()" class="com" id="com{{.Post.Id}}">Comment</button>
+      <div id="yo{{.Post.Id}}">
+        {{range .EveryComments}}
+          <div class="comment">
+            <span>
+              {{.Name}}:  {{.Commentaire}} 
+            </span>
+          </div>
+        {{end}}
+      </div>
     </div>
   </div>
 </dialog>
 
 <script>
-  document.getElementById("com{{.Id}}").addEventListener("click", () => {
-    let input = document.getElementById("infos{{.Id}}").value;
-    const d = document.getElementById("yo{{.Id}}")
-    let postId = "{{.Id}}"
-    let name = "{{.Name}}"
+  document.getElementById("com{{.Post.Id}}").addEventListener("click", () => {
+    let input = document.getElementById("infos{{.Post.Id}}").value;
+    const d = document.getElementById("yo{{.Post.Id}}")
+    let postId = "{{.Post.Id}}"
+    let name = "You"
     console.log(d)
     d.innerHTML +=
       `
       <div class="comment">
         <span>
-        ${name} :  ${input}
+        ${name} : ${input}
         </span>
       </div>
       `

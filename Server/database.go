@@ -159,9 +159,17 @@ func SelectAllPost(db *sql.DB, categorie string) []Posts {
 	return final
 }
 
-func SelectAllComments(db *sql.DB) []Commentaire {
+// func SelectAllCommentByPost(db *sql.DB) {
+// 	var u Zeubi
+// 	rows, _ := db.Query("Select * From post Inner JOIN commentaire WHERE commentaire.post_id = post.id")
+// 	fmt.Println(rows)
+// 	rows.Scan(&u.Id, &u.Categorie, &u.Name, &u.Title, &u.Description, &u.Date, &u.Test, &u.Post_id, &u.Name2, &u.Commentaire)
+// 	fmt.Println(u)
+// }
+
+func SelectAllComments(db *sql.DB, post_id int) []Commentaire {
 	var u Commentaire
-	rows := SelectAllFromTable(db, "commentaire")
+	rows := SelectCommentByPost(db, post_id)
 	final := make([]Commentaire, 0)
 	for rows.Next() {
 		rows.Scan(&u.Id, &u.PostId, &u.Name, &u.Commentaire)
@@ -170,6 +178,11 @@ func SelectAllComments(db *sql.DB) []Commentaire {
 	}
 	fmt.Println(final)
 	return final
+}
+
+func SelectCommentByPost(db *sql.DB, post_id int) *sql.Rows {
+	res, _ := db.Query(`SELECT * FROM commentaire WHERE post_id = ?`, post_id)
+	return res
 }
 
 func SelectUserNameWithPattern(db *sql.DB, pattern string) []User {
