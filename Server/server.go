@@ -61,10 +61,10 @@ func HandleHome(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
 	auth := session.Values["authenticated"]
 	fmt.Println(auth)
-	// if auth == nil {
-	// 	http.Redirect(w, r, "/login", http.StatusFound)
-	// 	return
-	// }
+	if auth == nil {
+		http.Redirect(w, r, "/", http.StatusFound)
+		return
+	}
 
 	json.Unmarshal([]byte(auth.(string)), &data)
 
@@ -108,12 +108,20 @@ func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB, login *Logi
 		login.Name = result.Name
 		res, _ := json.Marshal(login)
 		session, _ := store.Get(r, "cookie-name")
-		fmt.Println(session)
 		fmt.Printf("POSTFOR IN LOGIN %v", login)
 		session.Values["authenticated"] = string(res)
 		session.Save(r, w)
 		w.Write([]byte(`{"test": "success"}`))
+		// if fil == true {
+		// 	document.querySelectorAll(".signup").forEach((e) => {
+		// 		e.style.display = "none";
+		// 	})
+		// 	document.querySelectorAll(".sign-up").forEach((e) => {
+		// 		e.style.display = "none";
+		// 	})
+		// }
 	}
+
 	// http.Redirect(w, r, "/", http.StatusFound)
 	// return
 	// } else
@@ -135,7 +143,7 @@ func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB, login *Logi
 }
 
 func HandleLogout(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
+	if r.URL.Path != "/log-out" {
 		http.NotFound(w, r)
 		return
 	}
@@ -146,6 +154,7 @@ func HandleLogout(w http.ResponseWriter, r *http.Request) {
 	session.Save(r, w)
 
 	http.Redirect(w, r, "/", http.StatusFound)
+
 }
 
 func HandleFunc(db *sql.DB) {
