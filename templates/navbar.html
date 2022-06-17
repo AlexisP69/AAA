@@ -1,16 +1,21 @@
 {{define "navbar"}}
 
 <div class="nav">
+    <div class="nav-links">
+        <a class="log-out" id="logout" href="/log-out">Log out</a>
+        <a class="log-out" id="log-out" href="#">profile</a>
+    </div>
     <input type="checkbox" id="nav-check">
     <div class="nav-title">
         <nav role="navigation">
             <div id="menuToggle">
+
                 <!--
                     A fake / hidden checkbox is used as click reciever,
                     so you can use the :checked selector on it.
                 -->
                 <input type="checkbox" />
-                
+
                 <!--
                     Some spans to act as a hamburger.
                     
@@ -20,11 +25,27 @@
                 <span></span>
                 <span></span>
                 <span></span>
-                
+
+                <script type="text/javascript">
+                    document.getElementById("logout").onclick = function () {
+
+                        document.querySelectorAll(".log-out").forEach((e) => {
+                            e.style.display = "none";
+                        })
+                    }
+                    document.getElementById("log-out").onclick = function () {
+
+                        document.querySelectorAll(".log-out").forEach((e) => {
+                            e.style.display = "none";
+                        })
+                    }
+                </script>
+
                 <!--
                     Too bad the menu has to be inside of the button
                     but hey, it's pure CSS magic.
                 -->
+
                 <ul id="menu">
                     <a href="/">
                         <li>Home</li>
@@ -42,19 +63,22 @@
                         <li>Therms of use</li>
                     </a>
                 </ul>
+
             </div>
+
         </nav>
     </div>
-    <div class="title" >
+    <div class="title">
         Forum Project
     </div>
-  
+
     <div class="nav-links">
-        
-        <a id="signin" href="/login" >Sign In</a>
-        <a id="signup" href="/register" >Sign Up</a>
+
+        <a class="signin" id="sign-up" href="/login">Sign In</a>
+        <a class="signup" id="signup" href="/register">Sign Up</a>
         <!-- <a href="register" target="_blank">Sign Up</a> -->
     </div>
-   
+
+
 </div>
 {{end}}
