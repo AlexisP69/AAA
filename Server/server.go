@@ -161,7 +161,7 @@ func HandleFunc(db *sql.DB) {
 	var register Register
 	var login Login
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html"))
+		template := template.Must(template.ParseFiles("Page/HomePage.html", "Page/Signup.html", "templates/footer.html", "templates/navbar.html", "templates/Post.html", "templates/PostBlock.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
 			return
@@ -229,7 +229,7 @@ func HandleFunc(db *sql.DB) {
 			postSlice = append(postSlice, t)
 		}
 		fmt.Printf("%v", postSlice)
-		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		template := template.Must(template.ParseFiles("Page/Drugs.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html", "templates/filtre.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
 			return
@@ -246,7 +246,7 @@ func HandleFunc(db *sql.DB) {
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
 		}
-		template := template.Must(template.ParseFiles("Page/Erotica.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		template := template.Must(template.ParseFiles("Page/Erotica.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html", "templates/filtre.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
 			return
@@ -262,7 +262,7 @@ func HandleFunc(db *sql.DB) {
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
 		}
-		template := template.Must(template.ParseFiles("Page/Counterfeit.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		template := template.Must(template.ParseFiles("Page/Counterfeit.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html", "templates/filtre.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
 			return

@@ -8,8 +8,10 @@
 }
 
 .detail {
+    border-radius: 40px;
+
     margin-top: 40vh;
-    margin-left: 53vh;
+    margin-left: 51vh;
     width:90vh;
     height:40vh;
     background-color: #292a2b;
@@ -19,7 +21,7 @@
 .grandRectangle{
     text-align: center;
     border:solid 2px;
-    margin-top: 3vh;
+    margin-top: 1vh;
     border-radius: 3px;
     background-color: rgb(213, 199, 199);
     height:3vh;
@@ -28,7 +30,7 @@
 .petitRectangle{
     border-radius: 5px;
     background-color: rgb(213, 199, 199);
-    height:20vh;
+    height:18vh;
     border:solid 2px;
 }
 .basRectangle{
@@ -111,6 +113,7 @@ div[id="yo*"]{
 }
 
 .tt h4{
+    margin-top:0;
  font-family: 'Pacifico',cursive;
 font-size:4vh;
 color: #48CAE4;
