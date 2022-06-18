@@ -1,0 +1,46 @@
+{{define "filtre"}}
+
+<div class="rectangle1">
+    <h3>FILTRES</h3>
+<div class="checkbox-containeur1">
+    <div class="checkbox1">
+    <input type="checkbox" value="today" id="today">
+    <label for="today">Aujourd'hui</label>
+</div>
+<div class="checkbox1">
+    <input type="checkbox" value="hier" id="hier">
+    <label for="hier">Hier</label>
+</div>
+
+<div class="checkbox1">
+    <input type="checkbox" value="semaine" id="semaine">
+    <label for="semaine">Cette semaine</label>
+</div>
+<div class="checkbox1">
+    <input type="checkbox" value="mois" id="mois">
+    <label for="mois">Ce mois-ci </label>
+</div>
+<div class="checkbox1">
+    <input type="checkbox" value="annÃ©e" id="année">
+    <label for="année">Cette année </label>
+</div>
+
+<div class="boutons">
+    <button class="btn">Entrer</button>
+</div>
+
+</div>
+
+<div class="print-value">
+    <p id="valueList"></p>
+</div>
+
+
+<script>
+let valueList = document.getElementById("valueList");
+let text ='<span> you have selected:</span>';
+let listArray=[];
+let checkboxes =document.querySelector('checkbox')
+console.log(checkboxes)
+</script>
+{{end}}
