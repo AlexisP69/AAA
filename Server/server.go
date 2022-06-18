@@ -192,15 +192,18 @@ func HandleFunc(db *sql.DB) {
 		fmt.Println(register.Password)
 		pwd := []byte(register.Password)
 		hash := hashAndSalt(pwd)
+		validEmail := valid(register.Email)
 
 		// Enter the same password again and compare it with the
 		// first password entered
-		_, err := InsertIntoUsers(db, register.Name, register.Email, hash)
-		if err != nil {
-			// if( err == "UNIQUE constraint failed: users.email") {
+		if validEmail {
+			_, err := InsertIntoUsers(db, register.Name, register.Email, hash)
+			if err != nil {
+				// if( err == "UNIQUE constraint failed: users.email") {
 
-			// }
-			// fmt.Println(err)
+				// }
+				// fmt.Println(err)
+			}
 		}
 	})
 

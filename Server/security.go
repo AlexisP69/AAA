@@ -3,6 +3,7 @@ package forum
 import (
 	"fmt"
 	"log"
+	"net/mail"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -49,4 +50,9 @@ func comparePasswords(hashedPwd string, plainPwd []byte) bool {
 	}
 
 	return true
+}
+
+func valid(email string) bool {
+	_, err := mail.ParseAddress(email)
+	return err == nil
 }
