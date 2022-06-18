@@ -100,8 +100,11 @@ func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB, login *Logi
 	// fmt.Println(login.Email)
 	// login.Password, _ = CheckPasswordHash(login.Password)
 	fmt.Println(login.Password)
-	result := SelectUserWhenLogin(db, login.Email, login.Password)
-	if result.Id == 0 {
+	result := SelectUserWhenLogin(db, login.Email)
+	pwd2 := []byte(login.Password)
+	pwdMatch := comparePasswords(result.Password, pwd2)
+	fmt.Println(pwdMatch)
+	if result.Id == 0 || !pwdMatch {
 		w.Write([]byte(`{"test": "wrong mail or password"}`))
 
 	} else {
@@ -187,7 +190,12 @@ func HandleFunc(db *sql.DB) {
 		json.Unmarshal(body, &register)
 		// register.Password, _ = HashPassword(register.Password)
 		fmt.Println(register.Password)
-		_, err := InsertIntoUsers(db, register.Name, register.Email, register.Password)
+		pwd := []byte(register.Password)
+		hash := hashAndSalt(pwd)
+
+		// Enter the same password again and compare it with the
+		// first password entered
+		_, err := InsertIntoUsers(db, register.Name, register.Email, hash)
 		if err != nil {
 			// if( err == "UNIQUE constraint failed: users.email") {
 

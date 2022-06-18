@@ -119,10 +119,10 @@ func SelectAllByCategorie(db *sql.DB, categorie string) *sql.Rows {
 // 	return u
 // }
 
-func SelectUserWhenLogin(db *sql.DB, email string, password string) User {
+func SelectUserWhenLogin(db *sql.DB, email string) User {
 	var u User
 	fmt.Println("select user :", email)
-	db.QueryRow(`SELECT * FROM users WHERE (email, password) = (?,?)`, email, password).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
+	db.QueryRow(`SELECT * FROM users WHERE email = ?`, email).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 	fmt.Println(u)
 	return u
 }
