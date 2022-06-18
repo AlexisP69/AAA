@@ -20,7 +20,7 @@ type NewPost struct {
 	Date        string
 }
 
-type Test struct {
+type PostWithComments struct {
 	Post          Posts
 	EveryComments []Commentaire
 }
@@ -219,11 +219,11 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/drugs", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice []Test
+		var postSlice []PostWithComments
 		fmt.Println(register.Name)
 		posts := SelectAllPost(db, "drugs")
 		for _, post := range posts {
-			var t Test
+			var t PostWithComments
 			t.Post = post
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
@@ -237,11 +237,11 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/erotica", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice []Test
+		var postSlice []PostWithComments
 		fmt.Println(register.Name)
 		posts := SelectAllPost(db, "erotica")
 		for _, post := range posts {
-			var t Test
+			var t PostWithComments
 			t.Post = post
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
@@ -254,10 +254,10 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/counterfeit", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice []Test
+		var postSlice []PostWithComments
 		posts := SelectAllPost(db, "counterfeit")
 		for _, post := range posts {
-			var t Test
+			var t PostWithComments
 			t.Post = post
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
@@ -270,10 +270,10 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/tutorials", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice []Test
+		var postSlice []PostWithComments
 		posts := SelectAllPost(db, "tutorials")
 		for _, post := range posts {
-			var t Test
+			var t PostWithComments
 			t.Post = post
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
@@ -286,10 +286,10 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/guns", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice []Test
+		var postSlice []PostWithComments
 		posts := SelectAllPost(db, "guns")
 		for _, post := range posts {
-			var t Test
+			var t PostWithComments
 			t.Post = post
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
@@ -302,10 +302,10 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/software", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice []Test
+		var postSlice []PostWithComments
 		posts := SelectAllPost(db, "software")
 		for _, post := range posts {
-			var t Test
+			var t PostWithComments
 			t.Post = post
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
@@ -318,10 +318,10 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/games", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice []Test
+		var postSlice []PostWithComments
 		posts := SelectAllPost(db, "games")
 		for _, post := range posts {
-			var t Test
+			var t PostWithComments
 			t.Post = post
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
@@ -334,10 +334,10 @@ func HandleFunc(db *sql.DB) {
 	})
 
 	http.HandleFunc("/jsp", func(w http.ResponseWriter, r *http.Request) {
-		var postSlice []Test
+		var postSlice []PostWithComments
 		posts := SelectAllPost(db, "jsp")
 		for _, post := range posts {
-			var t Test
+			var t PostWithComments
 			t.Post = post
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
