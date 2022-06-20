@@ -36,12 +36,13 @@
 .basRectangle{
 
     border-radius: 5px;
-    height:7vh;
+    height:5vh;
     background-color: #48CAE4;
     border:solid 0.2px;
 }
 
 .comments{
+    margin-top: 2vh;
     border-radius: 5px;
     height:3vh;
     background-color: #292a2b;
