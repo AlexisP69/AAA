@@ -19,6 +19,7 @@
   <div class="basRectangle">
     <button onclick="pouce()"class="btn" id="green{{.Post.Id}}"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
     <button onclick="pouce()"class="btn" id="red{{.Post.Id}}"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+    <div class="likes"></div>
     <img id="commentaire" src="../Static/commentaire.png"></img>
     <div class="comments">
       <textarea id="infos{{.Post.Id}}" placeholder="Write an Comment"></textarea>
@@ -78,30 +79,34 @@
       .catch((err) => console.Error(err))
   })
 
+
   function pouce(){
-//  src="https://use.fontawesome.com/fe459689b4.js"
+    let like = 0
+    let likes=document.getElementById("likes")
+ src="https://use.fontawesome.com/fe459689b4.js"
   let btn1 = document.getElementById('green{{.Post.Id}}');
   let btn2 = document.getElementById('red{{.Post.Id}}');
 
-  console.log("TESTT !! : ", btn1)
-
   btn1.addEventListener('click', function() {
-    console.log("wewe")
+    
   if (btn2.classList.contains('red')) {
     btn2.classList.remove('red');
   } 
   this.classList.toggle('green');
+  console.log("green")
+  like+=1
 
 });
 
 btn2.addEventListener('click', function() {
-  console.log("wewe")
   if (btn1.classList.contains('green')) {
     btn1.classList.remove('green');
   } 
 this.classList.toggle('red');
+console.log("red")
 
 });
+likes.innerHTML = like
 }
 // newElement.innerHTML += "Nom de l'utilisateur"+" "+":"+" "+ info
 function none(){

@@ -379,9 +379,9 @@ func HandleFunc(db *sql.DB) {
 		InsertIntoComments(db, Commentaire.Input, login.Name, x)
 	})
 
-	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/Userpage", func(w http.ResponseWriter, r *http.Request) {
 		template := template.Must(template.ParseFiles(
-			"Page/Homepage.html",
+			"Page/UserPage.html",
 		))
 		if r.Method != http.MethodPost {
 			err := template.Execute(w, "")
@@ -390,9 +390,9 @@ func HandleFunc(db *sql.DB) {
 		}
 	})
 
-	http.HandleFunc("/Userpage", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/Therms-of-use", func(w http.ResponseWriter, r *http.Request) {
 		template := template.Must(template.ParseFiles(
-			"Page/UserPage.html",
+			"Page/Therms-of-use.html",
 		))
 		if r.Method != http.MethodPost {
 			err := template.Execute(w, "")
