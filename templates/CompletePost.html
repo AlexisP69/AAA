@@ -14,9 +14,11 @@
   <div class="petitRectangle">
     <h4>{{.Post.Description}}</h4>
   </div>
+
+
   <div class="basRectangle">
-    <img id="like" src="../Static/like.png"></img>
-    <img id="dislike" src="../Static/dislike.png"></img>
+    <button onclick="pouce()"class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+    <button onclick="pouce()"class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
     <img id="commentaire" src="../Static/commentaire.png"></img>
     <div class="comments">
       <textarea id="infos{{.Post.Id}}" placeholder="Write an Comment"></textarea>
@@ -34,7 +36,10 @@
   </div>
 </dialog>
 
+
+
 <script>
+  pouce()
   document.getElementById("com{{.Post.Id}}").addEventListener("click", () => {
     let input = document.getElementById("infos{{.Post.Id}}").value;
     const d = document.getElementById("yo{{.Post.Id}}")
@@ -71,7 +76,36 @@
         abs.innerText = res.test
       })
   })
+
+  function pouce(){
+//  src="https://use.fontawesome.com/fe459689b4.js"
+  let btn1 = document.getElementById('green');
+  let btn2 = document.getElementById('red');
+
+  console.log("TESTT !! : ", btn1)
+
+  btn1.addEventListener('click', function() {
+    console.log("wewe")
+  if (btn2.classList.contains('red')) {
+    btn2.classList.remove('red');
+  } 
+  this.classList.toggle('green');
+
+});
+
+btn2.addEventListener('click', function() {
+
+  if (btn1.classList.contains('green')) {
+    btn1.classList.remove('green');
+  } 
+this.classList.toggle('red');
+
+});
+}
 // newElement.innerHTML += "Nom de l'utilisateur"+" "+":"+" "+ info
+
+// <script src="https://use.fontawesome.com/fe459689b4.js"></
+
 
 </script>
 {{end}}
