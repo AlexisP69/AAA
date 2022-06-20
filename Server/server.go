@@ -225,7 +225,7 @@ func HandleFunc(db *sql.DB) {
 		template := template.Must(template.ParseFiles("Page/Fondateur.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
-			//return
+			return
 		}
 	})
 
