@@ -32,13 +32,13 @@
             <button onclick="window.location.href='/guns'" class="btn2">Guns</button>
             <button onclick="window.location.href='/software'" class="btn1">SoftWare</button>
             <button onclick="window.location.href='/games'" class="btn2">Games</button>
-            <button onclick="window.location.href='/jsp'" class="btn1">JSP</button>
+            <button onclick="window.location.href='/services'" class="btn1">Services</button>
         </div>
     </div>
 
     <h1>Erotica</h1>
     {{template "filtre"}}
-</div>
+    </div>
     <div class="postss">
     </div>
 
@@ -49,11 +49,11 @@
 
         {{template "completePost" .}}
         {{end}}
-        <div class ="Lesboutons">
+        <div class="Lesboutons">
             <button value="next" onclick="NextPage(this.value)">Next Page</button>
             <button value="prev" onclick="NextPage(this.value)">Previous Page</button>
             <div class="currentPage" id="currentPage"></div>
-          </div>
+        </div>
     </div>
     {{template "footer"}}
     {{template "post"}}
@@ -64,23 +64,24 @@
         document.getElementById('popup-Form').showModal()
     })
     let nbPage = 1;
-    postList=document.getElementById('postList')
-    currentPage=document.getElementById('currentPage')
+    postList = document.getElementById('postList')
+    currentPage = document.getElementById('currentPage')
     function NextPage(value) { // LE NOMBRE DE PAGE
-    if (value == "next") {
-        if (nbPage < 29) {
-            nbPage += 1
-            console.log(nbPage)
-            
-        }
-    }
+        if (value == "next") {
+            if (nbPage < 29) {
+                nbPage += 1
+                console.log(nbPage)
 
-    if (value == "prev") {
-        if (nbPage != 1) {
-            nbPage -= 1
+            }
         }
+
+        if (value == "prev") {
+            if (nbPage != 1) {
+                nbPage -= 1
+            }
+        }
+        currentPage.innerHTML = "Page Number : " + nbPage
     }
-    currentPage.innerHTML ="Page Number : "+nbPage
-}
 </script>
+
 </html>
