@@ -15,7 +15,6 @@
     <h4>{{.Post.Description}}</h4>
   </div>
 
-
   <div class="basRectangle">
     <button onclick="pouce()"class="btn" id="green{{.Post.Id}}"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
     <button onclick="pouce()"class="btn" id="red{{.Post.Id}}"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
@@ -40,6 +39,7 @@
 
 <script>
   pouce()
+  // create the div of the comments of the posts
   document.getElementById("com{{.Post.Id}}").addEventListener("click", () => {
     let input = document.getElementById("infos{{.Post.Id}}").value;
     const d = document.getElementById("yo{{.Post.Id}}")
@@ -54,8 +54,8 @@
         </span>
       </div>
       `
-    console.log(input) //A EFFACER
-
+    console.log(input)
+// fetching the road for the comments of the posts
     fetch("/newComments",
       {
         method: "POST",
@@ -78,15 +78,14 @@
       .catch((err) => console.Error(err))
   })
 
-  function pouce(){
-//  src="https://use.fontawesome.com/fe459689b4.js"
+  //function not finished which would suposingly change the color of the liked button in green and red
+function pouce(){
   let btn1 = document.getElementById('green{{.Post.Id}}');
   let btn2 = document.getElementById('red{{.Post.Id}}');
 
   console.log("TESTT !! : ", btn1)
 
   btn1.addEventListener('click', function() {
-    console.log("wewe")
   if (btn2.classList.contains('red')) {
     btn2.classList.remove('red');
   } 
@@ -95,7 +94,6 @@
 });
 
 btn2.addEventListener('click', function() {
-  console.log("wewe")
   if (btn1.classList.contains('green')) {
     btn1.classList.remove('green');
   } 
@@ -103,7 +101,6 @@ this.classList.toggle('red');
 
 });
 }
-// newElement.innerHTML += "Nom de l'utilisateur"+" "+":"+" "+ info
 function none(){
 document.getElementById("com{{.Post.Id}}").style.display = 'none';
 document.getElementById("infos{{.Post.Id}}").style.display = 'none';

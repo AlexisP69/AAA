@@ -72,24 +72,6 @@ h1{
   margin-bottom: 5vh;
 }
 
-/* .rectangle{
-  float:left;
-  text-align: center;
-  font-family: 'Josefin Sans', sans-serif;
-  text-orientation: sideways-left;
-  background-color:rgb(77, 170, 212);
-  font-size: 3vh;
-  width: 30vw;
-  height: 100%;
-} */
-
-/* p{
-  float: left;
-  text-align: center;
-  font-family: 'Josefin Sans', sans-serif;
-  text-orientation: sideways-left;
-} */
-
 .rectangle {
   float: left;
   margin-top:60px;
@@ -196,7 +178,6 @@ label {
     cursor: pointer;
   }
   
-  /* The actual popup (appears on top) */
   .popup .popuptext {
     visibility: hidden;
     width: 160px;
@@ -212,7 +193,6 @@ label {
     margin-left: -80px;
   }
   
-  /* Popup arrow */
   .popup .popuptext::after {
     content: "";
     position: absolute;
@@ -224,7 +204,6 @@ label {
     border-color: #555 transparent transparent transparent;
   }
   
-  /* Toggle this class when clicking on the popup container (hide and show the popup) */
   .popup .show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
@@ -291,22 +270,6 @@ label {
     color: #fff;
   }
 
-/* p1{
-  padding: 10vh;
-  font-size: 4vh;
-  font-family: 'Pacifico', cursive;
-  font-weight: bold;
-} */
-
- /* p{
-  margin-top: 6vh;
-  font-size: 4vh;
-  text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: bolder;
-  /* padding: 4vh; */
-
-
 h3{
   padding: 5vh;
   font-size: 6vh;
@@ -327,20 +290,4 @@ h3{
   cursor: pointer;
   margin: 10px;
 }
-/* .main{
-  padding: 1vh;
-  background: white;
-  padding: 15px 15px 15px 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px;
-  display:flex;
-  align-items: center;
-}
-
-.main .slider{
-  height: 40px;
-  width: 300px;
-  display: flex;
-  align-items: center;
-} */
 

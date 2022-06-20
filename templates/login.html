@@ -15,9 +15,7 @@
             </div>
         </div>
 
-
         <div class="right">
-
             <h5>Login</h5>
             <p>Don't have an account? <a id="hehe" href="#">Create Your Account</a> it takes less than a minute</p>
             <form id="Subscribe" Method="POST" action="/">
@@ -48,6 +46,7 @@
         document.getElementById('hehe').addEventListener('click', () => {
             document.getElementById('wrapper').showModal()
         })
+// function used to login the users 
         function logUsers() {
             let email = document.getElementById("Email").value;
             let password = document.getElementById("Password").value;
@@ -67,10 +66,7 @@
                     return res.json()
                 })
         }
-
     </script>
     </div>
-
 </dialog>
-
 {{end}}

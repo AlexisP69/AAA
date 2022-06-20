@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="/Static/Postblock.css" type="text/css">
     <link rel="stylesheet" href="/Static/CompletePosts.css" type="text/css">
     <link rel="stylesheet" href="/Static/filtre.css" type="text/css">
-
-
-
     <link rel="icon" type="image/png" sizes="16x16" href="/Static/Logo2.png">
     <title>Games</title>
 </head>
@@ -45,10 +42,7 @@
     <div class="postss">
     </div>
 
-    <!-- POST -->
-
     <a id="poost">Create New Post</a>
-    <!-- <button onclick="newPost()" id="newPost"> Create New Post</button> -->
     <div id="postList">
         {{range .}}
         {{template "postBlock" .}}
@@ -58,9 +52,6 @@
     </div>
     {{template "footer"}}
     {{template "post"}}
-
-
-
 
 </body>
 <script>

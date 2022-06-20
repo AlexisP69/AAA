@@ -35,12 +35,6 @@
     font-size: 18px;
 }
 
-/* .signin {
-    visibility: hidden;
-}
-.signup {
-    visibility: hidden;
-} */
 .nav>.nav-links>a {
     display: inline-block;
     padding: 13px 10px 13px 10px;
@@ -58,8 +52,6 @@
 }
 
 .log-out {
-    /* visibility: hidden; */
-    /* padding-top: 1vh; */
     margin-bottom: 1vh;
     display: inline-block;
     text-decoration: none;
@@ -162,20 +154,12 @@
     position: absolute;
     top: -7px;
     left: -5px;
-
     cursor: pointer;
-
     opacity: 0;
-    /* hide this */
     z-index: 2;
-    /* and place it over the hamburger */
-
     -webkit-touch-callout: none;
 }
 
-/*
- * Just a quick hamburger
- */
 #menuToggle span {
     display: block;
     width: 33px;
@@ -209,34 +193,22 @@
     background: #232323;
 }
 
-/*
- * But let's hide the middle one.
- */
 #menuToggle input:checked~span:nth-last-child(3) {
     opacity: 0;
     transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-/*
- * Ohyeah and the last one should go the other direction
- */
 #menuToggle input:checked~span:nth-last-child(2) {
     transform: rotate(-45deg) translate(0, -1px);
 }
 
-
 #menu {
-    /* position: absolute; */
     width: 300px;
     height: 500px;
     margin: -100px -200px 0 -50px;
-    /* padding: 50px; */
     padding-top: 120px;
-
-    /* background: #ededed; */
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
-    /* to stop flickering of text in safari */
 
     transform-origin: 0% 0%;
     transform: translate(-100%, 0);
@@ -245,17 +217,12 @@
 }
 
 #menu li {
-
     font-family: 'Pacifico', cursive;
     font-size: 22px;
     color: #fff;
-    /* background-color: #48CAE4; */
     height: 100px;
 }
 
-/*
- * And let's slide it in from the left
- */
 #menuToggle input:checked~ul {
     transform: none;
 }

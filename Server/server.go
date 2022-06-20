@@ -50,6 +50,7 @@ var (
 	store = sessions.NewCookieStore(key)
 )
 
+//look if the users is already connected and redirect him if not
 func HandleHome(w http.ResponseWriter, r *http.Request) {
 	var data Login = Login{}
 
@@ -74,6 +75,7 @@ func HandleHome(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, data)
 }
 
+//handle sessions creation
 func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB, login *Login) {
 	if r.URL.Path != "/loginApi" {
 		http.NotFound(w, r)
@@ -87,18 +89,6 @@ func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB, login *Logi
 		return
 	}
 	fmt.Println("Welcome")
-
-	// if _, ok := r.PostForm["Submit"]; ok {
-	// fmt.Println(string("uv"))
-
-	// var login Login
-
-	// body, _ := ioutil.ReadAll(r.Body)
-
-	// json.Unmarshal(body, &login)
-
-	// fmt.Println(login.Email)
-	// login.Password, _ = CheckPasswordHash(login.Password)
 	fmt.Println(login.Password)
 	result := SelectUserWhenLogin(db, login.Email)
 	pwd2 := []byte(login.Password)
@@ -115,36 +105,10 @@ func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB, login *Logi
 		session.Values["authenticated"] = string(res)
 		session.Save(r, w)
 		w.Write([]byte(`{"test": "success"}`))
-		// if fil == true {
-		// 	document.querySelectorAll(".signup").forEach((e) => {
-		// 		e.style.display = "none";
-		// 	})
-		// 	document.querySelectorAll(".sign-up").forEach((e) => {
-		// 		e.style.display = "none";
-		// 	})
-		// }
 	}
-
-	// http.Redirect(w, r, "/", http.StatusFound)
-	// return
-	// } else
-
-	// result := SelectUserWhenLogin(db, login.Email, login.Password)
-	// if result.Id == 0 {
-	// 	w.Write([]byte(`{"test": "wrong mail or password"}`))
-
-	// } else {
-	// 	w.Write([]byte(`{"test": "success"}`))
-	// }
-
-	// if session.Values["authenticated"] != nil {
-	// 	http.Redirect(w, r, "/", http.StatusFound)
-	// 	return
-	// }
-
-	// tmpl.Execute(w, nil)
 }
 
+// handle session deletion
 func HandleLogout(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/log-out" {
 		http.NotFound(w, r)
@@ -188,7 +152,6 @@ func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/registerApi", func(w http.ResponseWriter, r *http.Request) {
 		body, _ := ioutil.ReadAll(r.Body)
 		json.Unmarshal(body, &register)
-		// register.Password, _ = HashPassword(register.Password)
 		fmt.Println(register.Password)
 		pwd := []byte(register.Password)
 		hash := hashAndSalt(pwd)
@@ -225,7 +188,6 @@ func HandleFunc(db *sql.DB) {
 		template := template.Must(template.ParseFiles("Page/Fondateur.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, "")
-			//return
 		}
 	})
 

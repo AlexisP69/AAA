@@ -60,6 +60,7 @@
         </div>
     </div>
 </body>
+<!-- function in charge of registering the user into the DB -->
 <script>
     function newUser() {
         let email = document.getElementById("Email").value;
@@ -75,7 +76,6 @@
                     password: password
                 })
             }).then((res) => {
-                // console.log(res);
                 return res.json()
             })
             .then((res) => {

@@ -20,7 +20,6 @@ section {
     width: 100%;
     text-align: left;
     font: bold 16px sans-serif;
-    /* padding: 15px; */
     margin-bottom: 0;
 }
 
@@ -34,14 +33,10 @@ section {
     vertical-align: top;
 }
 
-/* Footer left */
-
 .footer-distributed .footer-left {
     float: left;
     width: 40%;
 }
-
-/* The company logo */
 
 .footer-distributed h3 {
     color: #ffffff;
@@ -52,8 +47,6 @@ section {
 .footer-distributed h3 span {
     color: lightseagreen;
 }
-
-/* Footer links */
 
 .footer-distributed .footer-links {
     color: #ffffff;
@@ -76,7 +69,6 @@ section {
     margin: 0;
 }
 
-/* Footer Center */
 
 .footer-distributed .footer-center {
     width: 35%;
@@ -134,8 +126,6 @@ section {
 .footer-distributed .footer-links .link-1:before {
     content: none;
 }
-
-/* Footer Right */
 
 .footer-distributed .footer-right {
     width: 20%;

@@ -31,6 +31,7 @@ type Commentaire struct {
 	Commentaire string
 }
 
+//creating database
 func InitDatabase(database string) *sql.DB {
 	fmt.Println("-- Creation --")
 	db, err := sql.Open("sqlite3", database)
@@ -71,6 +72,7 @@ func InitDatabase(database string) *sql.DB {
 	return db
 }
 
+//verification if the users already exists or not
 func InsertIntoUsers(db *sql.DB, name string, email string, password string) (int64, error) {
 	result, err := db.Exec(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`, name, email, password)
 	if err != nil {
@@ -81,21 +83,21 @@ func InsertIntoUsers(db *sql.DB, name string, email string, password string) (in
 	return result.LastInsertId()
 }
 
+//function in charge of registering the created posts
 func InsertIntoPost(db *sql.DB, categorie string, name string, title string, description string, date string) (int64, error) {
 	result, err := db.Exec(`INSERT INTO post (categorie, name, title, description, date) VALUES (?, ?, ?, ?, ?)`, categorie, name, title, description, date)
 	if err != nil {
 		fmt.Println(err)
-		// fmt.Println(err)
 		return 0, err
 	}
 	return result.LastInsertId()
 }
 
+//function in charge of registering the created comments
 func InsertIntoComments(db *sql.DB, commentaire string, name string, postId int) (int64, error) {
 	result, err := db.Exec(`INSERT INTO commentaire (commentaire, name, post_id) VALUES (?, ?, ?)`, commentaire, name, postId)
 	if err != nil {
 		fmt.Println(err)
-		// fmt.Println(err)
 		return 0, err
 	}
 	return result.LastInsertId()
@@ -108,16 +110,9 @@ func SelectAllFromTable(db *sql.DB, table string) *sql.Rows {
 }
 
 func SelectAllByCategorie(db *sql.DB, categorie string) *sql.Rows {
-	// var u Posts
-	res, _ := db.Query(`SELECT * FROM post WHERE lower(categorie) = '` + categorie + "'") //.Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
+	res, _ := db.Query(`SELECT * FROM post WHERE lower(categorie) = '` + categorie + "'")
 	return res
 }
-
-// func selectUserById(db *sql.DB, id int) User {
-// 	var u User
-// 	db.QueryRow(`SELECT * FROM users WHERE id = ?`, id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
-// 	return u
-// }
 
 func SelectUserWhenLogin(db *sql.DB, email string) User {
 	var u User
@@ -126,26 +121,6 @@ func SelectUserWhenLogin(db *sql.DB, email string) User {
 	fmt.Println(u)
 	return u
 }
-
-// func SelectPostWithId(db *sql.DB, id int) Posts {
-// 	var u Posts
-// 	fmt.Println("select post :", id)
-// 	db.QueryRow(`SELECT * FROM post WHERE id  = ?`, id).Scan(&u.Id, &u.Categorie, &u.Title, &u.Description)
-// 	fmt.Println(u)
-// 	return u
-// }
-
-// func SelectAllPost(db *sql.DB, categorie string) []Posts {
-// 	var u Posts
-// 	rows := SelectAllByCategorie(db, categorie) //SelectAllFromTable(db, "post")
-// 	final := make([]Posts, 0)
-// 	for rows.Next() {
-// 		rows.Scan(&u.Id, &u.Categorie, &u.Name, &u.Title, &u.Description)
-// 		final = append(final, u)
-
-// 	}
-// 	return final
-// }
 
 func SelectAllPost(db *sql.DB, categorie string) []Posts {
 	var u Posts
@@ -158,14 +133,6 @@ func SelectAllPost(db *sql.DB, categorie string) []Posts {
 	}
 	return final
 }
-
-// func SelectAllCommentByPost(db *sql.DB) {
-// 	var u Zeubi
-// 	rows, _ := db.Query("Select * From post Inner JOIN commentaire WHERE commentaire.post_id = post.id")
-// 	fmt.Println(rows)
-// 	rows.Scan(&u.Id, &u.Categorie, &u.Name, &u.Title, &u.Description, &u.Date, &u.Test, &u.Post_id, &u.Name2, &u.Commentaire)
-// 	fmt.Println(u)
-// }
 
 func SelectAllComments(db *sql.DB, post_id int) []Commentaire {
 	var u Commentaire
@@ -196,24 +163,3 @@ func SelectUserNameWithPattern(db *sql.DB, pattern string) []User {
 	}
 	return final
 }
-
-// func main() {
-// 	db := initDatabase("AAAforum.db")
-// 	defer db.Close()
-
-// 	// fmt.Println("-- Creation --")
-// 	// fmt.Println("-- Créer --")
-
-// 	// insertIntoUsers(db, "Mathieu", "m.m@gmail.com", "abcde")
-// 	// insertIntoUsers(db, "Thomas", "t.t@gmail.com", "fghij")
-// 	// insertIntoUsers(db, "Lucas", "l.l@gmail.com", "klmno")
-
-// 	fmt.Println("-- Sélection --")
-
-// 	selectAllFromTable(db, "users")
-// 	// user := selectUserById(db, 2)
-// 	// fmt.Println(user)
-
-// 	fmt.Println(selectUserNameWithPattern(db, "as"))
-// 	// fmt.Println(test)
-// }

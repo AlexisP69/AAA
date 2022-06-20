@@ -23,7 +23,6 @@
 }
 
 .text3 {
-    /* margin: 2vh; */
     font-family: 'Pacifico', cursive;
 
 }
@@ -92,10 +91,8 @@
 }
 
 .containersize3 {
-
     height: 50vh;
     background: white;
-    /* margin-bottom: 8vh; */
 }
 
 
@@ -242,7 +239,6 @@
     }
 }
 .search {
-    /* margin-top: 50vh; */
     width: 100%;
     position: relative;
     display: flex;

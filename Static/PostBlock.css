@@ -3,25 +3,19 @@ body {
     background-color: #292a2b;
    }
   
-  /* center the blockquote in the page */
   .blockquote-wrapper {
-     /* display: flex; */
      height: 20vh;
      margin-bottom: 60px;
-     /* padding: 0 0px; */
   }
   
-  /* Blockquote main style */
   .blockquote {
     margin-top:1vh;
     margin-left: 65vh;
       position: relative;
       max-width: 620px;
-      /* margin: 30px auto; */
       align-self: center;
   }
   
-  /* Blockquote header */
   .blockquote h1 {
     
       position: relative; 
@@ -36,7 +30,6 @@ body {
       padding: 25px;
   }
   
-  /* Blockquote right double quotes */
   .blockquote h1:after {
       
       content:"";
@@ -56,13 +49,11 @@ body {
       content:"";
       position: absolute;
       width: 80px;
-      /* border: 6px solid #292a2b; */
       bottom: -3px;
       left: 50px;
       z-index: 2;
   }
   
-  /* increase header size after 600px */
   @media all and (min-width: 600px) {
       .blockquote h1 {
           font-size: 3rem;
@@ -71,7 +62,6 @@ body {
   
   }
   
-  /* Blockquote subheader */
   .blockquote h4 {
       position: relative;
       font-family: 'Pacifico', cursive;

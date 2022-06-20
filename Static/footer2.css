@@ -3,27 +3,20 @@
 
 
 .footer{
-   
     margin-top: 14vh;
     background-color: black;
     box-sizing: border-box;
     width: 100%;
-    /* padding: 5px; */
 }
 
 a{  
     text-align: center;
     color:white;
     margin-left: 15px;
-    
-    
 }
-
-
 
 #monlogo{
     margin-left:1vh;
-    /* margin-top: 1vh; */
     background-color:black;
     display: block;
     margin-left: auto;
@@ -31,32 +24,12 @@ a{
      width:9vh;
     height:8vh; 
 }
-/* 
-li a{
-    margin-left: 47%;
-    font-size: medium;
-    margin-top: 1vh;
-    display: block;
-} */
 
 li{
     font-family: 'Pacifico', cursive;
     display:inline-block;
-    /* padding: 0 15px; */
     margin-left: 71vh;
     text-align: center;
     margin-top: 1vh;
     font-size: 3vh;
-    /* justify-content: space-around; */
-    
-    /* padding-bottom: 20px; */
-
 }
-
-/* p{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1vh;
-    display: block; 
-    color:white;
-} */

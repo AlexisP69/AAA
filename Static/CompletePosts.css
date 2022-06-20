@@ -65,7 +65,6 @@ textarea{
 }
 
 div[id="yo*"]{
-    /* text-align: center; */
     font-family: 'Pacifico',cursive;
     border-radius: 10px;
     background-color: #b2aaa2;
@@ -91,7 +90,6 @@ button{
     outline: 0;
     color: rgb(0, 0, 0);
     width: 9vh;
-    /* margin-top: 0; */
   }
   
   .btn:focus {
@@ -106,31 +104,11 @@ button{
     color: red;
   }
 
-
-/* #like{
-    height: 2.5vh;
-    margin-left: 3vh;
-    margin-top: 0.2vh;
-}
-
-#dislike{
-    height: 2.5vh;
-    margin-left: 8vh;
-    margin-top: 0.2vh;
-} */
-
 #commentaire{
     height: 4vh;
     margin-left: 52vh;
     margin-top: 0.2vh;
 }
-
-/* #button{
-    width: 1px;
-    height: 2.5vh;
-    margin-left: 3vh;
-    margin-top: 0.2vh;
-} */
 
 .tt h4{
     margin-top:0;

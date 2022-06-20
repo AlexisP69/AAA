@@ -135,16 +135,11 @@
     cursor: pointer;
 
     opacity: 0;
-    /* hide this */
     z-index: 2;
-    /* and place it over the hamburger */
-
     -webkit-touch-callout: none;
 }
 
-/*
- * Just a quick hamburger
- */
+
 #menuToggle span {
     display: block;
     width: 33px;
@@ -178,17 +173,11 @@
     background: #232323;
 }
 
-/*
- * But let's hide the middle one.
- */
 #menuToggle input:checked~span:nth-last-child(3) {
     opacity: 0;
     transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-/*
- * Ohyeah and the last one should go the other direction
- */
 #menuToggle input:checked~span:nth-last-child(2) {
     transform: rotate(-45deg) translate(0, -1px);
 }
@@ -196,18 +185,12 @@
 
 #menu {
     font-family: 'Pacifico', cursive;
-    /* position: absolute; */
     width: 200px;
     height:100%;
     margin: 10px -1000px 0 -50px;
-    /* padding: 50px; */
-    /* padding-top: 120px; */
-    
     background-color: #333;
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
-    /* to stop flickering of text in safari */
-
     transform-origin: 0% 0%;
     transform: translate(-100%, 0);
 
@@ -220,13 +203,9 @@
     font-family: 'Pacifico', cursive;
     font-size: 22px;
     color: #fff;
-    /* background-color: #48CAE4; */
     height:15vh;
 }
 
-/*
- * And let's slide it in from the left
- */
 #menuToggle input:checked~ul {
     transform: none;
 }

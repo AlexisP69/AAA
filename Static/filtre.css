@@ -12,7 +12,6 @@
 .checkbox-containeur1{
     
     box-sizing: border-box;
-     /* padding: 2vh; */
     font-size: 5vh;
    
     font-family: 'Pacifico', cursive;
@@ -31,7 +30,6 @@
     width: 4vh;
     height: 3vh;
     border-radius: 0.5rem;
-    /* margin-right: .5rem; */
     border: 1px solid #000;
   }
 
