@@ -36,7 +36,7 @@
 .basRectangle{
 
     border-radius: 5px;
-    height:3vh;
+    height:7vh;
     background-color: #48CAE4;
     border:solid 0.2px;
 }
@@ -86,8 +86,28 @@ div[id="yo*"]{
     font-size: 20vh;
 }
 
+button{
+    cursor: pointer;
+    outline: 0;
+    color: rgb(0, 0, 0);
+    width: 9vh;
+    /* margin-top: 0; */
+  }
+  
+  .btn:focus {
+    outline: none;
+  }
+  
+ .green{
+    color: green;
+  }
+  
+  .red{
+    color: red;
+  }
 
-#like{
+
+/* #like{
     height: 2.5vh;
     margin-left: 3vh;
     margin-top: 0.2vh;
@@ -97,26 +117,26 @@ div[id="yo*"]{
     height: 2.5vh;
     margin-left: 8vh;
     margin-top: 0.2vh;
-}
+} */
 
 #commentaire{
-    height: 2.5vh;
-    margin-left: 65vh;
+    height: 4vh;
+    margin-left: 52vh;
     margin-top: 0.2vh;
 }
 
-#button{
+/* #button{
     width: 1px;
     height: 2.5vh;
     margin-left: 3vh;
     margin-top: 0.2vh;
-}
+} */
 
 .tt h4{
     margin-top:0;
- font-family: 'Pacifico',cursive;
-font-size:4vh;
-color: #48CAE4;
+    font-family: 'Pacifico',cursive;
+    font-size:4vh;
+    color: #48CAE4;
 
 
 }
