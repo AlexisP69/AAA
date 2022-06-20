@@ -17,7 +17,7 @@
  
 .btn1 {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: rgb(143, 101, 101);
+  background: #000;
   color:white;
   width: 20vh;
   outline: 0;
@@ -38,7 +38,7 @@
 
 .btn1:hover {
   color: #000;
-  background: rgb(187, 184, 184);
+  background: rgb(255, 218, 87);
 }
 
 
@@ -164,7 +164,7 @@ label {
 }
 
 .btn2:hover {
-    background: rgb(251, 193, 245);
+  background: #48CAE4;
 }
 
 

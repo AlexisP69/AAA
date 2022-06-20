@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="/Static/CompletePosts.css" type="text/css">
     <link rel="stylesheet" href="/Static/filtre.css" type="text/css">
 
-
-
-    <link rel="icon" type="image/png" sizes="16x16" href="/Static/Capture d’écran 2022-05-31 à 16.29.49.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Static/Logo2.png">
     <title>Drugs</title>
 </head>
 
@@ -41,15 +39,8 @@
 
     <h1>Drugs</h1>
     {{template "filtre"}}
-        <!-- LIKE FILTRE -->
-            <!-- <p>Nombres de like</p>
-        <div class="main">
-            <input type="range" min="0" max="100" value="50" id="slider">
-            <div id="selector">
-                <div class="Selection"></div>
-        </div>  -->
-        </div>
-        </div>
+</div>
+
         
     <!-- </h2> -->
     <div class="postss">
@@ -58,7 +49,6 @@
     <!-- POST -->
 
     <a id="poost">Create New Post</a>
-    <!-- <button onclick="newPost()" id="newPost"> Create New Post</button> -->
     <div id="postList">
         {{range .}}
         {{template "postBlock" .}}
@@ -78,6 +68,7 @@
         document.getElementById('popup-Form').showModal()
     })
 
+    let nbPage = 1;
 </script>
 
 </html>

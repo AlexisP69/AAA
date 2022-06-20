@@ -70,8 +70,12 @@
 
         abs.innerText = res.test
       })
+      .catch((err) => console.Error(err))
   })
 // newElement.innerHTML += "Nom de l'utilisateur"+" "+":"+" "+ info
-
+function none(){
+document.getElementById("com{{.Post.Id}}").style.display = 'none';
+document.getElementById("infos{{.Post.Id}}").style.display = 'none';
+}
 </script>
 {{end}}
