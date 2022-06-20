@@ -250,7 +250,7 @@ func HandleFunc(db *sql.DB) {
 	http.HandleFunc("/services", func(w http.ResponseWriter, r *http.Request) {
 		posts := SelectAllPost(db, "services")
 		postSlice := FilterByCategory(db, posts)
-		template := template.Must(template.ParseFiles("Page/Services.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		template := template.Must(template.ParseFiles("Page/Services.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html", "templates/filtre.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
 			return
