@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/Static/Post.css" type="text/css" />
     <link rel="stylesheet" href="/Static/Postblock.css" type="text/css" />
     <link rel="stylesheet" href="/Static/CompletePosts.css" type="text/css" />
+    <link rel="stylesheet" href="/Static/filtre.css" type="text/css" />
+
     <link rel="icon" type="image/png" sizes="16x16" href="/Static/Logo2.png" />
     <title>Tutorials</title>
   </head>
@@ -45,7 +47,8 @@
     </div>
 
     <h1>Tutorials</h1>
-    <h2>F I L T E R S</h2>
+    {{template "filtre"}}
+    </div>
     <div class="postss"></div>
 
     <a id="poost">Create New Post</a>

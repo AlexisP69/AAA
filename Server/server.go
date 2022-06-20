@@ -251,7 +251,7 @@ func HandleFunc(db *sql.DB) {
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
 		}
-		template := template.Must(template.ParseFiles("Page/Tutorials.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		template := template.Must(template.ParseFiles("Page/Tutorials.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html", "templates/filtre.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
 			return
@@ -299,7 +299,7 @@ func HandleFunc(db *sql.DB) {
 			t.EveryComments = SelectAllComments(db, post.Id)
 			postSlice = append(postSlice, t)
 		}
-		template := template.Must(template.ParseFiles("Page/Games.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html"))
+		template := template.Must(template.ParseFiles("Page/Games.html", "templates/footer.html", "templates/navbar.html", "Page/Signup.html", "Page/Login.html", "templates/Post.html", "templates/PostBlock.html", "templates/CompletePost.html", "templates/filtre.html"))
 		if r.Method != http.MethodPost {
 			template.Execute(w, postSlice)
 			return
@@ -339,17 +339,6 @@ func HandleFunc(db *sql.DB) {
 		fmt.Println(Commentaire)
 		x, _ := strconv.Atoi(Commentaire.PostId)
 		InsertIntoComments(db, Commentaire.Input, login.Name, x)
-	})
-
-	http.HandleFunc("/homepage", func(w http.ResponseWriter, r *http.Request) {
-		template := template.Must(template.ParseFiles(
-			"Page/Homepage.html",
-		))
-		if r.Method != http.MethodPost {
-			err := template.Execute(w, "")
-			fmt.Println(err)
-			return
-		}
 	})
 
 	http.HandleFunc("/Userpage", func(w http.ResponseWriter, r *http.Request) {
